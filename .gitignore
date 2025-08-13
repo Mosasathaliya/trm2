@@ -42,3 +42,6 @@ dist/
 backend/node_modules/
 backend/dist/
 backend/.wrangler/
+
+# Cloudflare Pages
+functions/
