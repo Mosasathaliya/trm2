@@ -1,14 +1,13 @@
-
-'use server';
+﻿'use server';
 
 const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
 const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
 
 if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
-  if (process.env.NODE_ENV === 'production') {
-    throw new Error("Cloudflare Account ID or API Token are not set in the environment variables.");
-  } else {
+  if (typeof window === 'undefined' && process.env.VERCEL_ENV !== 'production') {
     console.warn("Cloudflare Account ID or API Token not set - AI features may not work in dev/build. Set them in Cloudflare for production.");
+  } else if (process.env.NODE_ENV === 'production' && typeof window !== 'undefined') {
+    throw new Error("Cloudflare Account ID or API Token are not set in the environment variables.");
   }
 }
 
@@ -37,10 +36,10 @@ export async function runAi({ model, inputs, stream = false }: RunAiOptions) {
   const isImageOrAudio = model.includes('stable-diffusion') || model.includes('melotts') || model.includes('whisper');
   const isTextGeneration = model.includes('llama');
 
-  const directUrl = `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/${model}`;
+  const directUrl = https://api.cloudflare.com/client/v4/accounts//ai/run/;
 
   let body: any;
-  const headers: HeadersInit = { 'Authorization': `Bearer ${CLOUDFLARE_API_TOKEN}` };
+  const headers: HeadersInit = { 'Authorization': Bearer  };
 
   if (model.includes('whisper') && 'audio' in inputs && (inputs.audio instanceof Buffer || inputs.audio instanceof Uint8Array)) {
     headers['Content-Type'] = 'application/octet-stream';
@@ -61,8 +60,8 @@ export async function runAi({ model, inputs, stream = false }: RunAiOptions) {
 
   if (!response.ok) {
     const errorText = await response.text();
-    console.error(`Cloudflare AI API error for model ${model}:`, errorText);
-    throw new Error(`Cloudflare AI request failed: ${response.statusText}`);
+    console.error(Cloudflare AI API error for model :, errorText);
+    throw new Error(Cloudflare AI request failed: );
   }
 
   if (stream) {
