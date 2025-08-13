@@ -1,30 +1,25 @@
 {
-  "name": "trm2-autrag-backend",
-  "version": "1.0.0",
-  "private": true,
+  "name": "trm2",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "build": "tsc",
-    "dev": "wrangler dev",
-    "deploy": "npm run build && wrangler deploy",
-    "deploy:staging": "npm run build && wrangler deploy --env staging",
-    "deploy:prod": "npm run build && wrangler deploy --env production",
-    "test": "jest",
-    "lint": "eslint src/**/*.ts",
-    "format": "prettier --write src/**/*.ts"
-  },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250212.0",
-    "@types/node": "^20.0.0",
-    "eslint": "^8.0.0",
-    "prettier": "^3.0.0",
-    "typescript": "^5.6.3",
-    "wrangler": "^3.101.0"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "@cloudflare/ai": "^1.0.0",
-    "hono": "^4.6.12"
+    "@astrojs/cloudflare": "^8.0.0",
+    "@astrojs/react": "^4.0.0",
+    "@astrojs/tailwind": "^6.0.0",
+    "astro": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
-  "engines": {
-    "node": ">=18.0.0"
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.0"
   }
 }
