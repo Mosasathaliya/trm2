@@ -1,6 +1,8 @@
 # Cloudflare Pages Configuration
 # This file is for Pages deployment, not Workers
 
+pages_build_output_dir = "dist/cloudflare"
+
 [build]
 command = "npm run build"
 watch_dir = "src"
