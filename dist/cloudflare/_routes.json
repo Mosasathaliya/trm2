@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/_astro/*",
+    "/mumble-jumble/claymojis.png",
+    "/mumble-jumble/click-sound.mp3",
+    "/mumble-jumble/generating.mp4",
+    "/mumble-jumble/hi.wav",
+    "/mumble-jumble/index.css",
+    "/mumble-jumble/index.html",
+    "/mumble-jumble/index.js",
+    "/mumble-jumble/key.jpeg",
+    "/mumble-jumble/logo.png",
+    "/mumble-jumble/preload.png"
+  ]
+}

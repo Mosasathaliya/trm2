@@ -16,6 +16,7 @@ export default defineConfig({
       }
     }
   }),
+  outDir: './dist/cloudflare',
   vite: {
     ssr: {
       external: ['@cloudflare/ai']
