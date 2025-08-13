@@ -1,11 +1,8 @@
 # Cloudflare Pages Configuration
 # This file is for Pages deployment, not Workers
 
+name = "trm2-pages"
 pages_build_output_dir = "dist/cloudflare"
-
-[build]
-command = "npm run build"
-watch_dir = "src"
 
 [env.production]
 name = "trm2-pages-prod"
