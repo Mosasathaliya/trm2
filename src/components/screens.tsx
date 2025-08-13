@@ -10,9 +10,10 @@ import { Button } from './ui/button';
 import { Progress } from './ui/progress';
 import { ScrollArea } from "./ui/scroll-area";
 import { LessonDetailDialog } from './lesson-detail-dialog';
-import { chatStream } from '../ai/flows/chat-flow';
+// All AI functions now come through RAG backend via client-ai
+// import { chatStream } from '../ai/flows/chat-flow';
 import { useToast } from "../hooks/use-toast"
-import { BookOpen, Book, Bot, ArrowRight, Sparkles, Image as ImageIcon, GraduationCap, Mic, X, Gamepad2, MessageCircle, Flame, Puzzle, Ear, BookOpen, Library, Loader2, Youtube, PlayCircle, Brain, ChevronLeft, ChevronRight, Lightbulb, Volume2, Award, FileQuestion, CheckCircle, FileText, Lock, BrainCircuit } from 'lucide-react';
+import { BookOpen, Book, Bot, ArrowRight, Sparkles, Image as ImageIcon, GraduationCap, Mic, X, Gamepad2, MessageCircle, Flame, Puzzle, Ear, Library, Loader2, Youtube, PlayCircle, Brain, ChevronLeft, ChevronRight, Lightbulb, Volume2, Award, FileQuestion, CheckCircle, FileText, Lock, BrainCircuit } from 'lucide-react';
 // Image import removed - using regular img tags for Astro
 import type { ActiveTab } from './main-app';
 import { generateStoryImage } from '../ai/flows/story-image-flow';
@@ -49,7 +50,7 @@ import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import { Label } from './ui/label';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import { cn } from '../lib/utils';
-import { translateText } from '../ai/flows/translate-flow';
+// import { translateText } from '../ai/flows/translate-flow';
 import { useStoryStore, type SavedStory, useQuizStore, type StoryQuizResult } from '../hooks/use-story-store';
 import { useProgressStore } from '../hooks/use-progress-store';
 import CloudflareAutoRAGPanel from './cloudflare-autrag-panel';
