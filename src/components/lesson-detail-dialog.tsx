@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Volume2, MessageSquare, BookText, BrainCircuit, Send, User, Bot, Sparkles, Image as ImageIcon, Mic, Square, FileText, Languages, Check, X, CheckCircle } from 'lucide-react';
+import { Volume2, MessageSquare, BookOpen, BrainCircuit, Send, User, Bot, Sparkles, Image as ImageIcon, Mic, Square, FileText, Languages, Check, X, CheckCircle } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import type { LearningItem, Lesson, Story, MCQ } from '@/lib/lessons';
 import { textToSpeech } from '@/ai/flows/tts-flow';
@@ -560,7 +560,7 @@ export function LessonDetailDialog({ item, isOpen, onClose }: LessonDetailDialog
         {item.type === 'lesson' && (
             <>
                 <div className="flex border-b px-6">
-                    <TabButton icon={<BookText />} label="الشرح والأمثلة" isActive={activeTab === 'explanation'} onClick={() => setActiveTab('explanation')} />
+                    <TabButton icon={<BookOpen />} label="الشرح والأمثلة" isActive={activeTab === 'explanation'} onClick={() => setActiveTab('explanation')} />
                     <TabButton icon={<BrainCircuit />} label="اختبر نفسك" isActive={activeTab === 'mcq'} onClick={() => setActiveTab('mcq')} />
                     <TabButton icon={<MessageSquare />} label="اسأل الخبير" isActive={activeTab === 'chatbot'} onClick={() => setActiveTab('chatbot')} />
                     {item.story && <TabButton icon={<FileText />} label="قصة" isActive={activeTab === 'story'} onClick={() => setActiveTab('story')} />}

@@ -9,7 +9,7 @@ import { WordCard, type Word } from "@/components/WordCard";
 import { suggestNewWords, getWordDetails } from "@/ai/flows/suggest-new-words";
 import { generateVocabularyQuiz } from "@/ai/flows/generate-vocabulary-quiz";
 import { useToast } from "@/hooks/use-toast";
-import { BookOpenText, Lightbulb, Loader2, Award, XCircle } from "lucide-react";
+import { BookOpen, Lightbulb, Loader2, Award, XCircle } from "lucide-react";
 import { ScrollArea } from "./ui/scroll-area";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "./ui/card";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
@@ -236,7 +236,7 @@ function LingoleapAppContainer() {
     <div className="lingoleap-app-container flex flex-col items-center h-full p-4 sm:p-8 bg-background text-foreground transition-colors duration-300">
       <header className="text-center mb-8">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-primary mb-2 flex items-center justify-center gap-2">
-          <BookOpenText className="h-8 w-8 sm:h-10 sm:w-10" /> LinguaLeap <Lightbulb className="h-8 w-8 sm:h-10 sm:w-10 text-accent" />
+                          <BookOpen className="h-8 w-8 sm:h-10 sm:w-10" /> LinguaLeap <Lightbulb className="h-8 w-8 sm:h-10 sm:w-10 text-accent" />
         </h1>
         <p className="text-lg text-muted-foreground">Expand Your Vocabulary, One Word at a Time</p>
       </header>

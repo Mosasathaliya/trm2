@@ -13,7 +13,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { LessonDetailDialog } from '@/components/lesson-detail-dialog';
 import { chatStream } from '@/ai/flows/chat-flow';
 import { useToast } from "@/hooks/use-toast"
-import { BookText, Book, Bot, ArrowRight, Sparkles, Image as ImageIcon, GraduationCap, Mic, X, Gamepad2, MessageCircle, Flame, Puzzle, Ear, BookCheck, Library, Loader2, Youtube, PlayCircle, Brain, ChevronLeft, ChevronRight, LightbulbIcon, Volume2, Award, FileQuestion, CheckCircle, NotebookText, Lock, BrainCircuit } from 'lucide-react';
+import { BookOpen, Book, Bot, ArrowRight, Sparkles, Image as ImageIcon, GraduationCap, Mic, X, Gamepad2, MessageCircle, Flame, Puzzle, Ear, BookOpen, Library, Loader2, Youtube, PlayCircle, Brain, ChevronLeft, ChevronRight, Lightbulb, Volume2, Award, FileQuestion, CheckCircle, FileText, Lock, BrainCircuit } from 'lucide-react';
 // Image import removed - using regular img tags for Astro
 import type { ActiveTab } from './main-app';
 import { generateStoryImage } from '@/ai/flows/story-image-flow';
@@ -53,7 +53,7 @@ import { cn } from '@/lib/utils';
 import { translateText } from '@/ai/flows/translate-flow';
 import { useStoryStore, type SavedStory, useQuizStore, type StoryQuizResult } from '@/hooks/use-story-store';
 import { useProgressStore } from '@/hooks/use-progress-store';
-import { CloudflareAutoRAGPanel } from './cloudflare-autrag-panel';
+import CloudflareAutoRAGPanel from './cloudflare-autrag-panel';
 import {
   Tooltip,
   TooltipContent,
@@ -339,7 +339,7 @@ function WhatIfDialog({ isOpen, onOpenChange }: { isOpen: boolean, onOpenChange:
                         السابق
                     </Button>
                      <Button variant="secondary" onClick={() => setIsExplanationOpen(true)}>
-                        <LightbulbIcon className="mr-2 h-4 w-4" />
+                        <Lightbulb className="mr-2 h-4 w-4" />
                         اشرح هذا الفيديو
                     </Button>
                     <Button onClick={goToNext} disabled={videoData.length <= 1}>
@@ -1093,7 +1093,7 @@ export function HomeScreen({ setActiveTab }: { setActiveTab: (tab: ActiveTab) =>
                   unlockThreshold={0} completedCount={completedItemsCount} />
 
                 <DashboardCard title="خبير الأزمنة" description="تحدث مع خبير الذكاء الاصطناعي لإتقان أزمنة اللغة الإنجليزية."
-                  icon={<BookCheck className="h-8 w-8 text-destructive" />} onClick={() => openDialog('tenseTeacher')}
+                  icon={<BookOpen className="h-8 w-8 text-destructive" />} onClick={() => openDialog('tenseTeacher')}
                   unlockThreshold={0} completedCount={completedItemsCount} />
 
                 <DashboardCard title="لعبة الكلمات المبعثرة" description="أعد ترتيب الحروف لتكوين كلمات وحسّن مهاراتك الإملائية."
@@ -1101,7 +1101,7 @@ export function HomeScreen({ setActiveTab }: { setActiveTab: (tab: ActiveTab) =>
                   unlockThreshold={0} completedCount={completedItemsCount} />
                 
                 <DashboardCard title="قصصي واختباراتي" description="اقرأ القصص التي أنشأتها واختبر فهمك."
-                  icon={<NotebookText className="h-8 w-8 text-pink-500" />} onClick={() => openDialog('myStories')}
+                  icon={<FileText className="h-8 w-8 text-pink-500" />} onClick={() => openDialog('myStories')}
                   unlockThreshold={0} completedCount={completedItemsCount} />
                 
                 <DashboardCard title="المساعد الصوتي" description="تدرب على المحادثة مع مساعد صوتي يعمل بالذكاء الاصطناعي."

@@ -20,6 +20,11 @@ export default defineConfig({
   vite: {
     ssr: {
       external: ['@cloudflare/ai']
+    },
+    resolve: {
+      alias: {
+        '@': '/src'
+      }
     }
   }
 });

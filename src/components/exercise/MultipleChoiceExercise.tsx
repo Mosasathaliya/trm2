@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Loader2, CheckCircle, XCircle, MessageSquareHeart } from 'lucide-react';
+import { Loader2, CheckCircle, XCircle, MessageSquare } from 'lucide-react';
 import { getExerciseFeedback, type ExerciseFeedbackInput } from '@/ai/flows/exercise-feedback';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
 
@@ -134,7 +134,7 @@ const MultipleChoiceExercise: FC<MultipleChoiceExerciseProps> = ({ exercise, les
 
         {aiFeedback && (
           <Alert variant="default" className="mt-4 border-accent bg-accent/10 dark:bg-accent/20">
-            <MessageSquareHeart className="h-5 w-5 text-primary" /> {/* Changed icon color to primary for better visibility */}
+                                    <MessageSquare className="h-5 w-5 text-primary" /> {/* Changed icon color to primary for better visibility */}
             <AlertTitle className="text-accent-foreground">AI Tutor Feedback (تقييم المعلم الذكي)</AlertTitle>
             <AlertDescription className="text-accent-foreground/80 whitespace-pre-line text-right" dir="rtl">
               {aiFeedback}

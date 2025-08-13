@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import type { InteractiveExercise, Lesson } from '@/types/lesson';
 import MultipleChoiceExercise from './MultipleChoiceExercise';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MessageCircleQuestion, Award } from 'lucide-react';
+import { MessageCircle, Award } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 interface InteractiveExercisesSectionProps {
@@ -22,7 +22,7 @@ const InteractiveExercisesSection: FC<InteractiveExercisesSectionProps> = ({ exe
     <Card className="mb-6 shadow-lg">
       <CardHeader>
         <CardTitle className="flex items-center text-2xl">
-          <MessageCircleQuestion className="mr-2 h-6 w-6 text-primary" />
+                          <MessageCircle className="mr-2 h-6 w-6 text-primary" />
           Interactive Exercises (تمارين تفاعلية)
         </CardTitle>
       </CardHeader>

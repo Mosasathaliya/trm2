@@ -1,7 +1,7 @@
 
 import type { FC } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpenText } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 
 interface ArabicExplanationProps {
   explanation: string;
@@ -12,7 +12,7 @@ const ArabicExplanation: FC<ArabicExplanationProps> = ({ explanation }) => {
     <Card className="mb-6 shadow-lg">
       <CardHeader>
         <CardTitle className="flex items-center text-2xl">
-          <BookOpenText className="mr-2 h-6 w-6 text-primary" />
+          <BookOpen className="mr-2 h-6 w-6 text-primary" />
           Explanation (الشرح)
         </CardTitle>
       </CardHeader>

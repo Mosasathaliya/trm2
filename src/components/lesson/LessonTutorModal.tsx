@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Loader2, MessageSquareHeart, Send } from 'lucide-react';
+import { Loader2, MessageSquare, Send } from 'lucide-react';
 import { getLessonTutorResponse, type LessonTutorInput } from '@/ai/flows/lesson-tutor-flow';
 
 interface LessonTutorModalProps {
@@ -68,7 +68,7 @@ const LessonTutorModal: FC<LessonTutorModalProps> = ({ isOpen, onClose, lesson }
       <DialogContent className="sm:max-w-[600px] flex flex-col max-h-[90vh]">
         <DialogHeader>
           <DialogTitle className="flex items-center text-2xl">
-            <MessageSquareHeart className="mr-2 h-6 w-6 text-primary" />
+                            <MessageSquare className="mr-2 h-6 w-6 text-primary" />
             AI Lesson Tutor (مساعد الدرس الذكي)
           </DialogTitle>
           <DialogDescription dir="rtl" className="text-right">
@@ -80,7 +80,7 @@ const LessonTutorModal: FC<LessonTutorModalProps> = ({ isOpen, onClose, lesson }
         <div className="flex-grow overflow-y-auto space-y-4 p-1 pr-3">
           {aiResponse && (
             <Alert variant="default" className="border-accent bg-accent/10 dark:bg-accent/20">
-              <MessageSquareHeart className="h-5 w-5 text-primary" />
+              <MessageSquare className="h-5 w-5 text-primary" />
               <AlertTitle className="text-accent-foreground">AI Tutor's Response (رد المعلم الذكي)</AlertTitle>
               <AlertDescription className="text-accent-foreground/90 whitespace-pre-line text-right" dir="rtl">
                 {aiResponse}
