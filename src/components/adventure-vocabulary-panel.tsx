@@ -3,7 +3,7 @@ import React from 'react';
 import type { VocabularyWord } from '@/lib/adventure-game-types';
 import { BookOpenIcon, ImageIcon, SparklesIcon } from '@/components/adventure-icon-components';
 import { Volume2 } from 'lucide-react';
-import Image from 'next/image';
+// Image import removed - using regular img tags for Astro
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import { useToast } from "@/hooks/use-toast";
@@ -122,11 +122,9 @@ export const VocabularyPanel: React.FC<VocabularyPanelProps> = ({ selectedWord, 
           )}
 
           {selectedWord.imageUrl ? (
-            <Image 
+            <img 
               src={selectedWord.imageUrl} 
               alt={`AI generated image for ${selectedWord.word}`}
-              width={400}
-              height={400}
               className="w-full h-auto object-cover rounded-lg border-2 border-gray-700 shadow-lg mt-4" 
             />
           ) : (

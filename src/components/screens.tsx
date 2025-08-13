@@ -14,7 +14,7 @@ import { LessonDetailDialog } from '@/components/lesson-detail-dialog';
 import { chatStream } from '@/ai/flows/chat-flow';
 import { useToast } from "@/hooks/use-toast"
 import { BookText, Book, Bot, ArrowRight, Sparkles, Image as ImageIcon, GraduationCap, Mic, X, Gamepad2, MessageCircle, Flame, Puzzle, Ear, BookCheck, Library, Loader2, Youtube, PlayCircle, Brain, ChevronLeft, ChevronRight, LightbulbIcon, Volume2, Award, FileQuestion, CheckCircle, NotebookText, Lock, BrainCircuit } from 'lucide-react';
-import Image from 'next/image';
+// Image import removed - using regular img tags for Astro
 import type { ActiveTab } from './main-app';
 import { generateStoryImage } from '@/ai/flows/story-image-flow';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose, DialogDescription } from '@/components/ui/dialog';
@@ -33,7 +33,7 @@ import { TenseTeacherApp } from './tense-teacher-app';
 import { ChatterbotApp } from './chatterbot-app';
 import { lessons } from '@/data/lingo-lessons-data';
 import type { Lesson } from '@/types/lesson';
-import Link from 'next/link';
+// Link import removed - using regular anchor tags for Astro
 
 // Import video links from the new data file
 import videoLinks from '@/data/video-links';
@@ -109,7 +109,7 @@ function LessonList() {
           }
 
           return (
-            <Link href={`/lessons/${lesson.lesson_id}`} key={lesson.lesson_id} passHref>
+            <a href={`/lessons/${lesson.lesson_id}`} key={lesson.lesson_id}>
               <Card className="h-full flex flex-col hover:shadow-xl transition-shadow duration-300 ease-in-out cursor-pointer group">
                 <CardHeader>
                   <div className="flex justify-between items-start mb-2">
@@ -146,8 +146,8 @@ function LessonList() {
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </div>
                 </CardFooter>
-              </Card>
-            </Link>
+                              </Card>
+              </a>
           );
         })}
       </div>
@@ -200,11 +200,10 @@ function VideoLearnDialog({ isOpen, onOpenChange }: { isOpen: boolean, onOpenCha
                                 className="aspect-video bg-muted rounded-lg overflow-hidden shadow-lg group cursor-pointer relative"
                                 onClick={() => setSelectedVideoUrl(video.embedUrl)}
                             >
-                                <Image
+                                <img
                                     src={`https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`}
                                     alt={`Video thumbnail ${index + 1}`}
-                                    fill
-                                    className="object-cover transition-transform group-hover:scale-110"
+                                    className="object-cover transition-transform group-hover:scale-110 w-full h-full"
                                     data-ai-hint="video thumbnail"
                                 />
                                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
@@ -421,7 +420,7 @@ function AiLessonsDialog({ isOpen, onOpenChange, onSelectLesson }: { isOpen: boo
                   <CardTitle as="h3">{lesson.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <Image src={lesson.image} alt={lesson.title} width={300} height={150} className="w-full h-auto object-cover rounded-md" data-ai-hint={lesson.image_hint} />
+                  <img src={lesson.image} alt={lesson.title} className="w-full h-auto object-cover rounded-md" data-ai-hint={lesson.image_hint} />
                 </CardContent>
               </Card>
             ))}
@@ -513,7 +512,7 @@ function AiLessonViewerDialog({ lesson, isOpen, onOpenChange, onBack }: { lesson
         </DialogHeader>
         <ScrollArea className="flex-grow">
           <div className="p-6">
-            <Image src={lesson.image} alt={lesson.title} width={600} height={400} className="w-full h-auto object-cover rounded-md mb-4" data-ai-hint={lesson.image_hint}/>
+            <img src={lesson.image} alt={lesson.title} className="w-full h-auto object-cover rounded-md mb-4" data-ai-hint={lesson.image_hint}/>
             <p className="text-foreground/90 leading-relaxed mb-4">{lesson.content}</p>
             <Button onClick={handleExplain} disabled={isExplaining || !!activeAudioId}>
               {isExplaining ? <Loader2 className="mr-2 h-4 w-4 animate-spin"/> : <Volume2 className="mr-2 h-4 w-4"/>}
@@ -815,7 +814,7 @@ function MyStoriesDialog({ isOpen, onOpenChange }: { isOpen: boolean, onOpenChan
                     return (
                       <Card key={story.id} className="cursor-pointer hover:shadow-xl transition-shadow flex flex-col" onClick={() => setViewingStory(story)}>
                         <CardHeader>
-                          {story.imageUrl && <Image src={story.imageUrl} alt={story.prompt} width={400} height={200} className="rounded-t-lg object-cover w-full aspect-video mb-4" />}
+                          {story.imageUrl && <img src={story.imageUrl} alt={story.prompt} className="rounded-t-lg object-cover w-full aspect-video mb-4" />}
                           <CardTitle as="h3" className="line-clamp-2">{story.prompt}</CardTitle>
                         </CardHeader>
                         <CardFooter className="mt-auto pt-4">
@@ -935,7 +934,7 @@ function StoryViewerDialog({ story, isOpen, onOpenChange }: { story: SavedStory 
             {activeTab === 'story' && (
                 <ScrollArea className="flex-grow">
                     <div className="p-6">
-                        {story.imageUrl && <Image src={story.imageUrl} alt={story.prompt} width={600} height={400} className="w-full h-auto object-cover rounded-md mb-4" />}
+                        {story.imageUrl && <img src={story.imageUrl} alt={story.prompt} className="w-full h-auto object-cover rounded-md mb-4" />}
                         <p className="whitespace-pre-wrap leading-relaxed">{story.content}</p>
                     </div>
                 </ScrollArea>
@@ -1647,7 +1646,7 @@ function CertificateDialog({ isOpen, onOpenChange, userName }: { isOpen: boolean
                     {isLoading && <Loader2 className="h-12 w-12 animate-spin text-primary" />}
                     {imageUrl && (
                         <>
-                          <Image src={imageUrl} alt="Certificate Background" fill className="object-cover"/>
+                          <img src={imageUrl} alt="Certificate Background" className="object-cover w-full h-full"/>
                           <div className="absolute inset-0 bg-black/10"></div>
                            <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-8 text-foreground">
                                 <p className="text-xl">This certifies that</p>

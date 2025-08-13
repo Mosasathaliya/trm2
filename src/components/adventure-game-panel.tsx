@@ -3,7 +3,7 @@ import type { StoryPart } from '@/lib/adventure-game-types';
 import { UserIcon, WandSparklesIcon, SendIcon } from '@/components/adventure-icon-components';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import type { TranslationState } from '@/lib/adventure-game-types';
-import Image from 'next/image';
+// Image import removed - using regular img tags for Astro
 
 interface GamePanelProps {
   storyHistory: StoryPart[];
@@ -102,7 +102,7 @@ export const GamePanel: React.FC<GamePanelProps> = ({ storyHistory, onSendAction
                     </div>
                 )}
                 {sceneImageUrl && (
-                     <Image src={sceneImageUrl} alt="Scene illustration" layout="fill" objectFit="cover" className="transition-opacity duration-500 opacity-100" />
+                     <img src={sceneImageUrl} alt="Scene illustration" className="transition-opacity duration-500 opacity-100 w-full h-full object-cover" />
                 )}
             </div>
         )}

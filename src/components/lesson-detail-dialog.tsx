@@ -21,7 +21,7 @@ import { expertChat, type ExpertChatInput } from '@/ai/flows/expert-chat-flow';
 import { generateStoryImage } from '@/ai/flows/story-image-flow';
 import { translateText } from '@/ai/flows/translate-flow';
 import { useToast } from "@/hooks/use-toast";
-import Image from 'next/image';
+// Image import removed - using regular img tags for Astro
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
@@ -483,11 +483,9 @@ function StoryReader({ story, isLessonStory }: { story: Story | Lesson['story'],
                 
                 {imageUrl && (
                     <div className="mt-4 border rounded-lg overflow-hidden">
-                        <Image
+                        <img
                             src={imageUrl}
                             alt={`Illustration for ${storyTitle}`}
-                            width={500}
-                            height={500}
                             className="w-full h-auto object-cover"
                         />
                     </div>
