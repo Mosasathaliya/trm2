@@ -1,5 +1,5 @@
 globalThis.process ??= {}; globalThis.process.env ??= {};
-export { r as renderers } from '../chunks/_@astro-renderers_gQnhom5Z.mjs';
+export { r as renderers } from '../chunks/_@astro-renderers_CwoFMiqm.mjs';
 
 const prerender = false;
 const GET = (ctx) => {

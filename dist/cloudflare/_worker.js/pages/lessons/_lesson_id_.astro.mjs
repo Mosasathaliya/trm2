@@ -1,8 +1,8 @@
 globalThis.process ??= {}; globalThis.process.env ??= {};
-import { o as objectType, s as stringType, a as arrayType, c as createComponent, b as createAstro, r as renderComponent, d as renderTemplate } from '../../chunks/astro/server_DbPTNgPy.mjs';
-import { c as createLucideIcon, j as jsxRuntimeExports, a as cn, b as cva, C as Card, d as CardHeader, e as CardTitle, B as BookOpenText, f as CardContent, g as createContextScope, u as useControllableState, h as useId, P as Primitive, i as composeEventHandlers, k as Presence, l as useComposedRefs, m as useLayoutEffect2, n as createCollection, o as useDirection, p as ChevronDown, L as Lightbulb, r as runAi, R as RadioGroup, q as RadioGroupItem, s as Label, t as CircleCheckBig, v as CircleX, w as CardFooter, x as Button, y as LoaderCircle, A as Alert, z as AlertTitle, D as AlertDescription, E as Award, F as Dialog, G as DialogContent, H as DialogHeader, I as DialogTitle, J as DialogDescription, T as Textarea, K as DialogFooter, S as Send, M as Link, N as translateText, $ as $$Layout, O as lessons } from '../../chunks/translate-flow_kN_oiuBh.mjs';
-import { a as reactExports, R as React } from '../../chunks/_@astro-renderers_gQnhom5Z.mjs';
-export { r as renderers } from '../../chunks/_@astro-renderers_gQnhom5Z.mjs';
+import { o as objectType, s as stringType, a as arrayType, n as numberType, b as booleanType, e as enumType, c as createComponent, d as createAstro, r as renderComponent, f as renderTemplate } from '../../chunks/astro/server_BTyQwOK9.mjs';
+import { c as createLucideIcon, j as jsxRuntimeExports, a as cn, b as cva, C as Card, d as CardHeader, e as CardTitle, B as BookOpenText, f as CardContent, g as createContextScope, u as useControllableState, h as useId, P as Primitive, i as composeEventHandlers, k as Presence, l as useComposedRefs, m as useLayoutEffect2, n as createCollection, o as useDirection, p as ChevronDown, L as Lightbulb, r as runAi, R as RadioGroup, q as RadioGroupItem, s as Label, t as CircleCheckBig, v as CircleX, w as CardFooter, x as Button, y as LoaderCircle, A as Alert, z as AlertTitle, D as AlertDescription, E as Award, F as Dialog, G as DialogContent, H as DialogHeader, I as DialogTitle, J as DialogDescription, T as Textarea, K as DialogFooter, S as Send, M as Link, N as generateText, O as getAiCostEstimate, Q as AI_MODELS, U as translateText, $ as $$Layout, V as lessons } from '../../chunks/translate-flow_CLdcbQxa.mjs';
+import { a as reactExports, R as React } from '../../chunks/_@astro-renderers_CwoFMiqm.mjs';
+export { r as renderers } from '../../chunks/_@astro-renderers_CwoFMiqm.mjs';
 
 /**
  * @license lucide-react v0.475.0 - ISC
@@ -1072,32 +1072,116 @@ function LessonClientComponent({ lesson }) {
 
 objectType({
   grammarTopic: stringType().describe("The specific English grammar topic to be explained."),
-  level: stringType().describe("The level of the student (e.g., Beginner, Intermediate).")
+  level: stringType().describe("The level of the student (e.g., Beginner, Intermediate)."),
+  language: enumType(["en", "ar"]).default("ar").describe("Target language for the explanation."),
+  includeExamples: booleanType().default(true).describe("Whether to include practical examples."),
+  includeExercises: booleanType().default(false).describe("Whether to include practice exercises."),
+  maxTokens: numberType().default(800).describe("Maximum tokens for the response.")
 });
 async function generateArabicExplanation(input) {
-  const { grammarTopic, level } = input;
+  const {
+    grammarTopic,
+    level,
+    language = "ar",
+    includeExamples = true,
+    includeExercises = false,
+    maxTokens = 800
+  } = input;
   if (typeof window !== "undefined") {
     return {
-      arabicExplanation: `شرح مؤقت لموضوع "${grammarTopic}" للمستوى ${level}. سيتم تحديث هذا المحتوى عند التشغيل.`
+      arabicExplanation: `شرح مؤقت لموضوع "${grammarTopic}" للمستوى ${level}. سيتم تحديث هذا المحتوى عند التشغيل.`,
+      model_used: "placeholder",
+      estimated_cost: 0,
+      generation_time: 0
     };
   }
-  const prompt = `Please provide a detailed explanation in Arabic for the following English grammar topic: "${grammarTopic}".
-The explanation should be clear, easy to understand, and suitable for a student at the "${level}" level.
-Use examples where appropriate to illustrate the concepts.
-Your response should ONLY be the Arabic explanation text, without any introductory phrases like "Here is the explanation:".`;
-  const messages = [
-    { role: "system", content: "You are an expert English grammar teacher who is fluent in both English and Arabic. Your task is to provide a clear, comprehensive, and natural-sounding explanation of a given English grammar topic entirely in Arabic." },
-    { role: "user", content: prompt }
-  ];
+  const startTime = Date.now();
   try {
-    const response = await runAi({ model: "@cf/meta/llama-3-8b-instruct", inputs: { messages } });
-    const jsonResponse = await response.json();
-    const explanation = jsonResponse.result.response;
-    return { arabicExplanation: explanation };
-  } catch (error) {
-    console.error("Failed to generate AI explanation:", error);
+    const explanationPrompt = `Create a comprehensive explanation of the English grammar topic "${grammarTopic}" for ${level} level students.
+    
+    The explanation should:
+    - Be clear and easy to understand
+    - Include the basic concept and rules
+    - Provide practical usage guidelines
+    - Be suitable for the specified level
+    - Include key points and tips
+    
+    ${includeExamples ? "Include 3-5 practical examples showing correct usage." : ""}
+    ${includeExercises ? "Include 2-3 simple practice exercises with answers." : ""}
+    
+    Make it engaging and educational.`;
+    const englishExplanation = await generateText(explanationPrompt, {
+      maxTokens: Math.floor(maxTokens * 0.6),
+      temperature: 0.4,
+      useFallback: true
+    });
+    let arabicExplanation = englishExplanation;
+    if (language === "ar") {
+      const translationPrompt = `Translate this English grammar explanation to Arabic: "${englishExplanation}"
+      
+      Make sure the Arabic translation:
+      - Is natural and fluent
+      - Uses appropriate Arabic grammar terminology
+      - Maintains the educational tone
+      - Is suitable for Arabic-speaking learners`;
+      arabicExplanation = await generateText(translationPrompt, {
+        maxTokens: Math.floor(maxTokens * 0.4),
+        temperature: 0.3,
+        useFallback: true
+      });
+    }
+    let examples = [];
+    if (includeExamples) {
+      const examplesPrompt = `Generate 3-5 practical examples for the grammar topic "${grammarTopic}" at ${level} level.
+      
+      Each example should:
+      - Demonstrate the grammar rule clearly
+      - Be relevant to everyday situations
+      - Include both positive and negative examples
+      - Be appropriate for the student's level`;
+      const examplesResponse = await generateText(examplesPrompt, {
+        maxTokens: 300,
+        temperature: 0.6,
+        useFallback: true
+      });
+      examples = examplesResponse.split("\n").filter((line) => line.trim()).map((line) => line.replace(/^[-•]\s*/, "")).slice(0, 5);
+    }
+    let exercises = [];
+    if (includeExercises) {
+      const exercisesPrompt = `Create 2-3 simple practice exercises for the grammar topic "${grammarTopic}" at ${level} level.
+      
+      Each exercise should:
+      - Test understanding of the grammar rule
+      - Be appropriate for the student's level
+      - Include clear instructions
+      - Have a definite correct answer
+      - Include an explanation of why it's correct`;
+      const exercisesResponse = await generateText(exercisesPrompt, {
+        maxTokens: 400,
+        temperature: 0.4,
+        useFallback: true
+      });
+      exercises = exercisesResponse.split("\n\n").filter((section) => section.trim()).slice(0, 3);
+    }
+    const totalTokens = (englishExplanation.length + arabicExplanation.length) / 4;
+    const estimatedCost = getAiCostEstimate(AI_MODELS.TEXT_GENERATION.LLAMA_3_8B, totalTokens, totalTokens);
+    const generationTime = Date.now() - startTime;
     return {
-      arabicExplanation: `شرح مؤقت لموضوع "${grammarTopic}" للمستوى ${level}. حدث خطأ في توليد المحتوى.`
+      arabicExplanation,
+      englishExplanation: language === "en" ? englishExplanation : void 0,
+      examples: examples.length > 0 ? examples : void 0,
+      exercises: exercises.length > 0 ? exercises : void 0,
+      model_used: AI_MODELS.TEXT_GENERATION.LLAMA_3_8B,
+      estimated_cost: estimatedCost.estimatedCost,
+      generation_time: generationTime
+    };
+  } catch (error) {
+    console.error("Enhanced lesson content generation failed:", error);
+    return {
+      arabicExplanation: `شرح مؤقت لموضوع "${grammarTopic}" للمستوى ${level}. حدث خطأ في توليد المحتوى.`,
+      model_used: "fallback",
+      estimated_cost: 0,
+      generation_time: Date.now() - startTime
     };
   }
 }

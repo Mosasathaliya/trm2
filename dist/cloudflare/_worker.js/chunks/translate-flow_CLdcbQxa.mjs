@@ -1,7 +1,7 @@
 globalThis.process ??= {}; globalThis.process.env ??= {};
-import { c as createComponent, b as createAstro, j as addAttribute, k as renderHead, l as renderSlot, d as renderTemplate, g as getDefaultExportFromCjs, h as clsx, o as objectType, s as stringType, u as unionType, a as arrayType } from './astro/server_DbPTNgPy.mjs';
+import { c as createComponent, d as createAstro, j as addAttribute, k as renderHead, l as renderSlot, f as renderTemplate, g as getDefaultExportFromCjs, i as clsx, o as objectType, e as enumType, b as booleanType, s as stringType, u as unionType, a as arrayType } from './astro/server_BTyQwOK9.mjs';
 /* empty css                         */
-import { b as requireReact, a as reactExports, R as React, c as React$1 } from './_@astro-renderers_gQnhom5Z.mjs';
+import { b as requireReact, a as reactExports, R as React, c as React$1 } from './_@astro-renderers_CwoFMiqm.mjs';
 
 const $$Astro = createAstro();
 const $$Layout = createComponent(($$result, $$props, $$slots) => {
@@ -9111,51 +9111,182 @@ const AlertDescription = reactExports.forwardRef(({ className, ...props }, ref) 
 ));
 AlertDescription.displayName = "AlertDescription";
 
-const CLOUDFLARE_API_TOKEN$1 = process.env.CLOUDFLARE_API_TOKEN;
-const CLOUDFLARE_ACCOUNT_ID$1 = process.env.CLOUDFLARE_ACCOUNT_ID;
-if (typeof window !== "undefined" && (!CLOUDFLARE_ACCOUNT_ID$1 || !CLOUDFLARE_API_TOKEN$1)) {
+const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
+const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
+if (typeof window !== "undefined" && (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN)) {
   console.warn("Cloudflare Account ID or API Token not set - AI features may not work. Set them in Cloudflare Pages environment variables.");
 }
-async function runAi({ model, inputs, stream = false }) {
-  if (!CLOUDFLARE_ACCOUNT_ID$1 || !CLOUDFLARE_API_TOKEN$1) {
+const AI_MODELS = {
+  // Text Generation - Cost: $0.20 per 1M tokens
+  TEXT_GENERATION: {
+    LLAMA_3_8B: "@cf/meta/llama-3-8b-instruct",
+    LLAMA_3_70B: "@cf/meta/llama-3-70b-instruct",
+    // Higher quality, higher cost
+    MISTRAL_7B: "@cf/mistralai/mistral-7b-instruct-v0.2",
+    GEMMA_2B: "@cf/google/gemma-2b-it"
+    // Fastest, lowest cost
+  },
+  // Translation - Cost: $0.20 per 1M tokens
+  TRANSLATION: {
+    M2M100: "@cf/meta/m2m100-1.2b",
+    // Best for Arabic
+    NLLB200: "@cf/meta/nllb-200-3.3b"
+    // Alternative
+  },
+  // Text-to-Speech - Cost: $0.15 per 1M characters
+  TTS: {
+    MELOTTS: "@cf/myshell-ai/melotts",
+    // Best Arabic support
+    ELEVENLABS: "@cf/elevenlabs/eleven-multilingual-v2"
+  },
+  // Speech-to-Text - Cost: $0.006 per 1M characters
+  STT: {
+    WHISPER: "@cf/openai/whisper"
+  },
+  // Image Generation - Cost: $0.0025 per image
+  IMAGE: {
+    STABLE_DIFFUSION: "@cf/stabilityai/stable-diffusion-xl-base-1.0",
+    PIXELART: "@cf/lykon/dreamshaper-v8"
+  },
+  // Embeddings & Reranking - Cost: $0.10 per 1M tokens
+  EMBEDDINGS: {
+    BGE_RERANKER: "@cf/baai/bge-reranker-base",
+    BGE_EMBEDDING: "@cf/baai/bge-base-en-v1.5"
+  }
+};
+async function runAi({
+  model,
+  inputs,
+  stream = false,
+  maxTokens = 1e3,
+  // Default token limit for cost control
+  temperature = 0.7
+}) {
+  if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
     throw new Error("Cloudflare AI credentials are not set in the environment variables.");
   }
   const isImageOrAudio = model.includes("stable-diffusion") || model.includes("melotts") || model.includes("whisper");
-  const isTextGeneration = model.includes("llama");
-  const directUrl = `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID$1}/ai/run/${model}`;
+  const isTextGeneration = model.includes("llama") || model.includes("mistral") || model.includes("gemma");
+  const directUrl = `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/${model}`;
   let body;
-  const headers = { "Authorization": `Bearer ${CLOUDFLARE_API_TOKEN$1}` };
+  const headers = {
+    "Authorization": `Bearer ${CLOUDFLARE_API_TOKEN}`,
+    "CF-Client-Version": "trinav-ai-v1.0"
+    // For analytics
+  };
   if (model.includes("whisper") && "audio" in inputs && (inputs.audio instanceof Buffer || inputs.audio instanceof Uint8Array)) {
     headers["Content-Type"] = "application/octet-stream";
     body = inputs.audio;
   } else {
     headers["Content-Type"] = "application/json";
-    body = JSON.stringify({
+    const enhancedInputs = {
+      ...inputs,
       ...isTextGeneration && stream ? { stream: true } : {},
-      ...inputs
+      ...isTextGeneration && maxTokens ? { max_tokens: maxTokens } : {},
+      ...isTextGeneration && temperature !== void 0 ? { temperature } : {}
+    };
+    body = JSON.stringify(enhancedInputs);
+  }
+  try {
+    const response = await fetch(directUrl, {
+      method: "POST",
+      headers,
+      body
     });
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Cloudflare AI API error for model ${model}:`, errorText);
+      throw new Error(`Cloudflare AI request failed: ${response.statusText}`);
+    }
+    if (stream) {
+      return response;
+    }
+    if (isImageOrAudio) {
+      return response;
+    }
+    const jsonResponse = await response.json();
+    return new Response(JSON.stringify({ result: jsonResponse }), {
+      headers: { "Content-Type": "application/json" },
+      status: 200
+    });
+  } catch (error) {
+    console.error(`AI request failed for model ${model}:`, error);
+    throw error;
   }
-  const response = await fetch(directUrl, {
-    method: "POST",
-    headers,
-    body
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error(`Cloudflare AI API error for model ${model}:`, errorText);
-    throw new Error(`Cloudflare AI request failed: ${response.statusText}`);
+}
+async function generateText(prompt, options = {}) {
+  const { maxTokens = 500, temperature = 0.7, useFallback = true } = options;
+  const models = useFallback ? [AI_MODELS.TEXT_GENERATION.GEMMA_2B, AI_MODELS.TEXT_GENERATION.LLAMA_3_8B] : [AI_MODELS.TEXT_GENERATION.LLAMA_3_8B];
+  for (const model of models) {
+    try {
+      const response = await runAi({
+        model,
+        inputs: {
+          messages: [{ role: "user", content: prompt }],
+          max_tokens: maxTokens,
+          temperature
+        },
+        maxTokens,
+        temperature
+      });
+      const result = await response.json();
+      return result.result?.response || result.result || "No response generated";
+    } catch (error) {
+      console.warn(`Model ${model} failed, trying next...`, error);
+      if (model === models[models.length - 1]) {
+        throw error;
+      }
+    }
   }
-  if (stream) {
-    return response;
+}
+async function translateTextEnhanced(text, targetLang, sourceLang = "en", options = {}) {
+  const { useFallback = true } = options;
+  const models = useFallback ? [AI_MODELS.TRANSLATION.M2M100, AI_MODELS.TRANSLATION.NLLB200] : [AI_MODELS.TRANSLATION.M2M100];
+  for (const model of models) {
+    try {
+      const response = await runAi({
+        model,
+        inputs: {
+          text,
+          source_lang: sourceLang,
+          target_lang: targetLang
+        }
+      });
+      const result = await response.json();
+      return result.result?.translated_text || result.result || text;
+    } catch (error) {
+      console.warn(`Translation model ${model} failed, trying next...`, error);
+      if (model === models[models.length - 1]) {
+        throw error;
+      }
+    }
   }
-  if (isImageOrAudio) {
-    return response;
-  }
-  const jsonResponse = await response.json();
-  return new Response(JSON.stringify({ result: jsonResponse }), {
-    headers: { "Content-Type": "application/json" },
-    status: 200
-  });
+}
+function getAiCostEstimate(model, inputTokens, outputTokens = 0) {
+  const costs = {
+    [AI_MODELS.TEXT_GENERATION.LLAMA_3_8B]: { input: 0.2, output: 0.2 },
+    [AI_MODELS.TEXT_GENERATION.GEMMA_2B]: { input: 0.15, output: 0.15 },
+    [AI_MODELS.TEXT_GENERATION.LLAMA_3_70B]: { input: 0.25, output: 0.25 },
+    [AI_MODELS.TEXT_GENERATION.MISTRAL_7B]: { input: 0.2, output: 0.2 },
+    [AI_MODELS.TRANSLATION.M2M100]: { input: 0.2, output: 0.2 },
+    [AI_MODELS.TRANSLATION.NLLB200]: { input: 0.2, output: 0.2 },
+    [AI_MODELS.TTS.MELOTTS]: { input: 0.15, output: 0 },
+    [AI_MODELS.TTS.ELEVENLABS]: { input: 0.15, output: 0 },
+    [AI_MODELS.STT.WHISPER]: { input: 6e-3, output: 0 },
+    [AI_MODELS.IMAGE.STABLE_DIFFUSION]: { input: 25e-4, output: 0 },
+    [AI_MODELS.IMAGE.PIXELART]: { input: 25e-4, output: 0 },
+    [AI_MODELS.EMBEDDINGS.BGE_RERANKER]: { input: 0.1, output: 0.1 },
+    [AI_MODELS.EMBEDDINGS.BGE_EMBEDDING]: { input: 0.1, output: 0.1 }
+  };
+  const modelCost = costs[model] || { input: 0.2, output: 0.2 };
+  const totalCost = (inputTokens * modelCost.input + outputTokens * modelCost.output) / 1e6;
+  return {
+    model,
+    inputTokens,
+    outputTokens,
+    estimatedCost: totalCost,
+    currency: "USD"
+  };
 }
 
 const Textarea = reactExports.forwardRef(
@@ -10977,65 +11108,82 @@ const DialogDescription = reactExports.forwardRef(({ className, ...props }, ref)
 ));
 DialogDescription.displayName = Description.displayName;
 
-const CLOUDFLARE_ACCOUNT_ID = "62af59a7ac82b29543577ee6800735ee";
-const CLOUDFLARE_API_TOKEN = "VDFyQyM2GDJ9L4cTQf8kXMjSp4VoiueUonsObued";
 objectType({
   text: unionType([stringType(), arrayType(stringType())]).describe("The text or array of texts to be translated."),
   sourceLanguage: stringType().default("en").describe('The source language code (e.g., "en" for English).'),
-  targetLanguage: stringType().describe('The target language for translation (e.g., "ar" for Arabic).')
+  targetLanguage: stringType().describe('The target language for translation (e.g., "ar" for Arabic).'),
+  useFallback: booleanType().default(true).describe("Whether to use fallback models for cost optimization."),
+  quality: enumType(["fast", "balanced", "high"]).default("balanced").describe("Translation quality preference.")
 });
-async function translateText({ text, sourceLanguage = "en", targetLanguage }) {
+async function translateText({
+  text,
+  sourceLanguage = "en",
+  targetLanguage,
+  useFallback = true,
+  quality = "balanced"
+}) {
   if (typeof window !== "undefined") {
     if (Array.isArray(text)) {
-      return { translation: text.map(() => "محتوى مؤقت - سيتم تحديثه عند التشغيل") };
+      return {
+        translation: text.map(() => "محتوى مؤقت - سيتم تحديثه عند التشغيل"),
+        model_used: "placeholder",
+        estimated_cost: 0,
+        quality: "fast"
+      };
     }
-    return { translation: "محتوى مؤقت - سيتم تحديثه عند التشغيل" };
-  }
-  const isBatch = Array.isArray(text);
-  const url = `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/meta/m2m100-1.2b`;
-  let body;
-  if (isBatch) {
-    body = {
-      requests: text.map((t) => ({
-        text: t,
-        source_lang: sourceLanguage,
-        target_lang: targetLanguage
-      }))
-    };
-  } else {
-    body = {
-      text,
-      source_lang: sourceLanguage,
-      target_lang: targetLanguage
+    return {
+      translation: "محتوى مؤقت - سيتم تحديثه عند التشغيل",
+      model_used: "placeholder",
+      estimated_cost: 0,
+      quality: "fast"
     };
   }
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${CLOUDFLARE_API_TOKEN}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(body)
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error(`Cloudflare AI API error for translation model:`, errorText);
-    throw new Error(`Cloudflare AI API request failed: ${response.statusText}`);
-  }
-  const jsonResponse = await response.json();
-  if (isBatch) {
-    if (jsonResponse.result && Array.isArray(jsonResponse.result)) {
-      const translations = jsonResponse.result.map((item) => item.translated_text.trim());
-      return { translation: translations };
+  try {
+    const translation = await translateTextEnhanced(
+      Array.isArray(text) ? text.join("\n") : text,
+      targetLanguage,
+      sourceLanguage,
+      { useFallback }
+    );
+    let modelUsed = AI_MODELS.TRANSLATION.M2M100;
+    if (quality === "high") {
+      modelUsed = AI_MODELS.TRANSLATION.M2M100;
+    } else if (quality === "fast") {
+      modelUsed = AI_MODELS.TRANSLATION.NLLB200;
     }
-  } else {
-    if (jsonResponse.result && jsonResponse.result.translated_text) {
-      const translation = jsonResponse.result.translated_text;
-      return { translation: translation.trim() };
+    const inputTokens = Array.isArray(text) ? text.reduce((total, t) => total + t.length / 4, 0) : text.length / 4;
+    const outputTokens = translation.length / 4;
+    const estimatedCost = (inputTokens + outputTokens) * 2e-7;
+    let finalTranslation;
+    if (Array.isArray(text)) {
+      const sentences = translation.split(/[.!?]+/).filter((s) => s.trim());
+      finalTranslation = sentences.slice(0, text.length);
+    } else {
+      finalTranslation = translation;
     }
+    return {
+      translation: finalTranslation,
+      model_used: modelUsed,
+      estimated_cost: estimatedCost,
+      quality
+    };
+  } catch (error) {
+    console.error("Enhanced translation failed:", error);
+    if (Array.isArray(text)) {
+      return {
+        translation: text.map(() => "ترجمة مؤقتة - سيتم تحديثها عند التشغيل"),
+        model_used: "fallback",
+        estimated_cost: 0,
+        quality: "fast"
+      };
+    }
+    return {
+      translation: "ترجمة مؤقتة - سيتم تحديثها عند التشغيل",
+      model_used: "fallback",
+      estimated_cost: 0,
+      quality: "fast"
+    };
   }
-  console.error("Unexpected translation API response structure:", jsonResponse);
-  throw new Error("Failed to parse translation from AI response.");
 }
 
-export { $$Layout as $, Alert as A, BookOpenText as B, Card as C, AlertDescription as D, Award as E, Dialog as F, DialogContent as G, DialogHeader as H, DialogTitle as I, DialogDescription as J, DialogFooter as K, Lightbulb as L, Link as M, translateText as N, lessons as O, Primitive as P, useCallbackRef$1 as Q, RadioGroup as R, Send as S, Textarea as T, reactDomExports as U, useSize as V, composeRefs as W, Portal$1 as X, hideOthers as Y, ReactRemoveScroll as Z, useFocusGuards as _, cn as a, FocusScope as a0, DismissableLayer as a1, require_interop_require_default as a2, requireJsxRuntime as a3, require_interop_require_wildcard as a4, requireReactDom as a5, requireRouterContext_sharedRuntime as a6, requireUseMergedRef as a7, X as a8, usePrevious as a9, CardDescription as aa, createRovingFocusGroupScope as ab, Root$2 as ac, Item as ad, DialogTrigger as ae, DialogClose as af, cva as b, createLucideIcon as c, CardHeader as d, CardTitle as e, CardContent as f, createContextScope as g, useId as h, composeEventHandlers as i, jsxRuntimeExports as j, Presence as k, useComposedRefs as l, useLayoutEffect2 as m, createCollection as n, useDirection as o, ChevronDown as p, RadioGroupItem as q, runAi as r, Label as s, CircleCheckBig as t, useControllableState as u, CircleX as v, CardFooter as w, Button as x, LoaderCircle as y, AlertTitle as z };
+export { $$Layout as $, Alert as A, BookOpenText as B, Card as C, AlertDescription as D, Award as E, Dialog as F, DialogContent as G, DialogHeader as H, DialogTitle as I, DialogDescription as J, DialogFooter as K, Lightbulb as L, Link as M, generateText as N, getAiCostEstimate as O, Primitive as P, AI_MODELS as Q, RadioGroup as R, Send as S, Textarea as T, translateText as U, lessons as V, useCallbackRef$1 as W, reactDomExports as X, useSize as Y, composeRefs as Z, Portal$1 as _, cn as a, hideOthers as a0, ReactRemoveScroll as a1, useFocusGuards as a2, FocusScope as a3, DismissableLayer as a4, require_interop_require_default as a5, requireJsxRuntime as a6, require_interop_require_wildcard as a7, requireReactDom as a8, requireRouterContext_sharedRuntime as a9, requireUseMergedRef as aa, X as ab, usePrevious as ac, CardDescription as ad, createRovingFocusGroupScope as ae, Root$2 as af, Item as ag, DialogTrigger as ah, DialogClose as ai, cva as b, createLucideIcon as c, CardHeader as d, CardTitle as e, CardContent as f, createContextScope as g, useId as h, composeEventHandlers as i, jsxRuntimeExports as j, Presence as k, useComposedRefs as l, useLayoutEffect2 as m, createCollection as n, useDirection as o, ChevronDown as p, RadioGroupItem as q, runAi as r, Label as s, CircleCheckBig as t, useControllableState as u, CircleX as v, CardFooter as w, Button as x, LoaderCircle as y, AlertTitle as z };

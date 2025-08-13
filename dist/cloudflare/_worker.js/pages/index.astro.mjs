@@ -1,8 +1,8 @@
 globalThis.process ??= {}; globalThis.process.env ??= {};
-import { o as objectType, e as enumType, s as stringType, a as arrayType, g as getDefaultExportFromCjs, n as numberType, f as commonjsGlobal, h as clsx, i as booleanType, c as createComponent, r as renderComponent, d as renderTemplate } from '../chunks/astro/server_DbPTNgPy.mjs';
-import { c as createLucideIcon, j as jsxRuntimeExports, g as createContextScope, P as Primitive, a as cn, l as useComposedRefs, o as useDirection, k as Presence, i as composeEventHandlers, Q as useCallbackRef, m as useLayoutEffect2, U as reactDomExports, V as useSize, W as composeRefs, X as Portal$2, Y as hideOthers, Z as ReactRemoveScroll, _ as useFocusGuards, a0 as FocusScope, a1 as DismissableLayer, u as useControllableState, h as useId, r as runAi, a2 as require_interop_require_default, a3 as requireJsxRuntime, a4 as require_interop_require_wildcard, a5 as requireReactDom, a6 as requireRouterContext_sharedRuntime, a7 as requireUseMergedRef, F as Dialog, G as DialogContent, H as DialogHeader, I as DialogTitle, J as DialogDescription, x as Button, C as Card, f as CardContent, N as translateText, A as Alert, t as CircleCheckBig, z as AlertTitle, D as AlertDescription, R as RadioGroup, q as RadioGroupItem, s as Label$2, a8 as X, T as Textarea, S as Send, n as createCollection, a9 as usePrevious, p as ChevronDown, d as CardHeader, e as CardTitle, B as BookOpenText, L as Lightbulb, y as LoaderCircle, aa as CardDescription, w as CardFooter, E as Award, v as CircleX, ab as createRovingFocusGroupScope, ac as Root$6, ad as Item$1, ae as DialogTrigger, K as DialogFooter, af as DialogClose, O as lessons$1, M as Link, $ as $$Layout } from '../chunks/translate-flow_kN_oiuBh.mjs';
-import { a as reactExports, b as requireReact, R as React } from '../chunks/_@astro-renderers_gQnhom5Z.mjs';
-export { r as renderers } from '../chunks/_@astro-renderers_gQnhom5Z.mjs';
+import { o as objectType, e as enumType, s as stringType, a as arrayType, g as getDefaultExportFromCjs, n as numberType, h as commonjsGlobal, i as clsx, b as booleanType, c as createComponent, r as renderComponent, f as renderTemplate } from '../chunks/astro/server_BTyQwOK9.mjs';
+import { c as createLucideIcon, j as jsxRuntimeExports, g as createContextScope, P as Primitive, a as cn, l as useComposedRefs, o as useDirection, k as Presence, i as composeEventHandlers, W as useCallbackRef, m as useLayoutEffect2, X as reactDomExports, Y as useSize, Z as composeRefs, _ as Portal$2, a0 as hideOthers, a1 as ReactRemoveScroll, a2 as useFocusGuards, a3 as FocusScope, a4 as DismissableLayer, u as useControllableState, h as useId, r as runAi, a5 as require_interop_require_default, a6 as requireJsxRuntime, a7 as require_interop_require_wildcard, a8 as requireReactDom, a9 as requireRouterContext_sharedRuntime, aa as requireUseMergedRef, F as Dialog, G as DialogContent, H as DialogHeader, I as DialogTitle, J as DialogDescription, x as Button, C as Card, f as CardContent, U as translateText, A as Alert, t as CircleCheckBig, z as AlertTitle, D as AlertDescription, R as RadioGroup, q as RadioGroupItem, s as Label$2, ab as X, T as Textarea, S as Send, n as createCollection, ac as usePrevious, p as ChevronDown, d as CardHeader, e as CardTitle, B as BookOpenText, L as Lightbulb, y as LoaderCircle, ad as CardDescription, w as CardFooter, E as Award, v as CircleX, ae as createRovingFocusGroupScope, af as Root$6, ag as Item$1, ah as DialogTrigger, K as DialogFooter, ai as DialogClose, V as lessons$1, M as Link, $ as $$Layout } from '../chunks/translate-flow_CLdcbQxa.mjs';
+import { a as reactExports, b as requireReact, R as React } from '../chunks/_@astro-renderers_CwoFMiqm.mjs';
+export { r as renderers } from '../chunks/_@astro-renderers_CwoFMiqm.mjs';
 
 /**
  * @license lucide-react v0.475.0 - ISC
@@ -53675,7 +53675,7 @@ function StoryViewerDialog({ story, isOpen, onOpenChange }) {
     if (!story) return;
     setIsLoadingQuiz(true);
     try {
-      const { generateStoryQuiz } = await import('../chunks/story-quiz-flow_B-ckEkUK.mjs');
+      const { generateStoryQuiz } = await import('../chunks/story-quiz-flow_DFX3cI8o.mjs');
       const result = await generateStoryQuiz({ storyContent: story.content });
       setQuiz(result.questions);
       setActiveTab("quiz");
