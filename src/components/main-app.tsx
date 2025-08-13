@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { Home, Book, Bot, BarChart, Sun, Moon } from "lucide-react";
 import { Button } from "./ui/button";
 import { BackgroundShapes } from "./triangular-background";
-import { HomeScreen, BookScreen, AiScreen, ProgressScreen } from "./screens";
 
 export type ActiveTab = "home" | "book" | "ai" | "progress";
 
@@ -28,6 +27,24 @@ function NavItem({ icon, label, isActive, onClick }: NavItemProps) {
       <span className="transform transition-transform">{icon}</span>
       <span className="text-xs">{label}</span>
     </button>
+  );
+}
+
+// Simple test component
+function TestHomeScreen() {
+  return (
+    <div className="text-center py-20">
+      <h2 className="text-4xl font-bold mb-4">لوحة التحكم الخاصة بك</h2>
+      <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+        مرحباً بك! ابدأ رحلتك التعليمية من هنا.
+      </p>
+      <div className="bg-card p-6 rounded-lg max-w-md mx-auto">
+        <h3 className="text-xl font-semibold mb-4">اختبار التطبيق</h3>
+        <p className="text-sm text-muted-foreground">
+          إذا كنت ترى هذا النص، فهذا يعني أن التطبيق يعمل بشكل صحيح!
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -55,11 +72,11 @@ export default function MainApp() {
   
   const renderScreen = () => {
     switch (activeTab) {
-      case "home": return <HomeScreen setActiveTab={setActiveTab} />;
-      case "book": return <BookScreen />;
-      case "ai": return <AiScreen setActiveTab={setActiveTab} />;
-      case "progress": return <ProgressScreen />;
-      default: return <HomeScreen setActiveTab={setActiveTab} />;
+      case "home": return <TestHomeScreen />;
+      case "book": return <div className="text-center py-20"><h2>المكتبة</h2></div>;
+      case "ai": return <div className="text-center py-20"><h2>الذكاء الاصطناعي</h2></div>;
+      case "progress": return <div className="text-center py-20"><h2>التقدم</h2></div>;
+      default: return <TestHomeScreen />;
     }
   }
 
