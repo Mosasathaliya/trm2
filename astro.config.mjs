@@ -6,11 +6,7 @@ export default defineConfig({
   integrations: [react()],
   output: 'server',
   adapter: cloudflare({
-    mode: 'directory',
-    runtime: {
-      mode: 'local',
-      type: 'pages'
-    }
+    mode: 'directory'
   }),
   outDir: './dist/cloudflare',
   vite: {
