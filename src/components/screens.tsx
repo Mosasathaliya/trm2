@@ -5,62 +5,62 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { LessonDetailDialog } from '@/components/lesson-detail-dialog';
-import { chatStream } from '@/ai/flows/chat-flow';
-import { useToast } from "@/hooks/use-toast"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from './ui/card';
+import { Textarea } from './ui/textarea';
+import { Button } from './ui/button';
+import { Progress } from './ui/progress';
+import { ScrollArea } from "./ui/scroll-area";
+import { LessonDetailDialog } from './lesson-detail-dialog';
+import { chatStream } from '../ai/flows/chat-flow';
+import { useToast } from "../hooks/use-toast"
 import { BookOpen, Book, Bot, ArrowRight, Sparkles, Image as ImageIcon, GraduationCap, Mic, X, Gamepad2, MessageCircle, Flame, Puzzle, Ear, BookOpen, Library, Loader2, Youtube, PlayCircle, Brain, ChevronLeft, ChevronRight, Lightbulb, Volume2, Award, FileQuestion, CheckCircle, FileText, Lock, BrainCircuit } from 'lucide-react';
 // Image import removed - using regular img tags for Astro
 import type { ActiveTab } from './main-app';
-import { generateStoryImage } from '@/ai/flows/story-image-flow';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose, DialogDescription } from '@/components/ui/dialog';
+import { generateStoryImage } from '../ai/flows/story-image-flow';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose, DialogDescription } from './ui/dialog';
 import { LingoleapApp } from './lingoleap-app';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from "recharts"
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@/components/ui/chart"
+} from "./ui/chart"
 import { TextAdventureApp } from './text-adventure-app';
 import { MumbleJumbleApp } from './mumble-jumble-app';
 import { TenseTeacherApp } from './tense-teacher-app';
 import { ChatterbotApp } from './chatterbot-app';
-import { lessons } from '@/data/lingo-lessons-data';
-import type { Lesson } from '@/types/lesson';
+import { lessons } from '../data/lingo-lessons-data';
+import type { Lesson } from '../types/lesson';
 // Link import removed - using regular anchor tags for Astro
 
 // Import video links from the new data file
-import videoLinks from '@/data/video-links';
-import whatIfLinks from '@/data/whatif-links';
-import motivationLinks from '@/data/motivation-links';
-import { explainVideoTopic, type ExplainVideoOutput } from '@/ai/flows/explain-video-flow';
-import { speakText } from '@/lib/tts-system';
+import videoLinks from '../data/video-links';
+import whatIfLinks from '../data/whatif-links';
+import motivationLinks from '../data/motivation-links';
+import { explainVideoTopic, type ExplainVideoOutput } from '../ai/flows/explain-video-flow';
+import { speakText } from '../lib/tts-system';
 
-import type { AiLesson } from '@/lib/ai-lessons';
-import { aiLessons } from '@/lib/ai-lessons';
-import { generateCertificateImage } from '@/ai/flows/generate-certificate-image';
+import type { AiLesson } from '../lib/ai-lessons';
+import { aiLessons } from '../lib/ai-lessons';
+import { generateCertificateImage } from '../ai/flows/generate-certificate-image';
 import { QuizScreen } from './quiz-screen';
 import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import { Label } from './ui/label';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
-import { cn } from '@/lib/utils';
-import { translateText } from '@/ai/flows/translate-flow';
-import { useStoryStore, type SavedStory, useQuizStore, type StoryQuizResult } from '@/hooks/use-story-store';
-import { useProgressStore } from '@/hooks/use-progress-store';
+import { cn } from '../lib/utils';
+import { translateText } from '../ai/flows/translate-flow';
+import { useStoryStore, type SavedStory, useQuizStore, type StoryQuizResult } from '../hooks/use-story-store';
+import { useProgressStore } from '../hooks/use-progress-store';
 import CloudflareAutoRAGPanel from './cloudflare-autrag-panel';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { learningItems } from '@/lib/lessons';
+} from "./ui/tooltip"
+import { learningItems } from '../lib/lessons';
 
 // Helper function to extract YouTube embed URL and video ID
 const getYouTubeInfo = (url: string): { embedUrl: string | null; videoId: string | null; title: string | null } => {
