@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "trm2-autrag-backend",
   "version": "1.0.0",
   "private": true,
@@ -21,8 +21,8 @@
     "wrangler": "^3.101.0"
   },
   "dependencies": {
-    "@cloudflare/ai": "^1.0.0",
-    "hono": "^4.6.12"
+    "@cloudflare/ai": "^1.2.2",
+    "hono": "^4.9.1"
   },
   "engines": {
     "node": ">=18.0.0"
