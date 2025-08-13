@@ -1,0 +1,14 @@
+المكتبة التعليمية in hear the flow goes like one by bone until finalexam at last the user have to pass in each lesson to go to next lesson
+The stories in المكتبة التعليمية are also part of the workflow.
+
+Unlocking rules:
+- ALL FEATURES UNLOCKED FOR TESTING.
+- After 5 lessons, unlock "Vocabulary Builder".
+- After 10 lessons, unlock "Story Maker", "Tense Expert", "Jumble Game", and "My Stories".
+- After 25 lessons, unlock all "Educational Resources" (Learning Materials, Video Learn, What If, Motivation).
+- After 42 lessons, unlock "Learn about AI".
+- After 48 lessons, unlock "Voice Assistant".
+- "AI Chat" is always unlocked.
+- The "Final Exam" (Create Quiz) in the Educational Library is unlocked only after all 80 lessons/stories are completed.
+- The "Generate Certificate" button in the Progress screen is unlocked only after the user passes the Final Exam with a score of 70% or higher.
+- CURRENTLY: ALL FEATURES ARE UNLOCKED FOR TESTING.
