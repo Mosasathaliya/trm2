@@ -9,11 +9,7 @@ export default defineConfig({
     mode: 'directory',
     runtime: {
       mode: 'local',
-      type: 'pages',
-      bindings: {
-        CLOUDFLARE_ACCOUNT_ID: 'CLOUDFLARE_ACCOUNT_ID',
-        CLOUDFLARE_API_TOKEN: 'CLOUDFLARE_API_TOKEN'
-      }
+      type: 'pages'
     }
   }),
   outDir: './dist/cloudflare',
@@ -24,17 +20,6 @@ export default defineConfig({
     resolve: {
       alias: {
         '@': '/src'
-      }
-    },
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            'react-vendor': ['react', 'react-dom'],
-            'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-tabs', '@radix-ui/react-select'],
-            'ai-vendor': ['@cloudflare/ai', 'zod', 'zustand']
-          }
-        }
       }
     }
   }

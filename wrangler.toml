@@ -8,7 +8,7 @@ pages_build_output_dir = "dist/cloudflare"
 name = "trm2-pages-prod"
 
 [env.preview]
-name = "trm2-pages-preview"
+name = "trm2-preview"
 
 # Environment variables for Cloudflare Pages
 [vars]

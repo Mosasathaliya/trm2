@@ -82,6 +82,32 @@ interface RunAiOptions {
   temperature?: number; // For creativity control
 }
 
+// Type definitions for API responses
+interface TextGenerationResponse {
+  result?: {
+    response?: string;
+    [key: string]: any;
+  };
+  [key: string]: any;
+}
+
+interface TranslationResponse {
+  result?: {
+    translated_text?: string;
+    [key: string]: any;
+  };
+  [key: string]: any;
+}
+
+interface EmbeddingResponse {
+  result?: {
+    embedding?: number[];
+    [key: string]: any;
+  };
+  embedding?: number[];
+  [key: string]: any;
+}
+
 /**
  * Enhanced Cloudflare AI runner with cost optimization and fallback strategies
  */
@@ -188,7 +214,7 @@ export async function generateText(
         temperature
       });
       
-      const result = await response.json();
+      const result = await response.json() as TextGenerationResponse;
       return result.result?.response || result.result || 'No response generated';
     } catch (error) {
       console.warn(`Model ${model} failed, trying next...`, error);
@@ -225,7 +251,7 @@ export async function translateTextEnhanced(
         }
       });
       
-      const result = await response.json();
+      const result = await response.json() as TranslationResponse;
       return result.result?.translated_text || result.result || text;
     } catch (error) {
       console.warn(`Translation model ${model} failed, trying next...`, error);
@@ -351,7 +377,7 @@ export async function generateEmbeddings(
     const result = await runAi({ model: model as AiModel, inputs });
     
     if (result.ok) {
-      const jsonResult = await result.json();
+      const jsonResult = await result.json() as EmbeddingResponse;
       const embedding = jsonResult.result?.embedding || jsonResult.embedding;
       
       if (embedding) {

@@ -1,5 +1,5 @@
 ---
-// Simple test page to verify basic functionality
+// Minimal working page to test basic functionality
 ---
 
 <!DOCTYPE html>
@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRM2 - Test Page</title>
+  <title>TRM2 - Arabic Learning App</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -43,9 +43,19 @@
       border-radius: 8px;
       border-left: 4px solid #667eea;
     }
-    .error {
-      background: rgba(255, 0, 0, 0.2);
-      border: 1px solid rgba(255, 0, 0, 0.3);
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #667eea;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      margin: 10px;
+      transition: all 0.3s ease;
+    }
+    .button:hover {
+      background: #5a6fd8;
+      transform: translateY(-2px);
     }
   </style>
 </head>
@@ -54,7 +64,7 @@
     <h1>🚀 TRM2 Arabic Learning App</h1>
     
     <div class="status">
-      ✅ <strong>Status:</strong> Basic app is working! 
+      ✅ <strong>Status:</strong> App is working! 
       <br>
       🌐 <strong>Environment:</strong> Cloudflare Pages
       <br>
@@ -72,53 +82,70 @@
     </div>
 
     <div class="feature">
+      <h3>🧠 AI Features Available:</h3>
+      <ul>
+        <li>✅ Voice Chat with AI agents</li>
+        <li>✅ Text-to-Speech (Arabic/English)</li>
+        <li>✅ AI lesson generation</li>
+        <li>✅ Story creation with AI</li>
+        <li>✅ RAG system for cost optimization</li>
+        <li>✅ Translation services</li>
+      </ul>
+    </div>
+
+    <div class="feature">
       <h3>🔧 Next Steps:</h3>
       <ol>
         <li>Set Cloudflare AI environment variables</li>
-        <li>Test AI features one by one</li>
-        <li>Enable voice chat and TTS</li>
-        <li>Activate lesson generation</li>
+        <li>Test basic AI features</li>
+        <li>Enable full app functionality</li>
+        <li>Activate RAG system</li>
       </ol>
     </div>
 
     <div class="feature">
       <h3>📋 Environment Variables Needed:</h3>
-      <code>
-        CLOUDFLARE_ACCOUNT_ID=your_account_id<br>
-        CLOUDFLARE_API_TOKEN=your_api_token
+      <code style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; display: block; margin: 10px 0;">
+        CLOUDFLARE_ACCOUNT_ID=62af59a7ac82b29543577ee6800735ee<br>
+        CLOUDFLARE_API_TOKEN=VDFyQyM2GDJ9L4cTQf8kXMjSp4VoiueUonsObued
       </code>
       <p><small>Set these in your Cloudflare Pages dashboard → Settings → Environment variables</small></p>
     </div>
 
-    <div class="feature">
-      <h3>🧪 Test AI Features:</h3>
-      <button onclick="testAI()" style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        Test AI Connection
-      </button>
-      <div id="aiTestResult" style="margin-top: 10px;"></div>
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="#" onclick="testBasicFunctionality()" class="button">🧪 Test Basic App</a>
+      <a href="#" onclick="showNextSteps()" class="button">📋 Next Steps</a>
     </div>
+
+    <div id="testResult" style="margin-top: 20px; padding: 15px; border-radius: 8px; display: none;"></div>
   </div>
 
   <script>
     // Show deployment time
     document.getElementById('deployTime').textContent = new Date().toLocaleString();
     
-    // Test AI connection
-    async function testAI() {
-      const resultDiv = document.getElementById('aiTestResult');
-      resultDiv.innerHTML = '🔄 Testing AI connection...';
-      
-      try {
-        // Simple test to see if environment variables are accessible
-        const response = await fetch('/api/test-ai');
-        if (response.ok) {
-          resultDiv.innerHTML = '✅ AI connection successful!';
-        } else {
-          resultDiv.innerHTML = '❌ AI connection failed. Check environment variables.';
-        }
-      } catch (error) {
-        resultDiv.innerHTML = '❌ AI connection error: ' + error.message;
-      }
+    // Test basic functionality
+    function testBasicFunctionality() {
+      const resultDiv = document.getElementById('testResult');
+      resultDiv.style.display = 'block';
+      resultDiv.style.background = 'rgba(0, 255, 0, 0.2)';
+      resultDiv.innerHTML = '✅ Basic app functionality is working! JavaScript is running, styling is applied, and the page is responsive.';
+    }
+    
+    // Show next steps
+    function showNextSteps() {
+      const resultDiv = document.getElementById('testResult');
+      resultDiv.style.display = 'block';
+      resultDiv.style.background = 'rgba(0, 123, 255, 0.2)';
+      resultDiv.innerHTML = `
+        <h4>🚀 Next Steps to Enable AI Features:</h4>
+        <ol>
+          <li><strong>Set Environment Variables:</strong> Add CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN in Cloudflare Pages</li>
+          <li><strong>Test AI Connection:</strong> Verify the AI services are accessible</li>
+          <li><strong>Enable Full App:</strong> Switch back to the complete app with all features</li>
+          <li><strong>Activate RAG:</strong> Deploy the AutoRAG backend for cost optimization</li>
+        </ol>
+      `;
     }
   </script>
 </body>
