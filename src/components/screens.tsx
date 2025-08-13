@@ -40,7 +40,7 @@ import videoLinks from '@/data/video-links';
 import whatIfLinks from '@/data/whatif-links';
 import motivationLinks from '@/data/motivation-links';
 import { explainVideoTopic, type ExplainVideoOutput } from '@/ai/flows/explain-video-flow';
-import { textToSpeech } from '@/ai/flows/tts-flow';
+import { speakText } from '@/lib/tts-system';
 
 import type { AiLesson } from '@/lib/ai-lessons';
 import { aiLessons } from '@/lib/ai-lessons';
@@ -53,6 +53,7 @@ import { cn } from '@/lib/utils';
 import { translateText } from '@/ai/flows/translate-flow';
 import { useStoryStore, type SavedStory, useQuizStore, type StoryQuizResult } from '@/hooks/use-story-store';
 import { useProgressStore } from '@/hooks/use-progress-store';
+import { RAGEnhancedAIPanel } from './rag-enhanced-ai-panel';
 import {
   Tooltip,
   TooltipContent,
@@ -250,10 +251,7 @@ function ExplanationDialog({ videoTitle, isOpen, onOpenChange }: { videoTitle: s
     if (!text || audioLoading === id) return;
     setAudioLoading(id);
     try {
-      const result = await textToSpeech({ prompt: text, lang: 'ar' });
-      if (result?.media) {
-        new Audio(result.media).play();
-      }
+      await speakText(text, { language: 'ar' });
     } catch (err) {
       console.error("TTS Error:", err);
       toast({ variant: 'destructive', title: 'خطأ في الصوت' });
@@ -459,26 +457,7 @@ function AiLessonViewerDialog({ lesson, isOpen, onOpenChange, onBack }: { lesson
     if (!text || activeAudioId) return;
     setActiveAudioId(id);
     try {
-      const result = await textToSpeech({ prompt: text, lang: lang });
-      if (result?.media) {
-        if (!audioRef.current) {
-          audioRef.current = new Audio();
-        }
-        const audio = audioRef.current;
-        audio.src = result.media;
-        audio.play().catch(e => {
-          console.error("Audio playback error:", e);
-          setActiveAudioId(null);
-        });
-        audio.onended = () => setActiveAudioId(null);
-        audio.onerror = () => {
-             toast({ variant: 'destructive', title: 'خطأ في تشغيل الصوت.' });
-             setActiveAudioId(null);
-        }
-      } else {
-        toast({ variant: 'destructive', title: 'خطأ', description: 'فشل في تشغيل الصوت.' });
-        setActiveAudioId(null);
-      }
+      await speakText(text, { language: lang });
     } catch (err) {
       console.error("TTS Error:", err);
       toast({ variant: 'destructive', title: 'خطأ في تشغيل الصوت.' });
@@ -1396,12 +1375,13 @@ export function AiScreen({ setActiveTab }: { setActiveTab: (tab: ActiveTab) => v
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [isStoryMakerOpen, setIsStoryMakerOpen] = useState(false);
     const [isVoiceChatOpen, setIsVoiceChatOpen] = useState(false);
+    const [isRAGPanelOpen, setIsRAGPanelOpen] = useState(false);
 
     return (
         <section className="animate-fadeIn">
             <h2 className="text-3xl font-bold mb-2 text-center">أدوات الذكاء الاصطناعي</h2>
             <p className="text-muted-foreground mb-6 text-center">اختر أداة لمساعدتك في رحلة تعلم اللغة.</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                  <Card 
                     className="cursor-pointer transform transition-all hover:scale-[1.03] hover:shadow-lg bg-card/70 backdrop-blur-sm"
                     onClick={() => setIsChatOpen(true)}
@@ -1446,6 +1426,21 @@ export function AiScreen({ setActiveTab }: { setActiveTab: (tab: ActiveTab) => v
                         </CardDescription>
                     </CardHeader>
                 </Card>
+
+                <Card 
+                    className="cursor-pointer transform transition-all hover:scale-[1.03] hover:shadow-lg bg-card/70 backdrop-blur-sm"
+                    onClick={() => setIsRAGPanelOpen(true)}
+                >
+                    <CardHeader>
+                        <CardTitle as="h3" className="flex items-center gap-3">
+                            <Brain className="h-8 w-8 text-blue-600" />
+                            <span>نظام RAG المتقدم</span>
+                        </CardTitle>
+                        <CardDescription>
+                            نظام ذكي لاسترجاع وإعادة استخدام المحتوى المُنشأ بالذكاء الاصطناعي.
+                        </CardDescription>
+                    </CardHeader>
+                </Card>
             </div>
 
             {/* AI Chat Dialog */}
@@ -1471,6 +1466,24 @@ export function AiScreen({ setActiveTab }: { setActiveTab: (tab: ActiveTab) => v
                     </DialogHeader>
                     <ChatterbotApp />
                      <DialogClose asChild><Button type="button" variant="secondary" className="absolute top-2 right-2 z-20">Close</Button></DialogClose>
+                </DialogContent>
+            </Dialog>
+
+            {/* RAG Enhanced AI Panel Dialog */}
+            <Dialog open={isRAGPanelOpen} onOpenChange={setIsRAGPanelOpen}>
+                <DialogContent className="max-w-6xl h-[90vh] flex flex-col p-0">
+                    <DialogHeader className="p-6 border-b">
+                        <DialogTitle className="flex items-center gap-2">
+                            <Brain className="h-6 w-6 text-blue-600" />
+                            نظام RAG المتقدم للذكاء الاصطناعي
+                        </DialogTitle>
+                        <DialogDescription>
+                            نظام استرجاع وإعادة استخدام المحتوى المُنشأ بالذكاء الاصطناعي لتحسين الكفاءة وتقليل التكاليف
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex-1 overflow-hidden">
+                        <RAGEnhancedAIPanel />
+                    </div>
                 </DialogContent>
             </Dialog>
         </section>

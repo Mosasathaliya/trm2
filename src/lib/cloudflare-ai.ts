@@ -324,3 +324,40 @@ export function getAiCostEstimate(
     currency: 'USD'
   };
 }
+
+/**
+ * Generate embeddings using Cloudflare AI embedding models
+ */
+export async function generateEmbeddings(
+  text: string,
+  model: string = AI_MODELS.EMBEDDINGS.BGE_EMBEDDING
+): Promise<{
+  embedding: number[];
+  model_used: string;
+  estimated_cost: number;
+}> {
+  try {
+    const inputs = { text };
+    const result = await runAi({ model: model as AiModel, inputs });
+    
+    if (result.ok) {
+      const jsonResult = await result.json();
+      const embedding = jsonResult.result?.embedding || jsonResult.embedding;
+      
+      if (embedding) {
+        return {
+          embedding,
+          model_used: model,
+          estimated_cost: 0.0001 // Fixed cost for embeddings
+        };
+      } else {
+        throw new Error('No embedding generated');
+      }
+    } else {
+      throw new Error(`Embedding request failed: ${result.statusText}`);
+    }
+  } catch (error) {
+    console.error('Embedding generation failed:', error);
+    throw error;
+  }
+}
