@@ -1,14 +1,12 @@
 /**
  * @fileoverview Main application component that orchestrates the layout, navigation, and screens.
  */
-"use client";
 
 import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
 import { Home, Book, Bot, BarChart, Sun, Moon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { BackgroundShapes } from "@/components/triangular-background";
-import { HomeScreen, BookScreen, AiScreen, ProgressScreen } from "@/components/screens";
+import { Button } from "./ui/button";
+import { BackgroundShapes } from "./triangular-background";
+import { HomeScreen, BookScreen, AiScreen, ProgressScreen } from "./screens";
 
 export type ActiveTab = "home" | "book" | "ai" | "progress";
 
@@ -33,9 +31,9 @@ function NavItem({ icon, label, isActive, onClick }: NavItemProps) {
   );
 }
 
-export function MainApp() {
+export default function MainApp() {
   const [activeTab, setActiveTab] = useState<ActiveTab>("home");
-  const { theme, setTheme } = useTheme();
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

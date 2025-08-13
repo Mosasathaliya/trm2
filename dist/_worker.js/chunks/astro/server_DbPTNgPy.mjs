@@ -1,4 +1,6 @@
 globalThis.process ??= {}; globalThis.process.env ??= {};
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
 function getDefaultExportFromCjs (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
@@ -5207,6 +5209,8 @@ var ZodFirstPartyTypeKind;
     ZodFirstPartyTypeKind["ZodReadonly"] = "ZodReadonly";
 })(ZodFirstPartyTypeKind || (ZodFirstPartyTypeKind = {}));
 const stringType = ZodString.create;
+const numberType = ZodNumber.create;
+const booleanType = ZodBoolean.create;
 ZodAny.create;
 ZodNever.create;
 const arrayType = ZodArray.create;
@@ -5377,6 +5381,9 @@ function isSlotString(str) {
   return !!str[slotString];
 }
 function renderSlot(result, slotted, fallback) {
+  if (!slotted && fallback) {
+    return renderSlot(result, fallback);
+  }
   return {
     async render(destination) {
       await renderChild(destination, typeof slotted === "function" ? slotted(result) : slotted);
@@ -5405,7 +5412,7 @@ async function renderSlotToString(result, slotted, fallback) {
       }
     }
   };
-  const renderInstance = renderSlot(result, slotted);
+  const renderInstance = renderSlot(result, slotted, fallback);
   await renderInstance.render(temporaryDestination);
   return markHTMLString(new SlotString(content, instructions));
 }
@@ -6745,23 +6752,6 @@ async function renderPage(result, componentFactory, props, children, streaming, 
   }
 }
 
-async function renderScript(result, id) {
-  if (result._metadata.renderedScripts.has(id)) return;
-  result._metadata.renderedScripts.add(id);
-  const inlined = result.inlinedScripts.get(id);
-  if (inlined != null) {
-    if (inlined) {
-      return markHTMLString(`<script type="module">${inlined}</script>`);
-    } else {
-      return "";
-    }
-  }
-  const resolved = await result.resolve(id);
-  return markHTMLString(
-    `<script type="module" src="${result.userAssetsBase ? (result.base === "/" ? "" : result.base) + result.userAssetsBase : ""}${resolved}"></script>`
-  );
-}
-
 /*! https://mths.be/cssesc v3.0.0 by @mathias */
 
 var cssesc_1;
@@ -6902,4 +6892,4 @@ function spreadAttributes(values = {}, _name, { class: scopedClassName } = {}) {
   return markHTMLString(output);
 }
 
-export { CspNotEnabled as $, AstroError as A, i18nNoLocaleFoundInPath as B, ResponseSentError as C, DEFAULT_404_COMPONENT as D, originPathnameSymbol as E, RewriteWithBodyUsed as F, GetStaticPathsRequired as G, InvalidGetStaticPathsEntry as H, InvalidGetStaticPathsReturn as I, GetStaticPathsExpectedParams as J, GetStaticPathsInvalidRouteParam as K, LocalsNotAnObject as L, PrerenderDynamicEndpointPathCollide as M, NoMatchingStaticPathFound as N, ReservedSlotName as O, PageNumberParamNotFound as P, renderSlotToString as Q, ROUTE_TYPE_HEADER as R, renderJSX as S, chunkToString as T, isRenderInstruction as U, MiddlewareNoDataOrNextCalled as V, MiddlewareNotAResponse as W, SessionStorageInitError as X, SessionStorageSaveError as Y, ForbiddenRewrite as Z, ASTRO_VERSION as _, arrayType as a, green as a0, LocalsReassigned as a1, generateCspDigest as a2, PrerenderClientAddressNotAvailable as a3, ClientAddressNotAvailable as a4, StaticClientAddressNotAvailable as a5, AstroResponseHeadersReassigned as a6, renderPage as a7, REWRITE_DIRECTIVE_HEADER_KEY as a8, REWRITE_DIRECTIVE_HEADER_VALUE as a9, renderEndpoint as aa, NOOP_MIDDLEWARE_HEADER as ab, REDIRECT_STATUS_CODES as ac, ActionsReturnedInvalidDataError as ad, escape as ae, createAstro as b, createComponent as c, unescapeHTML as d, renderScript as e, renderHead as f, decodeKey as g, getDefaultExportFromCjs as h, REROUTE_DIRECTIVE_HEADER as i, ActionNotFoundError as j, bold as k, red as l, dim as m, blue as n, objectType as o, clientAddressSymbol as p, REROUTABLE_STATUS_CODES as q, renderTemplate as r, stringType as s, responseSentSymbol as t, unionType as u, decryptString as v, createSlotValueFromString as w, isAstroComponentFactory as x, yellow as y, renderComponent as z };
+export { MiddlewareNotAResponse as $, AstroError as A, REROUTABLE_STATUS_CODES as B, responseSentSymbol as C, DEFAULT_404_COMPONENT as D, decryptString as E, createSlotValueFromString as F, isAstroComponentFactory as G, i18nNoLocaleFoundInPath as H, ResponseSentError as I, originPathnameSymbol as J, RewriteWithBodyUsed as K, LocalsNotAnObject as L, GetStaticPathsRequired as M, InvalidGetStaticPathsReturn as N, InvalidGetStaticPathsEntry as O, GetStaticPathsExpectedParams as P, GetStaticPathsInvalidRouteParam as Q, ROUTE_TYPE_HEADER as R, PageNumberParamNotFound as S, NoMatchingStaticPathFound as T, PrerenderDynamicEndpointPathCollide as U, ReservedSlotName as V, renderSlotToString as W, renderJSX as X, chunkToString as Y, isRenderInstruction as Z, MiddlewareNoDataOrNextCalled as _, arrayType as a, SessionStorageInitError as a0, SessionStorageSaveError as a1, ForbiddenRewrite as a2, ASTRO_VERSION as a3, CspNotEnabled as a4, green as a5, LocalsReassigned as a6, generateCspDigest as a7, PrerenderClientAddressNotAvailable as a8, ClientAddressNotAvailable as a9, StaticClientAddressNotAvailable as aa, AstroResponseHeadersReassigned as ab, renderPage as ac, REWRITE_DIRECTIVE_HEADER_KEY as ad, REWRITE_DIRECTIVE_HEADER_VALUE as ae, renderEndpoint as af, NOOP_MIDDLEWARE_HEADER as ag, REDIRECT_STATUS_CODES as ah, ActionsReturnedInvalidDataError as ai, escape as aj, createAstro as b, createComponent as c, renderTemplate as d, enumType as e, commonjsGlobal as f, getDefaultExportFromCjs as g, clsx as h, booleanType as i, addAttribute as j, renderHead as k, renderSlot as l, decodeKey as m, numberType as n, objectType as o, REROUTE_DIRECTIVE_HEADER as p, ActionNotFoundError as q, renderComponent as r, stringType as s, bold as t, unionType as u, red as v, dim as w, blue as x, yellow as y, clientAddressSymbol as z };

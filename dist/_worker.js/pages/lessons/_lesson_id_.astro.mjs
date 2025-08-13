@@ -1,1337 +1,1073 @@
 globalThis.process ??= {}; globalThis.process.env ??= {};
-import { o as objectType, s as stringType, u as unionType, a as arrayType, c as createComponent, b as createAstro, r as renderTemplate, d as unescapeHTML, e as renderScript, f as renderHead } from '../../chunks/astro/server_CDii1nDs.mjs';
-export { renderers } from '../../renderers.mjs';
+import { o as objectType, s as stringType, a as arrayType, c as createComponent, b as createAstro, r as renderComponent, d as renderTemplate } from '../../chunks/astro/server_DbPTNgPy.mjs';
+import { c as createLucideIcon, j as jsxRuntimeExports, a as cn, b as cva, C as Card, d as CardHeader, e as CardTitle, B as BookOpenText, f as CardContent, g as createContextScope, u as useControllableState, h as useId, P as Primitive, i as composeEventHandlers, k as Presence, l as useComposedRefs, m as useLayoutEffect2, n as createCollection, o as useDirection, p as ChevronDown, L as Lightbulb, r as runAi, R as RadioGroup, q as RadioGroupItem, s as Label, t as CircleCheckBig, v as CircleX, w as CardFooter, x as Button, y as LoaderCircle, A as Alert, z as AlertTitle, D as AlertDescription, E as Award, F as Dialog, G as DialogContent, H as DialogHeader, I as DialogTitle, J as DialogDescription, T as Textarea, K as DialogFooter, S as Send, M as Link, N as isBuildTime, O as translateText, $ as $$Layout, Q as lessons } from '../../chunks/translate-flow_COyTiWVQ.mjs';
+import { a as reactExports, R as React } from '../../chunks/_@astro-renderers_gQnhom5Z.mjs';
+export { r as renderers } from '../../chunks/_@astro-renderers_gQnhom5Z.mjs';
 
-const lessons = [
-  {
-    lesson_id: "prepositions-of-place-beginner",
-    title: "Prepositions of Place",
-    title_arabic: "حروف الجر المكانية",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Learn common prepositions of place like in, on, under, next to, behind, in front of, between, near, far from, above, among, around, opposite. AI will generate the full lesson in Arabic.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "Where is the bird?",
-        choices: ["in the cage", "on the cage", "under the cage", "next to the cage"],
-        correct_answer: "in the cage"
-      },
-      {
-        type: "multiple_choice",
-        question: "The flowers are ___ the vase.",
-        choices: ["on", "in", "under", "next to"],
-        correct_answer: "in"
-      },
-      {
-        type: "multiple_choice",
-        question: "The cat is ___ the table.",
-        choices: ["on", "in", "under", "between"],
-        correct_answer: "under"
-      },
-      {
-        type: "multiple_choice",
-        question: "The school is ___ the park.",
-        choices: ["next to", "in", "on", "under"],
-        correct_answer: "next to"
-      }
-    ],
-    additional_notes: "Remember 'at' for specific points, 'near' for proximity. AI will generate more in Arabic.",
-    common_mistakes: "Confusing 'in', 'on', 'at'. AI will detail common mistakes in Arabic.",
-    meta: {
-      englishGrammarTopic: "Prepositions of Place (e.g., in, on, under, next to, between, above, behind, in front of, among, around, opposite, far from, at, near)"
-    }
-  },
-  {
-    lesson_id: "present-simple-tense-beginner",
-    title: "Present Simple Tense",
-    title_arabic: "زمن المضارع البسيط",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Learn the basics of the Present Simple tense in English, used for habits, facts, and regular occurrences. AI will generate a detailed Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "Which sentence is in Present Simple?",
-        choices: ["She is reading.", "She reads every day.", "She read yesterday."],
-        correct_answer: "She reads every day."
-      },
-      {
-        type: "multiple_choice",
-        question: "I ___ (to like) coffee.",
-        choices: ["like", "likes", "am liking"],
-        correct_answer: "like"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Present Simple Tense (affirmative, negative, and interrogative forms for I, you, we, they, he, she, it)"
-    },
-    additional_notes: "Remember the 's' for he/she/it in affirmative sentences! AI will provide more in Arabic.",
-    common_mistakes: "Forgetting the 's' for third person singular. Using 'am/is/are' with the base verb (e.g., 'I am go'). AI will detail in Arabic."
-  },
-  {
-    lesson_id: "nouns-types-forms-beginner",
-    title: "Nouns: Types and Forms",
-    title_arabic: "الأسماء: أنواعها وأشكالها",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Discover different types of nouns in English and how they change form. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "Which of these is a proper noun?",
-        choices: ["city", "London", "book", "happiness"],
-        correct_answer: "London"
-      },
-      {
-        type: "multiple_choice",
-        question: "What is the plural of 'child'?",
-        choices: ["childs", "childes", "children", "childer"],
-        correct_answer: "children"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "English Nouns: Introduction to common and proper nouns, singular and plural forms (regular and common irregulars), and basic countable/uncountable nouns."
-    },
-    additional_notes: "Proper nouns always start with a capital letter. Pay attention to irregular plural forms. AI will provide more details in Arabic.",
-    common_mistakes: "Incorrectly forming plurals of irregular nouns. Not capitalizing proper nouns. AI will explain further in Arabic."
-  },
-  {
-    lesson_id: "subject-object-pronouns-beginner",
-    title: "Subject & Object Pronouns",
-    title_arabic: "ضمائر الفاعل والمفعول به",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Learn how to use subject and object pronouns correctly in English sentences. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "She gave the book to ___.",
-        choices: ["I", "me", "my", "mine"],
-        correct_answer: "me"
-      },
-      {
-        type: "multiple_choice",
-        question: "___ went to the park.",
-        choices: ["Him", "He", "His", "Them"],
-        correct_answer: "He"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Subject Pronouns (I, you, he, she, it, we, they) and Object Pronouns (me, you, him, her, it, us, them) in English sentences: their forms and functions."
-    },
-    additional_notes: "Subject pronouns usually come before the verb. Object pronouns usually come after the verb or a preposition. AI will detail this in Arabic.",
-    common_mistakes: "Using a subject pronoun where an object pronoun is needed (e.g., 'She gave it to I') and vice-versa. AI will clarify in Arabic."
-  },
-  {
-    lesson_id: "verbs-to-be-action-beginner",
-    title: "Verbs: 'To Be' & Action Verbs",
-    title_arabic: "الأفعال: فعل 'To Be' وأفعال الحركة",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Understand the verb 'to be' and common action verbs in English. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "They ___ happy.",
-        choices: ["is", "am", "are", "be"],
-        correct_answer: "are"
-      },
-      {
-        type: "multiple_choice",
-        question: "I ___ English every day.",
-        choices: ["study", "studies", "am study", "studying"],
-        correct_answer: "study"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "The verb 'to be' (am, is, are) in present simple and common action verbs in English (e.g., eat, drink, play, read, write), focusing on their present simple forms."
-    },
-    additional_notes: "The verb 'to be' changes form depending on the subject (I am, you are, he/she/it is, we are, they are). AI will explain in Arabic.",
-    common_mistakes: "Using the wrong form of 'to be'. Not conjugating action verbs correctly for third-person singular in present simple (e.g., 'he play' instead of 'he plays'). AI will elaborate in Arabic."
-  },
-  {
-    lesson_id: "descriptive-adjectives-beginner",
-    title: "Descriptive Adjectives",
-    title_arabic: "الصفات الوصفية",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Learn how adjectives describe nouns in English. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "The ___ cat is sleeping.",
-        choices: ["quickly", "black", "sleep", "house"],
-        correct_answer: "black"
-      },
-      {
-        type: "multiple_choice",
-        question: "Adjectives usually come ____ the noun they describe.",
-        choices: ["after", "before", "instead of", "far from"],
-        correct_answer: "before"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Introduction to descriptive adjectives in English: what they are, their function in describing nouns, common examples (e.g., big, small, happy, sad, red, blue), and their typical placement before a noun or after the verb 'to be'."
-    },
-    additional_notes: "Adjectives make your sentences more interesting and informative! AI will explain in Arabic.",
-    common_mistakes: "Placing adjectives after the noun (e.g., 'car red'). Using adverbs instead of adjectives. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "possessive-adjectives-beginner",
-    title: "Possessive Adjectives",
-    title_arabic: "صفات الملكية",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Learn about possessive adjectives (my, your, his, her, its, our, their). AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "This is ___ book.",
-        choices: ["I", "my", "me", "mine"],
-        correct_answer: "my"
-      },
-      {
-        type: "multiple_choice",
-        question: "___ car is blue.",
-        choices: ["She", "Her", "Hers", "He"],
-        correct_answer: "Her"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Possessive Adjectives (my, your, his, her, its, our, their) and their use with nouns."
-    },
-    additional_notes: "Possessive adjectives show ownership and come before a noun. AI will explain in Arabic.",
-    common_mistakes: "Confusing possessive adjectives (e.g., 'your') with contractions (e.g., 'you're'). AI will explain in Arabic."
-  },
-  {
-    lesson_id: "demonstratives-beginner",
-    title: "Demonstratives (This, That, These, Those)",
-    title_arabic: "أسماء الإشارة (This, That, These, Those)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Understand how to use this, that, these, and those. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "___ apple is red. (near you)",
-        choices: ["This", "That", "These", "Those"],
-        correct_answer: "This"
-      },
-      {
-        type: "multiple_choice",
-        question: "___ books are on the table. (far from you, plural)",
-        choices: ["This", "That", "These", "Those"],
-        correct_answer: "Those"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Demonstrative pronouns and adjectives (this, that, these, those) to point out specific people or things based on proximity."
-    },
-    additional_notes: "'This' and 'these' are for things near. 'That' and 'those' are for things far. AI will explain in Arabic.",
-    common_mistakes: "Using singular demonstratives with plural nouns and vice-versa. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "questions-to-be-beginner",
-    title: "Questions with 'To Be'",
-    title_arabic: "الأسئلة باستخدام فعل 'To Be'",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Learn to ask questions using 'am, is, are'. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "___ she a doctor?",
-        choices: ["Am", "Is", "Are", "Do"],
-        correct_answer: "Is"
-      },
-      {
-        type: "multiple_choice",
-        question: "What ___ your name?",
-        choices: ["am", "is", "are", "do"],
-        correct_answer: "is"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Forming yes/no questions and Wh-questions with the verb 'to be' (am, is, are) in the present simple by inverting subject and verb."
-    },
-    additional_notes: "For questions, the verb 'to be' comes before the subject. AI will explain in Arabic.",
-    common_mistakes: "Forgetting to invert the subject and verb 'to be'. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "questions-do-does-beginner",
-    title: "Questions with 'Do/Does'",
-    title_arabic: "الأسئلة باستخدام 'Do/Does'",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Learn to ask questions using 'do' and 'does' with action verbs. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "___ you like pizza?",
-        choices: ["Am", "Is", "Do", "Does"],
-        correct_answer: "Do"
-      },
-      {
-        type: "multiple_choice",
-        question: "Where ___ he live?",
-        choices: ["do", "does", "is", "are"],
-        correct_answer: "does"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Forming yes/no questions and Wh-questions with auxiliary verbs 'do' and 'does' for present simple action verbs, using the base form of the main verb."
-    },
-    additional_notes: "Use 'do' with I/you/we/they and 'does' with he/she/it. The main verb stays in its base form. AI will explain in Arabic.",
-    common_mistakes: "Using 's' on the main verb after 'does' (e.g., 'Does he likes?'). AI will explain in Arabic."
-  },
-  {
-    lesson_id: "adverbs-frequency-beginner",
-    title: "Adverbs of Frequency",
-    title_arabic: "ظروف التكرار",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Explore adverbs like always, sometimes, never. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "I ___ drink coffee in the morning.",
-        choices: ["always", "never eat", "sometimes play"],
-        correct_answer: "always"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Common adverbs of frequency (always, usually, often, sometimes, rarely, never) and their typical placement in sentences (before main verbs, after 'to be')."
-    },
-    additional_notes: "Placement: Adverbs of frequency usually go before the main verb, but after the verb 'to be'. AI will explain in Arabic.",
-    common_mistakes: "Incorrect placement of adverbs of frequency. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "there-is-there-are-beginner",
-    title: "There is / There are",
-    title_arabic: "There is / There are (يوجد)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Learn to use 'there is' and 'there are' correctly to talk about existence. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "___ a cat on the roof.",
-        choices: ["There is", "There are", "It is", "They are"],
-        correct_answer: "There is"
-      },
-      {
-        type: "multiple_choice",
-        question: "___ many books on the shelf.",
-        choices: ["There is", "There are", "It is", "They are"],
-        correct_answer: "There are"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Using 'there is' (for singular and uncountable nouns) and 'there are' (for plural nouns) to indicate the existence or presence of something, including question and negative forms."
-    },
-    additional_notes: "Use 'there is' for singular nouns and 'there are' for plural nouns. AI will explain in Arabic.",
-    common_mistakes: "Using 'there is' with plural nouns or 'there are' with singular nouns. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "countable-uncountable-nouns-beginner",
-    title: "Countable & Uncountable Nouns (Basic)",
-    title_arabic: "الأسماء المعدودة وغير المعدودة (أساسي)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Understand the basics of countable (e.g., apple, book) and uncountable nouns (e.g., water, rice). AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "Which is an uncountable noun?",
-        choices: ["chair", "information", "car", "student"],
-        correct_answer: "information"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Introduction to countable nouns (can be counted, have plural forms, use a/an) and uncountable nouns (cannot be counted, no plural form, do not use a/an)."
-    },
-    additional_notes: "Countable nouns can be singular or plural. Uncountable nouns are always singular. AI will explain in Arabic.",
-    common_mistakes: "Trying to make uncountable nouns plural (e.g., 'waters', 'furnitures'). AI will explain in Arabic."
-  },
-  {
-    lesson_id: "imperatives-beginner",
-    title: "Imperatives",
-    title_arabic: "صيغة الأمر",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Learn how to give commands, make requests, and provide instructions using imperatives. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "Which is a correct imperative sentence?",
-        choices: ["You open the window.", "Open the window.", "To open the window.", "Opening the window."],
-        correct_answer: "Open the window."
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Forming and using imperative sentences (base form of the verb) for commands, requests (often with 'please'), and instructions. Negative imperatives (Don't + base form)."
-    },
-    additional_notes: "Imperatives use the base form of the verb. The subject 'you' is usually implied. AI will explain in Arabic.",
-    common_mistakes: "Including the subject 'you' explicitly unless for emphasis. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "asking-answering-basic-questions-beginner",
-    title: "Asking and Answering Basic Questions",
-    title_arabic: "طرح الأسئلة الأساسية والإجابة عليها",
-    topic: "Conversation Basics",
-    topic_arabic: "أساسيات المحادثة",
-    level: "Beginner",
-    arabic_explanation: "Learn how to ask and answer common basic questions in English (e.g., What's your name? How are you? Where are you from?). AI will generate explanations and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "How to respond to 'How are you?'",
-        choices: ["I am book.", "I am fine, thank you.", "My name is fine.", "Yes, I am."],
-        correct_answer: "I am fine, thank you."
-      }
-    ],
-    additional_notes: "Practice these questions and answers to build confidence in basic conversations. AI will provide more tips in Arabic.",
-    common_mistakes: "Giving inappropriate or grammatically incorrect answers to simple questions. AI will detail in Arabic.",
-    meta: {
-      englishGrammarTopic: "Common Wh-questions (What, Where, Who, How) and Yes/No questions in simple present tense for basic personal information and greetings, along with typical short and long answers."
-    }
-  },
-  {
-    lesson_id: "articles-a-an-the-intermediate",
-    title: "Articles: A/An/The",
-    title_arabic: "أدوات التعريف والتنكير: A/An/The",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Understand when to use indefinite (a/an) and definite (the) articles in English. AI will provide a comprehensive Arabic explanation and illustrative examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "I saw ___ beautiful bird in the park. ___ bird was singing.",
-        choices: ["a / The", "the / A", "an / The", "a / A"],
-        correct_answer: "a / The"
-      },
-      {
-        type: "multiple_choice",
-        question: "She is ___ honest person.",
-        choices: ["a", "an", "the", "no article"],
-        correct_answer: "an"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "English Articles (a, an, the): Usage for specific and non-specific nouns, first and subsequent mentions, unique items, and general concepts. Also covering cases with no article."
-    },
-    additional_notes: "Pay attention to vowel sounds for 'a' vs 'an', not just the letter. 'The' is used for specific items known to both speaker and listener. AI will elaborate in Arabic.",
-    common_mistakes: "Using 'a/an' with plural or uncountable nouns. Omitting 'the' when it's required for specific nouns already mentioned or unique items. AI will detail in Arabic."
-  },
-  {
-    lesson_id: "past-simple-tense-intermediate",
-    title: "Past Simple Tense",
-    title_arabic: "زمن الماضي البسيط",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Learn to talk about completed actions in the past using the Past Simple tense. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "Yesterday, I ___ (to play) football.",
-        choices: ["play", "played", "playing", "plays"],
-        correct_answer: "played"
-      },
-      {
-        type: "multiple_choice",
-        question: "They ___ (not go) to the cinema last night.",
-        choices: ["don't go", "didn't went", "didn't go", "not goed"],
-        correct_answer: "didn't go"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Past Simple Tense in English: Forming regular (-ed) and common irregular past tense verbs, usage for completed actions in the past (affirmative, negative 'did not + base verb', and interrogative 'Did + subject + base verb?')."
-    },
-    additional_notes: "Remember the auxiliary verb 'did' for negatives and questions in Past Simple (except with 'to be'). Many common verbs are irregular in the past simple. AI will expand in Arabic.",
-    common_mistakes: "Using the past form of the verb in negative and question sentences with 'did' (e.g., 'didn't went'). Forgetting irregular verb forms. AI will provide examples in Arabic."
-  },
-  {
-    lesson_id: "comparative-superlative-adjectives-intermediate",
-    title: "Comparative & Superlative Adjectives",
-    title_arabic: "صفات المقارنة والتفضيل",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Learn how to compare things using comparative and superlative adjectives. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "This book is ___ than that one.",
-        choices: ["interesting", "more interesting", "most interesting", "interestinger"],
-        correct_answer: "more interesting"
-      },
-      {
-        type: "multiple_choice",
-        question: "Mount Everest is the ___ mountain in the world.",
-        choices: ["high", "higher", "highest", "most high"],
-        correct_answer: "highest"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Forming and using comparative (e.g., bigger, more beautiful) and superlative (e.g., biggest, most beautiful) adjectives in English to compare two or more nouns. Rules for short and long adjectives, and irregular forms."
-    },
-    additional_notes: "For short adjectives, add '-er' (comparative) and '-est' (superlative). For longer adjectives, use 'more' and 'most'. Some adjectives have irregular forms (e.g., good-better-best). AI will explain in Arabic.",
-    common_mistakes: "Using 'more' with short adjectives that take '-er' (e.g., 'more big'). Incorrectly forming irregular comparatives/superlatives. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "present-continuous-intermediate",
-    title: "Present Continuous Tense",
-    title_arabic: "زمن المضارع المستمر",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Master the Present Continuous tense for ongoing actions, temporary situations, and future plans. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "She ___ (read) a book right now.",
-        choices: ["read", "reads", "is reading", "was reading"],
-        correct_answer: "is reading"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Present Continuous Tense (am/is/are + verb-ing): form, use for actions happening now, temporary situations, and future plans (arrangements)."
-    },
-    additional_notes: "Used for actions happening at the moment of speaking or around the present time. AI will explain in Arabic.",
-    common_mistakes: "Using Present Simple instead of Present Continuous for actions happening now. Forgetting the 'be' verb. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "past-continuous-intermediate",
-    title: "Past Continuous Tense",
-    title_arabic: "زمن الماضي المستمر",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Learn the Past Continuous tense for actions in progress in the past, often used with Past Simple. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "I ___ (watch) TV when the phone rang.",
-        choices: ["watch", "watched", "am watching", "was watching"],
-        correct_answer: "was watching"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Past Continuous Tense (was/were + verb-ing): form, use for actions in progress at a specific time in the past, or actions interrupted by another past action (Past Simple)."
-    },
-    additional_notes: "Often used to set the scene for another action in the past. AI will explain in Arabic.",
-    common_mistakes: "Using Past Simple when an action was in progress. Forgetting 'was/were'. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "future-simple-will-going-to-intermediate",
-    title: "Future Simple: Will vs. Going to",
-    title_arabic: "زمن المستقبل البسيط: Will مقابل Going to",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Understand the difference between 'will' and 'be going to' for future actions, predictions, and plans. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "Look at those clouds! It ___ (rain).",
-        choices: ["will rain", "is going to rain", "rains"],
-        correct_answer: "is going to rain"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Future Simple Tense: 'will' for predictions, spontaneous decisions, promises, offers; 'be going to' for plans, intentions, and predictions based on present evidence."
-    },
-    additional_notes: "'Will' is often used for spontaneous decisions; 'going to' for prior plans. AI will explain in Arabic.",
-    common_mistakes: "Interchanging 'will' and 'going to' incorrectly, especially for plans vs. spontaneous decisions. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "possessive-pronouns-intermediate",
-    title: "Possessive Pronouns",
-    title_arabic: "ضمائر الملكية",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Learn about possessive pronouns like mine, yours, his, hers, its, ours, theirs. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "This book is not your book. It's ___.",
-        choices: ["my", "me", "mine", "I"],
-        correct_answer: "mine"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Possessive Pronouns (mine, yours, his, hers, its, ours, theirs) and their use to replace a possessive adjective + noun, showing ownership without a following noun."
-    },
-    additional_notes: "Possessive pronouns stand alone and do not precede a noun. AI will explain in Arabic.",
-    common_mistakes: "Confusing possessive pronouns with possessive adjectives (e.g., 'This is mine book'). AI will explain in Arabic."
-  },
-  {
-    lesson_id: "reflexive-pronouns-intermediate",
-    title: "Reflexive Pronouns",
-    title_arabic: "الضمائر الانعكاسية",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Understand reflexive pronouns (myself, yourself, etc.) when the subject and object are the same. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "He cut ___ while shaving.",
-        choices: ["he", "him", "himself", "his"],
-        correct_answer: "himself"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Reflexive Pronouns (myself, yourself, himself, herself, itself, ourselves, yourselves, themselves) used when the subject and the object of a verb are the same person or thing, or for emphasis."
-    },
-    additional_notes: "Reflexive pronouns reflect the action back to the subject. AI will explain in Arabic.",
-    common_mistakes: "Using object pronouns instead of reflexive pronouns (e.g., 'He hurt him' when meaning himself). AI will explain in Arabic."
-  },
-  {
-    lesson_id: "adverbs-manner-intermediate",
-    title: "Adverbs of Manner",
-    title_arabic: "ظروف الكيفية",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Learn how adverbs describe actions (e.g., slowly, happily) and their formation. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "She sings ___.",
-        choices: ["beautiful", "beautifully", "beauty", "beautify"],
-        correct_answer: "beautifully"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Adverbs of Manner (e.g., quickly, carefully, well): how they are formed (often by adding -ly to adjectives), their placement, and how they describe how an action is performed."
-    },
-    additional_notes: "Many adverbs of manner end in '-ly'. They usually go after the main verb or object. AI will explain in Arabic.",
-    common_mistakes: "Using an adjective instead of an adverb of manner (e.g., 'He drives careful'). AI will explain in Arabic."
-  },
-  {
-    lesson_id: "zero-conditional-intermediate",
-    title: "Zero Conditional",
-    title_arabic: "الجمل الشرطية (النوع صفر)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Understand Zero Conditional sentences for facts, general truths, and scientific laws. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "If you ___ water to 100°C, it ___.",
-        choices: ["heat / boils", "heats / boil", "will heat / boils", "heat / will boil"],
-        correct_answer: "heat / boils"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Zero Conditional (If/When + present simple, ... present simple): structure and use for expressing general truths, facts, habits, and scientific laws that are always true."
-    },
-    additional_notes: "Used for situations that are always true. AI will explain in Arabic.",
-    common_mistakes: "Using 'will' in zero conditional sentences. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "quantifiers-some-any-no-intermediate",
-    title: "Quantifiers: Some, Any, No",
-    title_arabic: "المحددات الكمية: Some, Any, No",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Learn to use 'some' (affirmative), 'any' (negative/questions), and 'no' (affirmative with negative meaning). AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "I don't have ___ money.",
-        choices: ["some", "any", "no", "many"],
-        correct_answer: "any"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Using quantifiers 'some' (typically in affirmative sentences and offers/requests), 'any' (typically in negative sentences and questions), 'no' (in affirmative sentences to mean not any) with countable and uncountable nouns."
-    },
-    additional_notes: "'Some' is also used in questions when offering or requesting something. AI will explain in Arabic.",
-    common_mistakes: "Using 'some' in general negative sentences or questions. Using 'no' with a negative verb (double negative). AI will explain in Arabic."
-  },
-  {
-    lesson_id: "prepositions-time-intermediate",
-    title: "Prepositions of Time (In, On, At - Expanded)",
-    title_arabic: "حروف الجر الزمنية (In, On, At - موسع)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Deepen your understanding of prepositions of time (in, on, at) for months, years, days, dates, specific times. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "My birthday is ___ June.",
-        choices: ["at", "on", "in", "by"],
-        correct_answer: "in"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Detailed use of prepositions of time 'in' (for longer periods: months, years, seasons, parts of the day like 'in the morning'), 'on' (for specific days and dates: 'on Monday', 'on July 4th'), 'at' (for specific times of day, night, weekend: 'at 5 PM', 'at night')."
-    },
-    additional_notes: "Remember 'in the morning/afternoon/evening' but 'at night'. AI will explain in Arabic.",
-    common_mistakes: "Confusing 'in', 'on', and 'at' for different time expressions. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "quantifiers-much-many-lot-few-little-intermediate",
-    title: "Quantifiers: Much, Many, A lot of, Few, Little",
-    title_arabic: "المحددات الكمية: Many, Much, A lot of, Few, Little",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Learn the use of quantifiers like much, many, a lot of, (a) few, (a) little with countable and uncountable nouns. AI will generate explanations and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "How ___ sugar do you want? (uncountable)",
-        choices: ["much", "many", "a few", "few"],
-        correct_answer: "much"
-      },
-      {
-        type: "multiple_choice",
-        question: "There are ___ apples left. (countable, small number)",
-        choices: ["much", "a little", "a few", "many"],
-        correct_answer: "a few"
-      }
-    ],
-    additional_notes: "'Much' with uncountable nouns (often in questions/negatives), 'many' with countable nouns. 'A lot of' can be used with both. '(A) few' with countable, '(a) little' with uncountable. AI will detail in Arabic.",
-    common_mistakes: "Using 'much' with countable nouns or 'many' with uncountable nouns. Confusing 'few'/'little' (negative connotation) with 'a few'/'a little' (positive connotation). AI will explain in Arabic.",
-    meta: {
-      englishGrammarTopic: "Quantifiers: 'much' (uncountable, ?/-), 'many' (countable, ?/-), 'a lot of/lots of' (both, +/?/-), '(a) few' (countable), '(a) little' (uncountable). Usage and nuances."
-    }
-  },
-  {
-    lesson_id: "modal-verbs-advanced",
-    title: "Modal Verbs (Can, Could, May, Might, Must, Should)",
-    title_arabic: "الأفعال المساعدة الشرطية (Modal Verbs)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Explore the nuances of modal verbs in English to express ability, permission, possibility, obligation, and advice. AI will generate an in-depth Arabic explanation and varied examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "You ___ study harder if you want to pass the exam.",
-        choices: ["can", "must", "should", "may"],
-        correct_answer: "should"
-      },
-      {
-        type: "multiple_choice",
-        question: "___ I borrow your pen, please?",
-        choices: ["Must", "Should", "May", "Might"],
-        correct_answer: "May"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Modal Verbs in English (can, could, may, might, must, should, will, would, shall, ought to): Explaining their functions for ability, permission, possibility, speculation, obligation, advice, necessity, prohibition, and future/conditional contexts. Including nuances and differences in formality/certainty."
-    },
-    additional_notes: "Modal verbs are followed by the base form of the main verb (e.g., 'can go', not 'can goes' or 'can to go'). 'Could' and 'might' often express more politeness or less certainty than 'can' and 'may'. AI will explain in Arabic.",
-    common_mistakes: "Using 'to' after a modal verb (e.g., 'must to study'). Using past tense forms of main verbs after modals (e.g., 'should went'). Confusing 'must' (strong obligation) with 'should' (advice). AI will explain in Arabic."
-  },
-  {
-    lesson_id: "present-perfect-tense-advanced",
-    title: "Present Perfect Tense",
-    title_arabic: "زمن المضارع التام",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Master the Present Perfect tense to talk about past actions connected to the present. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "She ___ (to visit) Paris three times.",
-        choices: ["visit", "visited", "has visited", "had visited"],
-        correct_answer: "has visited"
-      },
-      {
-        type: "multiple_choice",
-        question: "I ___ (not see) that movie yet.",
-        choices: ["don't see", "didn't see", "haven't seen", "hadn't seen"],
-        correct_answer: "haven't seen"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Present Perfect Tense in English (have/has + past participle): Usage for actions completed at an unspecified time in the past with relevance to the present, actions that started in the past and continue to the present, life experiences, and recent events. Contrast with Past Simple. Introduction to Present Perfect Continuous."
-    },
-    additional_notes: "Key signal words for Present Perfect include 'ever', 'never', 'already', 'yet', 'just', 'for', 'since'. AI will explain in Arabic.",
-    common_mistakes: "Confusing Present Perfect with Past Simple (e.g., using Present Perfect for an action with a specific past time: 'I have visited Paris yesterday'). Incorrect past participle forms. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "conditional-sentences-type-1-advanced",
-    title: "Conditional Sentences - Type 1",
-    title_arabic: "الجمل الشرطية - النوع الأول",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Learn to form and use Type 1 conditional sentences for real future possibilities. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "If it __ (to rain) tomorrow, we ___ (to stay) home.",
-        choices: ["rains / will stay", "will rain / stay", "rained / would stay", "rains / stay"],
-        correct_answer: "rains / will stay"
-      },
-      {
-        type: "multiple_choice",
-        question: "You will pass the exam if you ___ (to study) hard.",
-        choices: ["study", "will study", "studied", "would study"],
-        correct_answer: "study"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "First Conditional Sentences in English (If + present simple, ...will/can/may/should + base verb): Structure, usage for expressing real and possible future conditions and their results. Variations with modals other than 'will'."
-    },
-    additional_notes: "The 'if' clause describes the condition, and the main clause describes the result. The order of clauses can be switched without changing the meaning (e.g., 'We will stay home if it rains tomorrow'). AI will explain in Arabic.",
-    common_mistakes: "Using 'will' in the 'if' clause (e.g., 'If it will rain...'). Using incorrect tense combinations. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "past-perfect-tense-advanced",
-    title: "Past Perfect Tense",
-    title_arabic: "زمن الماضي التام",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Master the Past Perfect tense (had + past participle) for actions completed before another past action. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "By the time I arrived, she ___ (leave).",
-        choices: ["leave", "left", "has left", "had left"],
-        correct_answer: "had left"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Past Perfect Tense (had + past participle): form and use for an action completed before another action or specific time in the past. Contrast with Past Simple."
-    },
-    additional_notes: "Often used with time expressions like 'by the time', 'already', 'before', 'after'. AI will explain in Arabic.",
-    common_mistakes: "Using Past Simple when Past Perfect is needed to clarify the sequence of past events. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "future-continuous-tense-advanced",
-    title: "Future Continuous Tense",
-    title_arabic: "زمن المستقبل المستمر",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Learn the Future Continuous tense (will be + -ing) for ongoing actions in the future. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "This time tomorrow, I ___ (fly) to Paris.",
-        choices: ["fly", "will fly", "will be flying", "am flying"],
-        correct_answer: "will be flying"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Future Continuous Tense (will be + verb-ing): form and use for actions that will be in progress at a specific time in the future, or for planned future events."
-    },
-    additional_notes: "Emphasizes the duration of an activity in the future. AI will explain in Arabic.",
-    common_mistakes: "Using Future Simple when Future Continuous is more appropriate for ongoing future actions. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "future-perfect-tense-advanced",
-    title: "Future Perfect Tense",
-    title_arabic: "زمن المستقبل التام",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Explore the Future Perfect tense (will have + past participle) for actions completed by a future time. AI will provide an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "By next year, I ___ (finish) my studies.",
-        choices: ["finish", "will finish", "will be finishing", "will have finished"],
-        correct_answer: "will have finished"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Future Perfect Tense (will have + past participle): form and use for actions that will be completed by or before a certain time in the future."
-    },
-    additional_notes: "Often used with 'by' + future time expression. AI will explain in Arabic.",
-    common_mistakes: "Using Future Simple instead of Future Perfect for actions completed by a future point. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "conditional-sentences-type-2-advanced",
-    title: "Conditional Sentences - Type 2",
-    title_arabic: "الجمل الشرطية - النوع الثاني",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Understand Type 2 conditional sentences (If + past simple, ...would + base verb) for hypothetical situations. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "If I ___ (win) the lottery, I ___ (buy) a house.",
-        choices: ["win / will buy", "won / would buy", "win / would buy", "won / will buy"],
-        correct_answer: "won / would buy"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Second Conditional Sentences (If + past simple, ...would/could/might + base verb): structure and use for hypothetical, unlikely, or unreal situations in the present or future."
-    },
-    additional_notes: "Use 'were' instead of 'was' for 'I/he/she/it' in the 'if' clause (e.g., 'If I were you...'). AI will explain in Arabic.",
-    common_mistakes: "Using 'would' in the 'if' clause. Using Present Simple instead of Past Simple in the 'if' clause. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "conditional-sentences-type-3-advanced",
-    title: "Conditional Sentences - Type 3",
-    title_arabic: "الجمل الشرطية - النوع الثالث",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Learn Type 3 conditional sentences (If + past perfect, ...would have + past participle) for past unreal situations. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "If I ___ (study) harder, I ___ (pass) the exam.",
-        choices: ["had studied / would pass", "studied / would have passed", "had studied / would have passed", "studied / would pass"],
-        correct_answer: "had studied / would have passed"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Third Conditional Sentences (If + past perfect, ...would/could/might have + past participle): structure and use for hypothetical situations in the past that did not happen, and their unreal past results."
-    },
-    additional_notes: "Used to talk about regrets or different outcomes in the past. AI will explain in Arabic.",
-    common_mistakes: "Incorrect tense combinations, e.g., using 'would' instead of 'would have'. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "reported-speech-advanced",
-    title: "Reported Speech (Statements)",
-    title_arabic: "الكلام المنقول (الجمل الخبرية)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Master reported speech (indirect speech) for statements, including tense backshift and changes in pronouns/time. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "Direct: 'I am tired.' Reported: She said that she ___ tired.",
-        choices: ["is", "am", "was", "were"],
-        correct_answer: "was"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Reported Speech (Indirect Speech) for statements: tense backshift rules (e.g., present simple to past simple), changes in pronouns, and changes in time and place expressions when reporting what someone said."
-    },
-    additional_notes: "Tenses usually shift back one step (e.g., Present Simple -> Past Simple, Past Simple -> Past Perfect). AI will explain in Arabic.",
-    common_mistakes: "Forgetting to backshift tenses or change pronouns/time expressions correctly. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "passive-voice-present-past-simple-advanced",
-    title: "Passive Voice (Present & Past Simple)",
-    title_arabic: "المبني للمجهول (المضارع البسيط والماضي البسيط)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Understand and use the Passive Voice in Present Simple and Past Simple. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "Active: 'Someone built this house.' Passive: 'This house ___ by someone.'",
-        choices: ["is built", "was built", "builds", "has built"],
-        correct_answer: "was built"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Passive Voice: form (to be + past participle) and use in Present Simple (is/are + p.p.) and Past Simple (was/were + p.p.) when the focus is on the action or the receiver of the action, rather than the agent (doer)."
-    },
-    additional_notes: "The object of the active sentence becomes the subject of the passive sentence. AI will explain in Arabic.",
-    common_mistakes: "Incorrect form of 'to be' or past participle. Forgetting 'by' when mentioning the agent. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "gerunds-infinitives-intro-advanced",
-    title: "Gerunds and Infinitives (Introduction)",
-    title_arabic: "المصادر وأفعال المصدر (مقدمة)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Learn the basics of Gerunds (verb-ing as noun) and Infinitives (to + verb) and their common uses. AI will generate an Arabic explanation and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "___ (swim) is my favorite hobby.",
-        choices: ["Swim", "To swim", "Swimming", "Swam"],
-        correct_answer: "Swimming"
-      }
-    ],
-    meta: {
-      englishGrammarTopic: "Introduction to Gerunds (verb + -ing form used as a noun) and Infinitives (to + base form of the verb): their forms and common uses (e.g., as subjects, objects, after certain verbs, after prepositions for gerunds)."
-    },
-    additional_notes: "Some verbs are followed by gerunds, others by infinitives, and some by both with different meanings. AI will explain in Arabic.",
-    common_mistakes: "Using an infinitive where a gerund is required (e.g., after prepositions) and vice-versa. AI will explain in Arabic."
-  },
-  {
-    lesson_id: "mixed-conditionals-advanced",
-    title: "Mixed Conditional Sentences",
-    title_arabic: "الجمل الشرطية المختلطة",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Understand mixed conditional sentences, which combine different time frames in the if-clause and the main clause (e.g., past condition with present result). AI will generate explanations and examples.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "If he had taken the map (past), he ___ lost now (present).",
-        choices: ["would not be", "would not have been", "is not", "will not be"],
-        correct_answer: "would not be"
-      }
-    ],
-    additional_notes: "Mixed conditionals allow for more nuanced expressions of hypothetical situations linking different times. Common types are past condition/present result, and present condition/past result. AI will detail in Arabic.",
-    common_mistakes: "Using incorrect tense combinations for the desired time frame link. AI will explain in Arabic.",
-    meta: {
-      englishGrammarTopic: "Mixed Conditional Sentences: Combining different conditional types, typically Type 2 and Type 3, to express hypothetical links between different time frames (e.g., past condition affecting present result, or present condition affecting past result)."
-    }
-  },
-  {
-    lesson_id: "articles-a-an-basic-beginner",
-    title: "Articles: A/An (Basic)",
-    title_arabic: "أدوات التنكير: A/An (أساسي)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Learn the very basics of using 'a' and 'an' with singular countable nouns. AI will generate detailed explanations and examples in Arabic.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "I see ___ apple.",
-        choices: ["a", "an", "the"],
-        correct_answer: "an"
-      },
-      {
-        type: "multiple_choice",
-        question: "That is ___ big dog.",
-        choices: ["a", "an", "the"],
-        correct_answer: "a"
-      }
-    ],
-    additional_notes: "Use 'an' before words starting with a vowel sound (a, e, i, o, u sounds). Use 'a' before words starting with a consonant sound. AI will provide more details.",
-    common_mistakes: "Using 'a' before a vowel sound or 'an' before a consonant sound. Forgetting to use an article with a singular countable noun. AI will explain further.",
-    meta: {
-      englishGrammarTopic: "Basic usage of indefinite articles 'a' and 'an' with singular countable nouns, focusing on the sound of the first letter of the following word."
-    }
-  },
-  {
-    lesson_id: "plural-nouns-regular-beginner",
-    title: "Plural Nouns (Regular -s, -es)",
-    title_arabic: "أسماء الجمع (المنتظمة بإضافة -s, -es)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Beginner",
-    arabic_explanation: "Learn how to form regular plural nouns by adding -s or -es. AI will generate detailed explanations and examples in Arabic.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "One cat, two ___.",
-        choices: ["cat", "cats", "cates"],
-        correct_answer: "cats"
-      },
-      {
-        type: "multiple_choice",
-        question: "One box, three ___.",
-        choices: ["box", "boxs", "boxes"],
-        correct_answer: "boxes"
-      }
-    ],
-    additional_notes: "Most nouns add -s. Nouns ending in -s, -sh, -ch, -x, or -z add -es. AI will provide more rules and examples.",
-    common_mistakes: "Forgetting to add -s or -es. Adding -s when -es is needed, or vice-versa. AI will explain.",
-    meta: {
-      englishGrammarTopic: "Forming regular plural nouns in English by adding -s or -es based on the ending of the singular noun."
-    }
-  },
-  {
-    lesson_id: "present-perfect-vs-past-simple-intermediate",
-    title: "Present Perfect vs. Past Simple",
-    title_arabic: "المضارع التام مقابل الماضي البسيط",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Understand the key differences between Present Perfect (for actions with present relevance or unspecified past time) and Past Simple (for completed actions at a specific past time). AI will generate detailed explanations and examples in Arabic.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "I ___ (visit) Paris last year.",
-        choices: ["have visited", "visited", "visit"],
-        correct_answer: "visited"
-      },
-      {
-        type: "multiple_choice",
-        question: "She ___ (never/eat) sushi before.",
-        choices: ["has never eaten", "never ate", "didn't never eat"],
-        correct_answer: "has never eaten"
-      }
-    ],
-    additional_notes: "Past Simple is used with specific past time markers (yesterday, last week). Present Perfect often connects past actions to the present. AI will elaborate.",
-    common_mistakes: "Using Present Perfect with specific past time adverbs. Using Past Simple for experiences without a specific time. AI will explain further.",
-    meta: {
-      englishGrammarTopic: "Contrasting Present Perfect Tense (have/has + past participle) with Past Simple Tense (-ed/irregular forms) based on time reference, completion, and relevance to the present."
-    }
-  },
-  {
-    lesson_id: "gerunds-subjects-objects-intermediate",
-    title: "Gerunds as Subjects and Objects",
-    title_arabic: "المصادر كفاعل ومفعول به",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Intermediate",
-    arabic_explanation: "Learn how gerunds (verb + -ing) can function as subjects or objects in a sentence. AI will generate detailed explanations and examples in Arabic.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "___ (Read) books is my favorite activity.",
-        choices: ["To read", "Reading", "Read"],
-        correct_answer: "Reading"
-      },
-      {
-        type: "multiple_choice",
-        question: "I enjoy ___ (listen) to music.",
-        choices: ["to listen", "listening", "listen"],
-        correct_answer: "listening"
-      }
-    ],
-    additional_notes: "Gerunds act like nouns. Many verbs are followed by gerunds as objects (e.g., enjoy, finish, avoid). AI will list more.",
-    common_mistakes: "Using an infinitive instead of a gerund after certain verbs or as a subject when the gerund form is more natural. AI will explain.",
-    meta: {
-      englishGrammarTopic: "Using gerunds (verb + -ing form) as nouns, specifically as the subject of a sentence or the object of a verb or preposition."
-    }
-  },
-  {
-    lesson_id: "relative-clauses-advanced",
-    title: "Relative Clauses (Defining and Non-defining)",
-    title_arabic: "الجمل الموصولة (المُعَرِّفة وغير المُعَرِّفة)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Master defining and non-defining relative clauses using who, whom, whose, which, that. AI will generate detailed explanations and examples in Arabic.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "The man ___ lives next door is a doctor. (defining)",
-        choices: ["who", "which", "whose"],
-        correct_answer: "who"
-      },
-      {
-        type: "multiple_choice",
-        question: "My brother, ___ lives in London, is visiting me. (non-defining)",
-        choices: ["that", "who", "which (for person)"],
-        correct_answer: "who"
-      }
-    ],
-    additional_notes: "Defining clauses provide essential information. Non-defining clauses add extra, non-essential information and are set off by commas. 'That' is often used in defining clauses but not non-defining ones. AI will elaborate.",
-    common_mistakes: "Using 'that' in non-defining clauses. Omitting commas in non-defining clauses. Using the wrong relative pronoun. AI will explain further.",
-    meta: {
-      englishGrammarTopic: "Relative Clauses: Forming and using defining (restrictive) and non-defining (non-restrictive) relative clauses with relative pronouns (who, whom, whose, which, that) and relative adverbs (where, when, why)."
-    }
-  },
-  {
-    lesson_id: "subjunctive-mood-advanced",
-    title: "Subjunctive Mood",
-    title_arabic: "صيغة التمني/الشرط (Subjunctive)",
-    topic: "Grammar",
-    topic_arabic: "قواعد",
-    level: "Advanced",
-    arabic_explanation: "Understand the subjunctive mood for wishes, suggestions, demands, and hypothetical situations. AI will generate detailed explanations and examples in Arabic.",
-    examples: [],
-    interactive_exercises: [
-      {
-        type: "multiple_choice",
-        question: "I wish I ___ (be) taller.",
-        choices: ["am", "was", "were"],
-        correct_answer: "were"
-      },
-      {
-        type: "multiple_choice",
-        question: "The manager insisted that the report ___ (finish) by Friday.",
-        choices: ["is finished", "be finished", "was finished"],
-        correct_answer: "be finished"
-      }
-    ],
-    additional_notes: "The subjunctive often uses the base form of the verb (e.g., 'I suggest he go') or 'were' instead of 'was' (e.g., 'If I were you'). AI will provide more contexts.",
-    common_mistakes: "Using indicative mood instead of subjunctive where required, especially after verbs of demand, suggestion, or in unreal conditions. AI will explain.",
-    meta: {
-      englishGrammarTopic: "The Subjunctive Mood in English: Present subjunctive (base form of verb for demands, suggestions, e.g., 'I suggest he *be* on time') and Past subjunctive (simple past form, e.g., 'If I *were* you', 'I wish I *knew*') for wishes, hypothetical situations, and formal requests."
-    }
-  }
+/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$5 = [
+  ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
+  ["path", { d: "M19 12H5", key: "x3x0zl" }]
 ];
+const ArrowLeft = createLucideIcon("ArrowLeft", __iconNode$5);
 
-function isBuildTime() {
-  return typeof window === "undefined";
-}
+/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 
-const CLOUDFLARE_ACCOUNT_ID$1 = process.env.NEXT_PUBLIC_CLOUDFLARE_ACCOUNT_ID;
-const CLOUDFLARE_API_TOKEN$1 = process.env.CLOUDFLARE_API_TOKEN;
-objectType({
-  text: unionType([stringType(), arrayType(stringType())]).describe("The text or array of texts to be translated."),
-  sourceLanguage: stringType().default("en").describe('The source language code (e.g., "en" for English).'),
-  targetLanguage: stringType().describe('The target language for translation (e.g., "ar" for Arabic).')
-});
-async function translateText({ text, sourceLanguage = "en", targetLanguage }) {
-  if (isBuildTime() && (!CLOUDFLARE_ACCOUNT_ID$1 || !CLOUDFLARE_API_TOKEN$1)) {
-    if (Array.isArray(text)) {
-      return { translation: text.map(() => "محتوى مؤقت - سيتم تحديثه عند التشغيل") };
+
+const __iconNode$4 = [
+  ["path", { d: "M7.9 20A9 9 0 1 0 4 16.1L2 22Z", key: "vv11sd" }],
+  ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
+  ["path", { d: "M12 17h.01", key: "p32p05" }]
+];
+const MessageCircleQuestion = createLucideIcon("MessageCircleQuestion", __iconNode$4);
+
+/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$3 = [
+  ["path", { d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", key: "1lielz" }],
+  [
+    "path",
+    {
+      d: "M14.8 7.5a1.84 1.84 0 0 0-2.6 0l-.2.3-.3-.3a1.84 1.84 0 1 0-2.4 2.8L12 13l2.7-2.7c.9-.9.8-2.1.1-2.8",
+      key: "1blaws"
     }
-    return { translation: "محتوى مؤقت - سيتم تحديثه عند التشغيل" };
-  }
-  if (!CLOUDFLARE_ACCOUNT_ID$1 || !CLOUDFLARE_API_TOKEN$1) {
-    throw new Error("Cloudflare AI credentials are not set in the environment variables.");
-  }
-  const isBatch = Array.isArray(text);
-  const url = `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID$1}/ai/run/@cf/meta/m2m100-1.2b`;
-  let body;
-  if (isBatch) {
-    body = {
-      requests: text.map((t) => ({
-        text: t,
-        source_lang: sourceLanguage,
-        target_lang: targetLanguage
-      }))
-    };
-  } else {
-    body = {
-      text,
-      source_lang: sourceLanguage,
-      target_lang: targetLanguage
-    };
-  }
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${CLOUDFLARE_API_TOKEN$1}`,
-      "Content-Type": "application/json"
+  ]
+];
+const MessageSquareHeart = createLucideIcon("MessageSquareHeart", __iconNode$3);
+
+/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$2 = [
+  ["path", { d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", key: "1lielz" }],
+  ["path", { d: "M12 7v6", key: "lw1j43" }],
+  ["path", { d: "M9 10h6", key: "9gxzsh" }]
+];
+const MessageSquarePlus = createLucideIcon("MessageSquarePlus", __iconNode$2);
+
+/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$1 = [
+  ["path", { d: "M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8Z", key: "qazsjp" }],
+  ["path", { d: "M15 3v4a2 2 0 0 0 2 2h4", key: "40519r" }]
+];
+const StickyNote = createLucideIcon("StickyNote", __iconNode$1);
+
+/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode = [
+  [
+    "path",
+    {
+      d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
+      key: "wmoenq"
+    }
+  ],
+  ["path", { d: "M12 9v4", key: "juzpu7" }],
+  ["path", { d: "M12 17h.01", key: "p32p05" }]
+];
+const TriangleAlert = createLucideIcon("TriangleAlert", __iconNode);
+
+const badgeVariants = cva(
+  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  {
+    variants: {
+      variant: {
+        default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+        outline: "text-foreground"
+      }
     },
-    body: JSON.stringify(body)
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error(`Cloudflare AI API error for translation model:`, errorText);
-    throw new Error(`Cloudflare AI API request failed: ${response.statusText}`);
-  }
-  const jsonResponse = await response.json();
-  if (isBatch) {
-    if (jsonResponse.result && Array.isArray(jsonResponse.result)) {
-      const translations = jsonResponse.result.map((item) => item.translated_text.trim());
-      return { translation: translations };
-    }
-  } else {
-    if (jsonResponse.result && jsonResponse.result.translated_text) {
-      const translation = jsonResponse.result.translated_text;
-      return { translation: translation.trim() };
+    defaultVariants: {
+      variant: "default"
     }
   }
-  console.error("Unexpected translation API response structure:", jsonResponse);
-  throw new Error("Failed to parse translation from AI response.");
+);
+function Badge({ className, variant, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn(badgeVariants({ variant }), className), ...props });
 }
 
-const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
-const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
-if (typeof window !== "undefined" && (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN)) {
-  console.warn("Cloudflare Account ID or API Token not set - AI features may not work. Set them in Cloudflare Pages environment variables.");
-}
-async function runAi({ model, inputs, stream = false }) {
-  if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
-    throw new Error("Cloudflare AI credentials are not set in the environment variables.");
-  }
-  const isImageOrAudio = model.includes("stable-diffusion") || model.includes("melotts") || model.includes("whisper");
-  const isTextGeneration = model.includes("llama");
-  const directUrl = `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/${model}`;
-  let body;
-  const headers = { "Authorization": `Bearer ${CLOUDFLARE_API_TOKEN}` };
-  if (model.includes("whisper") && "audio" in inputs && (inputs.audio instanceof Buffer || inputs.audio instanceof Uint8Array)) {
-    headers["Content-Type"] = "application/octet-stream";
-    body = inputs.audio;
-  } else {
-    headers["Content-Type"] = "application/json";
-    body = JSON.stringify({
-      ...isTextGeneration && stream ? { stream: true } : {},
-      ...inputs
+const LessonHeader = ({ title, topic, level }) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-6", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-4xl font-bold text-primary mb-2", children: title }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", children: topic }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Badge,
+        {
+          variant: level === "Beginner" ? "default" : level === "Intermediate" ? "outline" : "destructive",
+          className: level === "Beginner" ? "bg-accent text-accent-foreground" : level === "Intermediate" ? "border-accent text-accent-foreground" : "bg-orange-500 text-white",
+          children: level
+        }
+      )
+    ] })
+  ] });
+};
+
+const ArabicExplanation = ({ explanation }) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mb-6 shadow-lg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center text-2xl", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(BookOpenText, { className: "mr-2 h-6 w-6 text-primary" }),
+      "Explanation (الشرح)"
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-lg leading-relaxed whitespace-pre-line text-right", dir: "rtl", children: explanation }) })
+  ] });
+};
+
+var COLLAPSIBLE_NAME = "Collapsible";
+var [createCollapsibleContext, createCollapsibleScope] = createContextScope(COLLAPSIBLE_NAME);
+var [CollapsibleProvider, useCollapsibleContext] = createCollapsibleContext(COLLAPSIBLE_NAME);
+var Collapsible = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const {
+      __scopeCollapsible,
+      open: openProp,
+      defaultOpen,
+      disabled,
+      onOpenChange,
+      ...collapsibleProps
+    } = props;
+    const [open = false, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen,
+      onChange: onOpenChange
     });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      CollapsibleProvider,
+      {
+        scope: __scopeCollapsible,
+        disabled,
+        contentId: useId(),
+        open,
+        onOpenToggle: reactExports.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Primitive.div,
+          {
+            "data-state": getState$1(open),
+            "data-disabled": disabled ? "" : void 0,
+            ...collapsibleProps,
+            ref: forwardedRef
+          }
+        )
+      }
+    );
   }
-  const response = await fetch(directUrl, {
-    method: "POST",
-    headers,
-    body
+);
+Collapsible.displayName = COLLAPSIBLE_NAME;
+var TRIGGER_NAME$1 = "CollapsibleTrigger";
+var CollapsibleTrigger = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeCollapsible, ...triggerProps } = props;
+    const context = useCollapsibleContext(TRIGGER_NAME$1, __scopeCollapsible);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.button,
+      {
+        type: "button",
+        "aria-controls": context.contentId,
+        "aria-expanded": context.open || false,
+        "data-state": getState$1(context.open),
+        "data-disabled": context.disabled ? "" : void 0,
+        disabled: context.disabled,
+        ...triggerProps,
+        ref: forwardedRef,
+        onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
+      }
+    );
+  }
+);
+CollapsibleTrigger.displayName = TRIGGER_NAME$1;
+var CONTENT_NAME$1 = "CollapsibleContent";
+var CollapsibleContent = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { forceMount, ...contentProps } = props;
+    const context = useCollapsibleContext(CONTENT_NAME$1, props.__scopeCollapsible);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: ({ present }) => /* @__PURE__ */ jsxRuntimeExports.jsx(CollapsibleContentImpl, { ...contentProps, ref: forwardedRef, present }) });
+  }
+);
+CollapsibleContent.displayName = CONTENT_NAME$1;
+var CollapsibleContentImpl = reactExports.forwardRef((props, forwardedRef) => {
+  const { __scopeCollapsible, present, children, ...contentProps } = props;
+  const context = useCollapsibleContext(CONTENT_NAME$1, __scopeCollapsible);
+  const [isPresent, setIsPresent] = reactExports.useState(present);
+  const ref = reactExports.useRef(null);
+  const composedRefs = useComposedRefs(forwardedRef, ref);
+  const heightRef = reactExports.useRef(0);
+  const height = heightRef.current;
+  const widthRef = reactExports.useRef(0);
+  const width = widthRef.current;
+  const isOpen = context.open || isPresent;
+  const isMountAnimationPreventedRef = reactExports.useRef(isOpen);
+  const originalStylesRef = reactExports.useRef(void 0);
+  reactExports.useEffect(() => {
+    const rAF = requestAnimationFrame(() => isMountAnimationPreventedRef.current = false);
+    return () => cancelAnimationFrame(rAF);
+  }, []);
+  useLayoutEffect2(() => {
+    const node = ref.current;
+    if (node) {
+      originalStylesRef.current = originalStylesRef.current || {
+        transitionDuration: node.style.transitionDuration,
+        animationName: node.style.animationName
+      };
+      node.style.transitionDuration = "0s";
+      node.style.animationName = "none";
+      const rect = node.getBoundingClientRect();
+      heightRef.current = rect.height;
+      widthRef.current = rect.width;
+      if (!isMountAnimationPreventedRef.current) {
+        node.style.transitionDuration = originalStylesRef.current.transitionDuration;
+        node.style.animationName = originalStylesRef.current.animationName;
+      }
+      setIsPresent(present);
+    }
+  }, [context.open, present]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Primitive.div,
+    {
+      "data-state": getState$1(context.open),
+      "data-disabled": context.disabled ? "" : void 0,
+      id: context.contentId,
+      hidden: !isOpen,
+      ...contentProps,
+      ref: composedRefs,
+      style: {
+        [`--radix-collapsible-content-height`]: height ? `${height}px` : void 0,
+        [`--radix-collapsible-content-width`]: width ? `${width}px` : void 0,
+        ...props.style
+      },
+      children: isOpen && children
+    }
+  );
+});
+function getState$1(open) {
+  return open ? "open" : "closed";
+}
+var Root = Collapsible;
+var Trigger = CollapsibleTrigger;
+var Content = CollapsibleContent;
+
+var ACCORDION_NAME = "Accordion";
+var ACCORDION_KEYS = ["Home", "End", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"];
+var [Collection, useCollection, createCollectionScope] = createCollection(ACCORDION_NAME);
+var [createAccordionContext, createAccordionScope] = createContextScope(ACCORDION_NAME, [
+  createCollectionScope,
+  createCollapsibleScope
+]);
+var useCollapsibleScope = createCollapsibleScope();
+var Accordion$1 = React.forwardRef(
+  (props, forwardedRef) => {
+    const { type, ...accordionProps } = props;
+    const singleProps = accordionProps;
+    const multipleProps = accordionProps;
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Collection.Provider, { scope: props.__scopeAccordion, children: type === "multiple" ? /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImplMultiple, { ...multipleProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImplSingle, { ...singleProps, ref: forwardedRef }) });
+  }
+);
+Accordion$1.displayName = ACCORDION_NAME;
+var [AccordionValueProvider, useAccordionValueContext] = createAccordionContext(ACCORDION_NAME);
+var [AccordionCollapsibleProvider, useAccordionCollapsibleContext] = createAccordionContext(
+  ACCORDION_NAME,
+  { collapsible: false }
+);
+var AccordionImplSingle = React.forwardRef(
+  (props, forwardedRef) => {
+    const {
+      value: valueProp,
+      defaultValue,
+      onValueChange = () => {
+      },
+      collapsible = false,
+      ...accordionSingleProps
+    } = props;
+    const [value, setValue] = useControllableState({
+      prop: valueProp,
+      defaultProp: defaultValue,
+      onChange: onValueChange
+    });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      AccordionValueProvider,
+      {
+        scope: props.__scopeAccordion,
+        value: value ? [value] : [],
+        onItemOpen: setValue,
+        onItemClose: React.useCallback(() => collapsible && setValue(""), [collapsible, setValue]),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionCollapsibleProvider, { scope: props.__scopeAccordion, collapsible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImpl, { ...accordionSingleProps, ref: forwardedRef }) })
+      }
+    );
+  }
+);
+var AccordionImplMultiple = React.forwardRef((props, forwardedRef) => {
+  const {
+    value: valueProp,
+    defaultValue,
+    onValueChange = () => {
+    },
+    ...accordionMultipleProps
+  } = props;
+  const [value = [], setValue] = useControllableState({
+    prop: valueProp,
+    defaultProp: defaultValue,
+    onChange: onValueChange
   });
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error(`Cloudflare AI API error for model ${model}:`, errorText);
-    throw new Error(`Cloudflare AI request failed: ${response.statusText}`);
+  const handleItemOpen = React.useCallback(
+    (itemValue) => setValue((prevValue = []) => [...prevValue, itemValue]),
+    [setValue]
+  );
+  const handleItemClose = React.useCallback(
+    (itemValue) => setValue((prevValue = []) => prevValue.filter((value2) => value2 !== itemValue)),
+    [setValue]
+  );
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    AccordionValueProvider,
+    {
+      scope: props.__scopeAccordion,
+      value,
+      onItemOpen: handleItemOpen,
+      onItemClose: handleItemClose,
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionCollapsibleProvider, { scope: props.__scopeAccordion, collapsible: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImpl, { ...accordionMultipleProps, ref: forwardedRef }) })
+    }
+  );
+});
+var [AccordionImplProvider, useAccordionContext] = createAccordionContext(ACCORDION_NAME);
+var AccordionImpl = React.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAccordion, disabled, dir, orientation = "vertical", ...accordionProps } = props;
+    const accordionRef = React.useRef(null);
+    const composedRefs = useComposedRefs(accordionRef, forwardedRef);
+    const getItems = useCollection(__scopeAccordion);
+    const direction = useDirection(dir);
+    const isDirectionLTR = direction === "ltr";
+    const handleKeyDown = composeEventHandlers(props.onKeyDown, (event) => {
+      if (!ACCORDION_KEYS.includes(event.key)) return;
+      const target = event.target;
+      const triggerCollection = getItems().filter((item) => !item.ref.current?.disabled);
+      const triggerIndex = triggerCollection.findIndex((item) => item.ref.current === target);
+      const triggerCount = triggerCollection.length;
+      if (triggerIndex === -1) return;
+      event.preventDefault();
+      let nextIndex = triggerIndex;
+      const homeIndex = 0;
+      const endIndex = triggerCount - 1;
+      const moveNext = () => {
+        nextIndex = triggerIndex + 1;
+        if (nextIndex > endIndex) {
+          nextIndex = homeIndex;
+        }
+      };
+      const movePrev = () => {
+        nextIndex = triggerIndex - 1;
+        if (nextIndex < homeIndex) {
+          nextIndex = endIndex;
+        }
+      };
+      switch (event.key) {
+        case "Home":
+          nextIndex = homeIndex;
+          break;
+        case "End":
+          nextIndex = endIndex;
+          break;
+        case "ArrowRight":
+          if (orientation === "horizontal") {
+            if (isDirectionLTR) {
+              moveNext();
+            } else {
+              movePrev();
+            }
+          }
+          break;
+        case "ArrowDown":
+          if (orientation === "vertical") {
+            moveNext();
+          }
+          break;
+        case "ArrowLeft":
+          if (orientation === "horizontal") {
+            if (isDirectionLTR) {
+              movePrev();
+            } else {
+              moveNext();
+            }
+          }
+          break;
+        case "ArrowUp":
+          if (orientation === "vertical") {
+            movePrev();
+          }
+          break;
+      }
+      const clampedIndex = nextIndex % triggerCount;
+      triggerCollection[clampedIndex].ref.current?.focus();
+    });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      AccordionImplProvider,
+      {
+        scope: __scopeAccordion,
+        disabled,
+        direction: dir,
+        orientation,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Collection.Slot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Primitive.div,
+          {
+            ...accordionProps,
+            "data-orientation": orientation,
+            ref: composedRefs,
+            onKeyDown: disabled ? void 0 : handleKeyDown
+          }
+        ) })
+      }
+    );
   }
-  if (stream) {
-    return response;
+);
+var ITEM_NAME = "AccordionItem";
+var [AccordionItemProvider, useAccordionItemContext] = createAccordionContext(ITEM_NAME);
+var AccordionItem$1 = React.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAccordion, value, ...accordionItemProps } = props;
+    const accordionContext = useAccordionContext(ITEM_NAME, __scopeAccordion);
+    const valueContext = useAccordionValueContext(ITEM_NAME, __scopeAccordion);
+    const collapsibleScope = useCollapsibleScope(__scopeAccordion);
+    const triggerId = useId();
+    const open = value && valueContext.value.includes(value) || false;
+    const disabled = accordionContext.disabled || props.disabled;
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      AccordionItemProvider,
+      {
+        scope: __scopeAccordion,
+        open,
+        disabled,
+        triggerId,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Root,
+          {
+            "data-orientation": accordionContext.orientation,
+            "data-state": getState(open),
+            ...collapsibleScope,
+            ...accordionItemProps,
+            ref: forwardedRef,
+            disabled,
+            open,
+            onOpenChange: (open2) => {
+              if (open2) {
+                valueContext.onItemOpen(value);
+              } else {
+                valueContext.onItemClose(value);
+              }
+            }
+          }
+        )
+      }
+    );
   }
-  if (isImageOrAudio) {
-    return response;
+);
+AccordionItem$1.displayName = ITEM_NAME;
+var HEADER_NAME = "AccordionHeader";
+var AccordionHeader = React.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAccordion, ...headerProps } = props;
+    const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
+    const itemContext = useAccordionItemContext(HEADER_NAME, __scopeAccordion);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.h3,
+      {
+        "data-orientation": accordionContext.orientation,
+        "data-state": getState(itemContext.open),
+        "data-disabled": itemContext.disabled ? "" : void 0,
+        ...headerProps,
+        ref: forwardedRef
+      }
+    );
   }
+);
+AccordionHeader.displayName = HEADER_NAME;
+var TRIGGER_NAME = "AccordionTrigger";
+var AccordionTrigger$1 = React.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAccordion, ...triggerProps } = props;
+    const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
+    const itemContext = useAccordionItemContext(TRIGGER_NAME, __scopeAccordion);
+    const collapsibleContext = useAccordionCollapsibleContext(TRIGGER_NAME, __scopeAccordion);
+    const collapsibleScope = useCollapsibleScope(__scopeAccordion);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Collection.ItemSlot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Trigger,
+      {
+        "aria-disabled": itemContext.open && !collapsibleContext.collapsible || void 0,
+        "data-orientation": accordionContext.orientation,
+        id: itemContext.triggerId,
+        ...collapsibleScope,
+        ...triggerProps,
+        ref: forwardedRef
+      }
+    ) });
+  }
+);
+AccordionTrigger$1.displayName = TRIGGER_NAME;
+var CONTENT_NAME = "AccordionContent";
+var AccordionContent$1 = React.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAccordion, ...contentProps } = props;
+    const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
+    const itemContext = useAccordionItemContext(CONTENT_NAME, __scopeAccordion);
+    const collapsibleScope = useCollapsibleScope(__scopeAccordion);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Content,
+      {
+        role: "region",
+        "aria-labelledby": itemContext.triggerId,
+        "data-orientation": accordionContext.orientation,
+        ...collapsibleScope,
+        ...contentProps,
+        ref: forwardedRef,
+        style: {
+          ["--radix-accordion-content-height"]: "var(--radix-collapsible-content-height)",
+          ["--radix-accordion-content-width"]: "var(--radix-collapsible-content-width)",
+          ...props.style
+        }
+      }
+    );
+  }
+);
+AccordionContent$1.displayName = CONTENT_NAME;
+function getState(open) {
+  return open ? "open" : "closed";
+}
+var Root2 = Accordion$1;
+var Item = AccordionItem$1;
+var Header = AccordionHeader;
+var Trigger2 = AccordionTrigger$1;
+var Content2 = AccordionContent$1;
+
+const Accordion = Root2;
+const AccordionItem = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Item,
+  {
+    ref,
+    className: cn("border-b", className),
+    ...props
+  }
+));
+AccordionItem.displayName = "AccordionItem";
+const AccordionTrigger = reactExports.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(Header, { className: "flex", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+  Trigger2,
+  {
+    ref,
+    className: cn(
+      "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
+      className
+    ),
+    ...props,
+    children: [
+      children,
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "h-4 w-4 shrink-0 transition-transform duration-200" })
+    ]
+  }
+) }));
+AccordionTrigger.displayName = Trigger2.displayName;
+const AccordionContent = reactExports.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Content2,
+  {
+    ref,
+    className: "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
+    ...props,
+    children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn("pb-4 pt-0", className), children })
+  }
+));
+AccordionContent.displayName = Content2.displayName;
+
+const LessonExamples = ({ examples }) => {
+  if (!examples || examples.length === 0) {
+    return null;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mb-6 shadow-lg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center text-2xl", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Lightbulb, { className: "mr-2 h-6 w-6 text-primary" }),
+      "Examples (أمثلة)"
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Accordion, { type: "single", collapsible: true, className: "w-full", defaultValue: "item-0", children: examples.map((example, index) => /* @__PURE__ */ jsxRuntimeExports.jsxs(AccordionItem, { value: `item-${index}`, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(AccordionTrigger, { className: "text-lg hover:no-underline", children: [
+        "Example ",
+        index + 1
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 p-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-md", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold", children: "English:" }),
+          " ",
+          example.english.split("*").map((part, i) => i % 2 === 1 ? /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-accent", children: part }, i) : part)
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-md text-right", dir: "rtl", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold ml-1", children: ":عربي" }),
+          " ",
+          example.arabic.split("*").map((part, i) => i % 2 === 1 ? /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-accent", children: part }, i) : part)
+        ] })
+      ] }) })
+    ] }, index)) }) })
+  ] });
+};
+
+const AdditionalNotes = ({ notes, notesArabic }) => {
+  if (!notes && !notesArabic) {
+    return null;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mb-6 shadow-lg border-primary/50", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { as: "h3", className: "flex items-center text-2xl text-primary", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(StickyNote, { className: "mr-2 h-6 w-6" }),
+      "Additional Notes (ملاحظات إضافية)"
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Accordion, { type: "single", collapsible: true, defaultValue: "item-1", className: "w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(AccordionItem, { value: "item-1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionTrigger, { className: "text-lg hover:no-underline", children: "Toggle Notes" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(AccordionContent, { children: [
+        notes && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-md leading-relaxed whitespace-pre-line", children: notes }) }),
+        notesArabic && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-md font-semibold text-primary/90 mb-1", children: "(بالعربية)" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-md leading-relaxed whitespace-pre-line text-right", dir: "rtl", children: notesArabic })
+        ] })
+      ] })
+    ] }) }) })
+  ] });
+};
+
+const CommonMistakes = ({ mistakes, mistakesArabic }) => {
+  if (!mistakes && !mistakesArabic) {
+    return null;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mb-6 shadow-lg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { as: "h3", className: "flex items-center text-2xl", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(TriangleAlert, { className: "mr-2 h-6 w-6 text-destructive" }),
+      "Common Mistakes (أخطاء شائعة)"
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Accordion, { type: "single", collapsible: true, defaultValue: "item-1", className: "w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(AccordionItem, { value: "item-1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionTrigger, { className: "text-lg hover:no-underline", children: "Toggle Mistakes" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(AccordionContent, { children: [
+        mistakes && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-md leading-relaxed whitespace-pre-line", children: mistakes }) }),
+        mistakesArabic && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-md font-semibold text-destructive/90 mb-1", children: "(بالعربية)" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-md leading-relaxed whitespace-pre-line text-right", dir: "rtl", children: mistakesArabic })
+        ] })
+      ] })
+    ] }) }) })
+  ] });
+};
+
+objectType({
+  lessonTitle: stringType().describe("The title of the lesson."),
+  lessonTopic: stringType().describe("The topic of the lesson."),
+  lessonLevel: stringType().describe("The level of the lesson (e.g., Beginner, Intermediate, Advanced)."),
+  lessonArabicExplanation: stringType().describe("The Arabic explanation of the lesson."),
+  lessonExamples: arrayType(
+    objectType({
+      english: stringType().describe("The English example."),
+      arabic: stringType().describe("The Arabic translation of the example."),
+      imagePrompt: stringType().optional(),
+      imageUrl: stringType().optional()
+    })
+  ).describe("Examples provided in the lesson."),
+  lessonInteractiveExercises: arrayType(
+    objectType({
+      type: stringType().describe("The type of the exercise (e.g., multiple_choice)."),
+      question: stringType().describe("The question of the exercise."),
+      choices: arrayType(stringType()).optional().describe("The choices for the multiple-choice question."),
+      correct_answer: stringType().describe("The correct answer to the exercise."),
+      user_answer: stringType().describe("The user provided answer to the exercise.")
+    })
+  ).describe("Interactive exercises in the lesson."),
+  lessonAdditionalNotes: stringType().optional().describe("Additional notes for the lesson."),
+  lessonCommonMistakes: stringType().optional().describe("Common mistakes students make in the lesson."),
+  lessonAdditionalNotesArabic: stringType().optional().describe("Additional notes for the lesson in Arabic."),
+  lessonCommonMistakesArabic: stringType().optional().describe("Common mistakes students make in the lesson in Arabic.")
+});
+async function getExerciseFeedback(input) {
+  const { lessonTitle, lessonTopic, lessonLevel, lessonArabicExplanation, lessonExamples, lessonInteractiveExercises, lessonAdditionalNotesArabic, lessonCommonMistakesArabic } = input;
+  const examplesText = lessonExamples.map((ex) => `- English: "${ex.english}", Arabic: "${ex.arabic}"`).join("\n");
+  const prompt = `You are an expert AI English language tutor from Speed of Mastery.
+Your primary language for providing feedback to students MUST be natural-sounding, clear, and encouraging ARABIC. You can use English for specific grammar terms if necessary, but all explanations and clarifications should be in Arabic.
+
+The student is currently working on a lesson titled "${lessonTitle}" on the topic of "${lessonTopic}" at the "${lessonLevel}" level.
+Here is the core lesson content (in Arabic):
+Explanation: "${lessonArabicExplanation}"
+Examples:
+${examplesText}
+Additional Notes: "${lessonAdditionalNotesArabic || "None"}"
+Common Mistakes: "${lessonCommonMistakesArabic || "None"}"
+
+Now, consider the following exercise and the student's answer:
+Question: "${lessonInteractiveExercises[0].question}"
+Correct Answer: "${lessonInteractiveExercises[0].correct_answer}"
+Student's Answer: "${lessonInteractiveExercises[0].user_answer}"
+
+Your task is to provide targeted feedback to the student IN ARABIC.
+- If the student's answer is correct, congratulate them in Arabic. You can also offer a small additional tip or encouragement in Arabic to reinforce their learning.
+- If the student's answer is incorrect, gently explain IN ARABIC why it's incorrect. Clarify the correct answer IN ARABIC and, if possible, reference the lesson material (like the Arabic explanation or examples) to help them understand. Be encouraging and helpful.
+
+Ensure your entire feedback is in ARABIC. Your response should consist ONLY of the feedback text itself. Do not add any extra text like "Here is the feedback:".`;
+  const messages = [{ role: "user", content: prompt }];
+  const response = await runAi({ model: "@cf/meta/llama-3-8b-instruct", inputs: { messages } });
   const jsonResponse = await response.json();
-  return new Response(JSON.stringify({ result: jsonResponse }), {
-    headers: { "Content-Type": "application/json" },
-    status: 200
-  });
+  const feedback = jsonResponse.result.response;
+  return { feedback };
+}
+
+const MultipleChoiceExercise = ({ exercise, lesson, onCorrect }) => {
+  const [selectedAnswer, setSelectedAnswer] = reactExports.useState(null);
+  const [isSubmitted, setIsSubmitted] = reactExports.useState(false);
+  const [isCorrect, setIsCorrect] = reactExports.useState(null);
+  const [aiFeedback, setAiFeedback] = reactExports.useState(null);
+  const [isLoading, startTransition] = reactExports.useTransition();
+  const handleSubmit = async () => {
+    if (!selectedAnswer) return;
+    setIsSubmitted(true);
+    const correct = selectedAnswer === exercise.correct_answer;
+    setIsCorrect(correct);
+    if (correct) {
+      onCorrect();
+    }
+    startTransition(async () => {
+      try {
+        const feedbackInput = {
+          lessonTitle: lesson.title,
+          lessonTopic: lesson.topic,
+          lessonLevel: lesson.level,
+          lessonArabicExplanation: lesson.arabic_explanation,
+          lessonExamples: lesson.examples,
+          lessonInteractiveExercises: [{
+            type: exercise.type,
+            question: exercise.question,
+            choices: exercise.choices,
+            correct_answer: exercise.correct_answer,
+            user_answer: selectedAnswer
+          }],
+          lessonAdditionalNotes: lesson.additional_notes,
+          lessonCommonMistakes: lesson.common_mistakes,
+          lessonAdditionalNotesArabic: lesson.additional_notes_arabic,
+          lessonCommonMistakesArabic: lesson.common_mistakes_arabic
+        };
+        const feedbackResponse = await getExerciseFeedback(feedbackInput);
+        setAiFeedback(feedbackResponse.feedback);
+      } catch (error) {
+        console.error("Error fetching AI feedback:", error);
+        setAiFeedback("عذرًا، لم أتمكن من الحصول على الملاحظات في الوقت الحالي. يرجى المحاولة مرة أخرى لاحقًا.");
+      }
+    });
+  };
+  const handleReset = () => {
+    setSelectedAnswer(null);
+    setIsSubmitted(false);
+    setIsCorrect(null);
+    setAiFeedback(null);
+  };
+  const getChoiceStyle = (choice) => {
+    if (!isSubmitted) return "";
+    if (choice === exercise.correct_answer) return "text-green-600 dark:text-green-400 font-semibold";
+    if (choice === selectedAnswer && choice !== exercise.correct_answer) return "text-destructive font-semibold";
+    return "";
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mb-4 shadow-md", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-xl", children: exercise.question }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      RadioGroup,
+      {
+        value: selectedAnswer ?? "",
+        onValueChange: setSelectedAnswer,
+        disabled: isSubmitted,
+        className: "space-y-3",
+        children: exercise.choices.map((choice, index) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(RadioGroupItem, { value: choice, id: `${exercise.question}-choice-${index}` }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Label, { htmlFor: `${exercise.question}-choice-${index}`, className: `text-md cursor-pointer ${getChoiceStyle(choice)}`, children: [
+            choice,
+            isSubmitted && choice === exercise.correct_answer && /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheckBig, { className: "inline ml-2 h-5 w-5 text-green-600 dark:text-green-400" }),
+            isSubmitted && choice === selectedAnswer && choice !== exercise.correct_answer && /* @__PURE__ */ jsxRuntimeExports.jsx(CircleX, { className: "inline ml-2 h-5 w-5 text-destructive" })
+          ] })
+        ] }, index))
+      }
+    ) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(CardFooter, { className: "flex flex-col items-start space-y-4", children: [
+      !isSubmitted ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { onClick: handleSubmit, disabled: !selectedAnswer || isLoading, className: "w-full sm:w-auto", children: [
+        isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "mr-2 h-4 w-4 animate-spin" }) : null,
+        "Check Answer"
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { onClick: handleReset, variant: "outline", className: "w-full sm:w-auto", children: "Try Again" }),
+      isSubmitted && isCorrect !== null && /* @__PURE__ */ jsxRuntimeExports.jsxs(Alert, { variant: isCorrect ? "default" : "destructive", className: isCorrect ? "border-green-500 bg-green-50 dark:bg-green-900/30 dark:border-green-700" : "", children: [
+        isCorrect ? /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheckBig, { className: "h-5 w-5 text-green-600 dark:text-green-400" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(CircleX, { className: "h-5 w-5 text-destructive" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertTitle, { className: isCorrect ? "text-green-700 dark:text-green-300" : "text-destructive-foreground", children: isCorrect ? "Correct! (صحيح!)" : "Incorrect. (غير صحيح.)" }),
+        !isCorrect && /* @__PURE__ */ jsxRuntimeExports.jsxs(AlertDescription, { children: [
+          "The correct answer is (الإجابة الصحيحة هي): ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: exercise.correct_answer })
+        ] })
+      ] }),
+      isLoading && !aiFeedback && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center text-muted-foreground", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "mr-2 h-4 w-4 animate-spin" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Getting feedback from AI tutor... (جاري الحصول على تقييم المعلم الذكي...)" })
+      ] }),
+      aiFeedback && /* @__PURE__ */ jsxRuntimeExports.jsxs(Alert, { variant: "default", className: "mt-4 border-accent bg-accent/10 dark:bg-accent/20", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquareHeart, { className: "h-5 w-5 text-primary" }),
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertTitle, { className: "text-accent-foreground", children: "AI Tutor Feedback (تقييم المعلم الذكي)" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDescription, { className: "text-accent-foreground/80 whitespace-pre-line text-right", dir: "rtl", children: aiFeedback })
+      ] })
+    ] })
+  ] });
+};
+
+const InteractiveExercisesSection = ({ exercises, lesson, onCorrectAnswer, hasPassed }) => {
+  if (!exercises || exercises.length === 0) {
+    return null;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mb-6 shadow-lg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center text-2xl", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(MessageCircleQuestion, { className: "mr-2 h-6 w-6 text-primary" }),
+      "Interactive Exercises (تمارين تفاعلية)"
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { children: [
+      hasPassed && /* @__PURE__ */ jsxRuntimeExports.jsxs(Alert, { variant: "default", className: "mb-6 border-green-500 bg-green-50 dark:bg-green-900/30 dark:border-green-700", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "h-5 w-5 text-green-600 dark:text-green-400" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertTitle, { className: "text-green-700 dark:text-green-300", children: "Congratulations! (تهانينا!)" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(AlertDescription, { children: [
+          "You've passed this lesson's exercises! Feel free to keep practicing.",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { dir: "rtl", className: "block", children: "لقد نجحت في تمارين هذا الدرس! يمكنك الاستمرار في الممارسة." })
+        ] })
+      ] }),
+      exercises.map((exercise, index) => {
+        if (exercise.type === "multiple_choice") {
+          return /* @__PURE__ */ jsxRuntimeExports.jsx(MultipleChoiceExercise, { exercise, lesson, onCorrect: onCorrectAnswer }, index);
+        }
+        return /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "Unsupported exercise type: ",
+          exercise.type
+        ] }, index);
+      })
+    ] })
+  ] });
+};
+
+objectType({
+  studentQuestion: stringType().describe("The question asked by the student."),
+  lessonTitle: stringType().describe("The title of the lesson."),
+  lessonTopic: stringType().describe("The topic of the lesson."),
+  lessonLevel: stringType().describe("The level of the lesson (e.g., Beginner, Intermediate, Advanced)."),
+  lessonArabicExplanation: stringType().describe("The Arabic explanation of the lesson."),
+  lessonExamples: arrayType(
+    objectType({
+      english: stringType().describe("The English example."),
+      arabic: stringType().describe("The Arabic translation of the example."),
+      imagePrompt: stringType().optional(),
+      imageUrl: stringType().optional()
+    })
+  ).describe("Examples provided in the lesson."),
+  lessonAdditionalNotesArabic: stringType().optional().describe("Additional notes for the lesson in Arabic."),
+  lessonCommonMistakesArabic: stringType().optional().describe("Common mistakes students make in the lesson in Arabic.")
+});
+async function getLessonTutorResponse(input) {
+  const { studentQuestion, lessonTitle, lessonTopic, lessonArabicExplanation, lessonExamples, lessonAdditionalNotesArabic, lessonCommonMistakesArabic } = input;
+  const examplesText = lessonExamples.map((ex) => `- English: "${ex.english}", Arabic: "${ex.arabic}"`).join("\n");
+  const systemPrompt = `You are a specialist AI English language tutor from Speed of Mastery, fluent in English and Arabic.
+Your entire response MUST be in natural, helpful, and encouraging Arabic.
+Your personality is patient and supportive.`;
+  const userPrompt = `You are tutoring a student on an English lesson.
+Lesson Title: "${lessonTitle}"
+Topic: "${lessonTopic}"
+Level: "${level}"
+
+Here is the core lesson material (in Arabic) you must use to answer the question:
+---
+Lesson Explanation: "${lessonArabicExplanation}"
+---
+Lesson Examples:
+${examplesText}
+---
+Additional Notes: "${lessonAdditionalNotesArabic || "None"}"
+---
+Common Mistakes: "${lessonCommonMistakesArabic || "None"}"
+---
+
+The student's question is: "${studentQuestion}"
+
+Your task is to provide a clear, helpful, and concise answer to the student's question **in Arabic only**.
+- Base your answer on the lesson material provided.
+- If it helps, refer to the lesson explanation or examples to clarify your answer.
+- If the student's question is unclear, politely ask for clarification in Arabic, but try to provide a helpful answer first if possible.
+- Your response should be complete and ready to display directly to the student. Do not add any extra conversational text like "Here is the answer". Just provide the answer itself.`;
+  const messages = [
+    { role: "system", content: systemPrompt },
+    { role: "user", content: userPrompt }
+  ];
+  const response = await runAi({ model: "@cf/meta/llama-3-8b-instruct", inputs: { messages } });
+  const jsonResponse = await response.json();
+  const aiTutorResponse = jsonResponse.result.response;
+  return { aiTutorResponse };
+}
+
+const LessonTutorModal = ({ isOpen, onClose, lesson }) => {
+  const [studentQuestion, setStudentQuestion] = reactExports.useState("");
+  const [aiResponse, setAiResponse] = reactExports.useState(null);
+  const [error, setError] = reactExports.useState(null);
+  const [isLoading, startTransition] = reactExports.useTransition();
+  const handleSubmitQuestion = async () => {
+    if (!studentQuestion.trim()) return;
+    setError(null);
+    setAiResponse(null);
+    startTransition(async () => {
+      try {
+        const tutorInput = {
+          studentQuestion,
+          lessonTitle: lesson.title,
+          lessonTopic: lesson.topic,
+          lessonLevel: lesson.level,
+          lessonArabicExplanation: lesson.arabic_explanation,
+          lessonExamples: lesson.examples.map((ex) => ({
+            english: ex.english,
+            arabic: ex.arabic,
+            imagePrompt: ex.imagePrompt,
+            imageUrl: ex.imageUrl
+          })),
+          lessonAdditionalNotesArabic: lesson.additional_notes_arabic,
+          lessonCommonMistakesArabic: lesson.common_mistakes_arabic
+        };
+        const response = await getLessonTutorResponse(tutorInput);
+        setAiResponse(response.aiTutorResponse);
+      } catch (err) {
+        console.error("Error fetching AI tutor response:", err);
+        setError("عذرًا، لم أتمكن من الحصول على رد من المعلم الذكي في الوقت الحالي. يرجى المحاولة مرة أخرى لاحقًا.");
+        setAiResponse(null);
+      }
+    });
+  };
+  const handleClose = () => {
+    setStudentQuestion("");
+    setAiResponse(null);
+    setError(null);
+    onClose();
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Dialog, { open: isOpen, onOpenChange: (open) => !open && handleClose(), children: /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "sm:max-w-[600px] flex flex-col max-h-[90vh]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogHeader, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogTitle, { className: "flex items-center text-2xl", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquareHeart, { className: "mr-2 h-6 w-6 text-primary" }),
+        "AI Lesson Tutor (مساعد الدرس الذكي)"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(DialogDescription, { dir: "rtl", className: "text-right", children: "اطرح سؤالاً حول هذا الدرس، وسيقوم المعلم الذكي بمساعدتك على فهمه بشكل أفضل. اكتب سؤالك باللغة العربية أو الإنجليزية." })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-grow overflow-y-auto space-y-4 p-1 pr-3", children: [
+      aiResponse && /* @__PURE__ */ jsxRuntimeExports.jsxs(Alert, { variant: "default", className: "border-accent bg-accent/10 dark:bg-accent/20", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquareHeart, { className: "h-5 w-5 text-primary" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertTitle, { className: "text-accent-foreground", children: "AI Tutor's Response (رد المعلم الذكي)" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDescription, { className: "text-accent-foreground/90 whitespace-pre-line text-right", dir: "rtl", children: aiResponse })
+      ] }),
+      isLoading && !aiResponse && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center text-muted-foreground p-4 justify-center", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "mr-2 h-5 w-5 animate-spin" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "جاري الحصول على رد من المعلم الذكي..." })
+      ] }),
+      error && /* @__PURE__ */ jsxRuntimeExports.jsxs(Alert, { variant: "destructive", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertTitle, { children: "Error (خطأ)" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDescription, { children: error })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 space-y-3 pt-4 border-t", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Textarea,
+        {
+          placeholder: "اكتب سؤالك هنا... (Type your question here...)",
+          value: studentQuestion,
+          onChange: (e) => setStudentQuestion(e.target.value),
+          className: "min-h-[80px] text-base",
+          rows: 3,
+          dir: studentQuestion.match(/[\u0600-\u06FF]/) ? "rtl" : "ltr"
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogFooter, { className: "gap-2 sm:gap-0", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "outline", onClick: handleClose, className: "w-full sm:w-auto", children: "Close (إغلاق)" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { onClick: handleSubmitQuestion, disabled: isLoading || !studentQuestion.trim(), className: "w-full sm:w-auto", children: [
+          isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "mr-2 h-4 w-4 animate-spin" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "mr-2 h-4 w-4" }),
+          "Ask AI Tutor (اسأل المعلم الذكي)"
+        ] })
+      ] })
+    ] })
+  ] }) });
+};
+
+const LessonDisplay = ({ lesson }) => {
+  const [isTutorModalOpen, setIsTutorModalOpen] = reactExports.useState(false);
+  const [hasPassedExercises, setHasPassedExercises] = reactExports.useState(false);
+  const handleCorrectAnswer = () => {
+    if (!hasPassedExercises) {
+      setHasPassedExercises(true);
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-8 relative pb-20", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(LessonHeader, { title: lesson.title, topic: lesson.topic, level: lesson.level }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ArabicExplanation, { explanation: lesson.arabic_explanation }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(LessonExamples, { examples: lesson.examples }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      InteractiveExercisesSection,
+      {
+        exercises: lesson.interactive_exercises,
+        lesson,
+        onCorrectAnswer: handleCorrectAnswer,
+        hasPassed: hasPassedExercises
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(AdditionalNotes, { notes: lesson.additional_notes, notesArabic: lesson.additional_notes_arabic }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CommonMistakes, { mistakes: lesson.common_mistakes, mistakesArabic: lesson.common_mistakes_arabic }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Button,
+      {
+        onClick: () => setIsTutorModalOpen(true),
+        className: "fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-xl z-50 p-0",
+        "aria-label": "Open AI Lesson Tutor",
+        size: "icon",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquarePlus, { className: "h-7 w-7" })
+      }
+    ),
+    isTutorModalOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      LessonTutorModal,
+      {
+        isOpen: isTutorModalOpen,
+        onClose: () => setIsTutorModalOpen(false),
+        lesson
+      }
+    )
+  ] });
+};
+
+function LessonClientComponent({ lesson }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "container mx-auto max-w-3xl py-8 px-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { asChild: true, variant: "outline", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: "/", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { className: "mr-2 h-4 w-4" }),
+      "All Lessons"
+    ] }) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(LessonDisplay, { lesson })
+  ] });
 }
 
 objectType({
@@ -1366,10 +1102,6 @@ Your response should ONLY be the Arabic explanation text, without any introducto
   }
 }
 
-var __freeze = Object.freeze;
-var __defProp = Object.defineProperty;
-var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(cooked.slice()) }));
-var _a;
 const $$Astro = createAstro();
 async function getStaticPaths() {
   return lessons.map((lesson) => ({
@@ -1414,7 +1146,7 @@ const $$lessonId = createComponent(async ($$result, $$props, $$slots) => {
   } catch (error) {
     console.error("Failed to generate or translate lesson content:", lesson.lesson_id, error);
     const topic = lesson.meta?.englishGrammarTopic || lesson.title;
-    enhancedLesson.arabic_explanation = `\u0634\u0631\u062D \u0645\u0624\u0642\u062A \u0644\u0645\u0648\u0636\u0648\u0639 "${topic}" \u0644\u0644\u0645\u0633\u062A\u0648\u0649 ${lesson.level}. \u0633\u064A\u062A\u0645 \u062A\u062D\u062F\u064A\u062B \u0647\u0630\u0627 \u0627\u0644\u0645\u062D\u062A\u0648\u0649 \u0639\u0646\u062F \u062A\u0634\u063A\u064A\u0644 \u0627\u0644\u062A\u0637\u0628\u064A\u0642.`;
+    enhancedLesson.arabic_explanation = `\u0634\u0631\u062D \u0645\u0624\u0642\u062A \u0644\u0645\u0648\u0636\u0648\u0639 "${topic}" \u0644\u0644\u0645\u0633\u062A\u0648\u0649 ${lesson.level}. \u0633\u064A\u062A\u0645 \u062A\u062D\u062F\u064A\u062B \u0647\u0630\u0627 \u0627\u0644\u0645\u062D\u062A\u0648\u0649 \u0639\u0646\u062F \u0627\u0644\u062A\u0634\u063A\u064A\u0644.`;
     enhancedLesson.examples = lesson.examples.map((ex) => ({
       ...ex,
       arabic: "\u0645\u062B\u0627\u0644 \u0645\u0624\u0642\u062A - \u0633\u064A\u062A\u0645 \u062A\u062D\u062F\u064A\u062B\u0647 \u0639\u0646\u062F \u0627\u0644\u062A\u0634\u063A\u064A\u0644"
@@ -1422,7 +1154,7 @@ const $$lessonId = createComponent(async ($$result, $$props, $$slots) => {
     enhancedLesson.additional_notes_arabic = "\u0645\u0644\u0627\u062D\u0638\u0627\u062A \u0645\u0624\u0642\u062A\u0629 - \u0633\u062A\u062A\u0645 \u062A\u062D\u062F\u064A\u062B\u0647\u0627 \u0639\u0646\u062F \u0627\u0644\u062A\u0634\u063A\u064A\u0644";
     enhancedLesson.common_mistakes_arabic = "\u0623\u062E\u0637\u0627\u0621 \u0634\u0627\u0626\u0639\u0629 \u0645\u0624\u0642\u062A\u0629 - \u0633\u062A\u062A\u0645 \u062A\u062D\u062F\u064A\u062B\u0647\u0627 \u0639\u0646\u062F \u0627\u0644\u062A\u0634\u063A\u064A\u0644";
   }
-  return renderTemplate(_a || (_a = __template(['<html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>', " - Learn English</title>", '</head> <body> <div id="lesson-root"></div> ', ' <script type="application/json">', "<\/script></body></html>"])), enhancedLesson.title, renderHead(), renderScript($$result, "C:/Users/trust/Downloads/8tl09pl09pl09l9/TERM2-main/src/pages/lessons/[lesson_id].astro?astro&type=script&index=0&lang.ts"), unescapeHTML(JSON.stringify(enhancedLesson)));
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": `${enhancedLesson.title} - Learn English` }, { "default": async ($$result2) => renderTemplate` ${renderComponent($$result2, "LessonClientComponent", LessonClientComponent, { "lesson": enhancedLesson, "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/trust/Downloads/8tl09pl09pl09l9/TERM2-main/src/components/lesson/LessonClientComponent", "client:component-export": "default" })} ` })}`;
 }, "C:/Users/trust/Downloads/8tl09pl09pl09l9/TERM2-main/src/pages/lessons/[lesson_id].astro", void 0);
 
 const $$file = "C:/Users/trust/Downloads/8tl09pl09pl09l9/TERM2-main/src/pages/lessons/[lesson_id].astro";
