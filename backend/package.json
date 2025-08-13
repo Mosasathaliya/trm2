@@ -1,19 +1,30 @@
 ﻿{
-  "name": "trm2-api",
+  "name": "trm2-autrag-backend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "node esbuild.mjs",
+    "build": "tsc",
     "deploy": "npm run build && wrangler deploy",
-    "dev": "wrangler dev --local"
+    "deploy:staging": "npm run build && wrangler deploy --env staging",
+    "deploy:prod": "npm run build && wrangler deploy --env production",
+    "dev": "wrangler dev",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250212.0",
-    "esbuild": "^0.21.5",
+    "@types/node": "^20.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
     "typescript": "^5.6.3",
     "wrangler": "^3.101.0"
   },
   "dependencies": {
+    "@cloudflare/ai": "^1.0.0",
     "hono": "^4.6.12"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

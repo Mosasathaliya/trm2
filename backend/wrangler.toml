@@ -1,8 +1,41 @@
-﻿name = "trm2-api"
-main = "dist/index.js"
-account_id = "62af59a7ac82b29543577ee6800735ee"
+﻿name = "trm2-autrag-backend"
+main = "src/functions/api/autrag/[[path]].ts"
 compatibility_date = "2025-08-13"
 compatibility_flags = ["nodejs_compat"]
 
+[env.production]
+name = "trm2-autrag-backend-prod"
+
+[env.staging]
+name = "trm2-autrag-backend-staging"
+
+[ai]
+binding = "AI"
+
 [vars]
 CLOUDFLARE_ACCOUNT_ID = "62af59a7ac82b29543577ee6800735ee"
+AUTORAG_ENDPOINT = "https://api.cloudflare.com/client/v4/accounts"
+
+# [[r2_buckets]]
+# binding = "RAG_STORAGE"
+# bucket_name = "trm2-rag-storage"
+# preview_bucket_name = "trm2-rag-storage-preview"
+
+# [[d1_databases]]
+# binding = "RAG_DB"
+# database_name = "trm2-rag-db"
+# database_id = "your-d1-database-id"
+
+# [[kv_namespaces]]
+# binding = "RAG_CACHE"
+# id = "your-kv-namespace-id"
+# preview_id = "your-preview-kv-namespace-id"
+
+[triggers]
+crons = [
+  "0 2 * * *", # Daily at 2 AM - cleanup old documents
+  "0 6 * * *"  # Daily at 6 AM - rebuild embeddings index
+]
+
+[dev]
+port = 8787
