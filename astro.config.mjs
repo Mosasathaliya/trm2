@@ -1,18 +1,11 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   integrations: [react()],
-  output: 'server',
-  adapter: cloudflare({
-    mode: 'directory'
-  }),
-  outDir: './dist/cloudflare',
+  output: 'static',
+  outDir: './dist',
   vite: {
-    ssr: {
-      external: ['@cloudflare/ai']
-    },
     resolve: {
       alias: {
         '@': '/src'
