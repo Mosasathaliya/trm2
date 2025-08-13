@@ -7,13 +7,17 @@ pages_build_output_dir = "dist/cloudflare"
 [env.production]
 name = "trm2-pages-prod"
 
-[env.preview]
-name = "trm2-preview"
-
-# Environment variables for Cloudflare Pages
+# Environment variables for production
 [vars]
 NODE_VERSION = "18.20.8"
 
 # These will be set in Cloudflare Pages dashboard
 # CLOUDFLARE_ACCOUNT_ID = "your_account_id"
 # CLOUDFLARE_API_TOKEN = "your_api_token"
+
+[env.preview]
+name = "trm2-preview"
+
+# Environment variables for preview
+[vars]
+NODE_VERSION = "18.20.8"
