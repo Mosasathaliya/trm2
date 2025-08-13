@@ -8,6 +8,7 @@ export const prerender = true;
 
 export interface Props {
   lesson_id: string;
+  lesson: Lesson;
 }
 
 export async function getStaticPaths() {
@@ -17,13 +18,7 @@ export async function getStaticPaths() {
   }));
 }
 
-const { lesson_id } = Astro.params;
-const lesson = lessons.find((l) => l.lesson_id === lesson_id);
-
-if (!lesson) {
-  // Redirect to home if lesson not found
-  return Astro.redirect('/');
-}
+const { lesson } = Astro.props;
 ---
 
 <Layout title={`${lesson.title} - Speed of Mastery`}>
