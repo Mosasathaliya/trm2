@@ -7,8 +7,6 @@
   },
   "packageManager": "npm@10.9.2",
   "scripts": {
-    "preinstall": "npm install @rollup/rollup-linux-x64-gnu --no-save --force",
-    "postinstall": "node -e \"try { require('@rollup/rollup-linux-x64-gnu'); console.log('✅ Rollup module installed successfully'); } catch(e) { console.log('❌ Rollup module missing:', e.message); process.exit(1); }\"",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -21,12 +19,14 @@
     "@astrojs/tailwind": "^6.0.0",
     "astro": "^4.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@rollup/rollup-linux-x64-gnu": "^4.0.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "tailwindcss": "^3.3.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.0.0"
   }
 }
