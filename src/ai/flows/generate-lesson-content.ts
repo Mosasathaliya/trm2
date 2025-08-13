@@ -3,8 +3,7 @@
  * @fileOverview This flow generates a detailed Arabic explanation for a specific English grammar topic.
  */
 import { z } from 'zod';
-import { runAi } from '@/lib/cloudflare-ai';
-
+import { runAi } from '../../lib/cloudflare-ai';
 
 export type GenerateExplanationInput = z.infer<typeof GenerateExplanationInputSchema>;
 const GenerateExplanationInputSchema = z.object({
@@ -16,15 +15,13 @@ export type GenerateExplanationOutput = {
   arabicExplanation: string;
 };
 
-import { isBuildTime } from '@/lib/env-check';
-
 export async function generateArabicExplanation(input: GenerateExplanationInput): Promise<GenerateExplanationOutput> {
   const { grammarTopic, level } = input;
   
-  // During build time, return placeholder content
-  if (isBuildTime() && (!process.env.CLOUDFLARE_ACCOUNT_ID || !process.env.CLOUDFLARE_API_TOKEN)) {
+  // Check if we're in a browser environment
+  if (typeof window !== 'undefined') {
     return { 
-      arabicExplanation: `شرح مؤقت لموضوع "${grammarTopic}" للمستوى ${level}. سيتم تحديث هذا المحتوى عند تشغيل التطبيق.` 
+      arabicExplanation: `شرح مؤقت لموضوع "${grammarTopic}" للمستوى ${level}. سيتم تحديث هذا المحتوى عند التشغيل.` 
     };
   }
   

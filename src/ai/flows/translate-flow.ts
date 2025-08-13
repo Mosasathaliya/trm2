@@ -6,8 +6,9 @@
  */
 import { z } from 'zod';
 
-const CLOUDFLARE_ACCOUNT_ID = process.env.NEXT_PUBLIC_CLOUDFLARE_ACCOUNT_ID;
-const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
+// For Astro/Cloudflare Pages, we need to access env vars differently
+const CLOUDFLARE_ACCOUNT_ID = import.meta.env.CLOUDFLARE_ACCOUNT_ID || process.env.CLOUDFLARE_ACCOUNT_ID;
+const CLOUDFLARE_API_TOKEN = import.meta.env.CLOUDFLARE_API_TOKEN || process.env.CLOUDFLARE_API_TOKEN;
 
 export type TranslateInput = z.infer<typeof TranslateInputSchema>;
 const TranslateInputSchema = z.object({
@@ -23,8 +24,9 @@ export type TranslateOutput = {
 import { isBuildTime } from '@/lib/env-check';
 
 export async function translateText({ text, sourceLanguage = 'en', targetLanguage }: TranslateInput): Promise<TranslateOutput> {
-  // During build time, return placeholder content
-  if (isBuildTime() && (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN)) {
+  // Check if we're in a browser environment
+  if (typeof window !== 'undefined') {
+    // Client-side: return placeholder content
     if (Array.isArray(text)) {
       return { translation: text.map(() => "محتوى مؤقت - سيتم تحديثه عند التشغيل") };
     }

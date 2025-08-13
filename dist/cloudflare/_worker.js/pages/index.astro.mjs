@@ -1,6 +1,6 @@
 globalThis.process ??= {}; globalThis.process.env ??= {};
 import { o as objectType, e as enumType, s as stringType, a as arrayType, g as getDefaultExportFromCjs, n as numberType, f as commonjsGlobal, h as clsx, i as booleanType, c as createComponent, r as renderComponent, d as renderTemplate } from '../chunks/astro/server_DbPTNgPy.mjs';
-import { c as createLucideIcon, j as jsxRuntimeExports, g as createContextScope, P as Primitive, a as cn, l as useComposedRefs, o as useDirection, k as Presence, i as composeEventHandlers, U as useCallbackRef, m as useLayoutEffect2, V as reactDomExports, W as useSize, X as composeRefs, Y as Portal$2, Z as hideOthers, _ as ReactRemoveScroll, a0 as useFocusGuards, a1 as FocusScope, a2 as DismissableLayer, u as useControllableState, h as useId, r as runAi, a3 as require_interop_require_default, a4 as requireJsxRuntime, a5 as require_interop_require_wildcard, a6 as requireReactDom, a7 as requireRouterContext_sharedRuntime, a8 as requireUseMergedRef, F as Dialog, G as DialogContent, H as DialogHeader, I as DialogTitle, J as DialogDescription, x as Button, C as Card, f as CardContent, O as translateText, A as Alert, t as CircleCheckBig, z as AlertTitle, D as AlertDescription, R as RadioGroup, q as RadioGroupItem, s as Label$2, a9 as X, T as Textarea, S as Send, n as createCollection, aa as usePrevious, p as ChevronDown, d as CardHeader, e as CardTitle, B as BookOpenText, L as Lightbulb, y as LoaderCircle, ab as CardDescription, w as CardFooter, E as Award, v as CircleX, ac as createRovingFocusGroupScope, ad as Root$6, ae as Item$1, af as DialogTrigger, K as DialogFooter, ag as DialogClose, Q as lessons$1, M as Link, $ as $$Layout } from '../chunks/translate-flow_COyTiWVQ.mjs';
+import { c as createLucideIcon, j as jsxRuntimeExports, g as createContextScope, P as Primitive, a as cn, l as useComposedRefs, o as useDirection, k as Presence, i as composeEventHandlers, Q as useCallbackRef, m as useLayoutEffect2, U as reactDomExports, V as useSize, W as composeRefs, X as Portal$2, Y as hideOthers, Z as ReactRemoveScroll, _ as useFocusGuards, a0 as FocusScope, a1 as DismissableLayer, u as useControllableState, h as useId, r as runAi, a2 as require_interop_require_default, a3 as requireJsxRuntime, a4 as require_interop_require_wildcard, a5 as requireReactDom, a6 as requireRouterContext_sharedRuntime, a7 as requireUseMergedRef, F as Dialog, G as DialogContent, H as DialogHeader, I as DialogTitle, J as DialogDescription, x as Button, C as Card, f as CardContent, N as translateText, A as Alert, t as CircleCheckBig, z as AlertTitle, D as AlertDescription, R as RadioGroup, q as RadioGroupItem, s as Label$2, a8 as X, T as Textarea, S as Send, n as createCollection, a9 as usePrevious, p as ChevronDown, d as CardHeader, e as CardTitle, B as BookOpenText, L as Lightbulb, y as LoaderCircle, aa as CardDescription, w as CardFooter, E as Award, v as CircleX, ab as createRovingFocusGroupScope, ac as Root$6, ad as Item$1, ae as DialogTrigger, K as DialogFooter, af as DialogClose, O as lessons$1, M as Link, $ as $$Layout } from '../chunks/translate-flow_kN_oiuBh.mjs';
 import { a as reactExports, b as requireReact, R as React } from '../chunks/_@astro-renderers_gQnhom5Z.mjs';
 export { r as renderers } from '../chunks/_@astro-renderers_gQnhom5Z.mjs';
 
@@ -53675,7 +53675,7 @@ function StoryViewerDialog({ story, isOpen, onOpenChange }) {
     if (!story) return;
     setIsLoadingQuiz(true);
     try {
-      const { generateStoryQuiz } = await import('../chunks/story-quiz-flow_DmnEIh8T.mjs');
+      const { generateStoryQuiz } = await import('../chunks/story-quiz-flow_B-ckEkUK.mjs');
       const result = await generateStoryQuiz({ storyContent: story.content });
       setQuiz(result.questions);
       setActiveTab("quiz");
@@ -54356,9 +54356,17 @@ function MainApp() {
   const [mounted, setMounted] = reactExports.useState(false);
   reactExports.useEffect(() => {
     setMounted(true);
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    }
   }, []);
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
   };
   const renderScreen = () => {
     switch (activeTab) {

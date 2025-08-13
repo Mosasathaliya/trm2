@@ -38,10 +38,19 @@ export default function MainApp() {
 
   useEffect(() => {
     setMounted(true);
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme') as "light" | "dark";
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    }
   }, []);
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
   };
   
   const renderScreen = () => {

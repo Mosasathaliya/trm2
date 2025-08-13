@@ -1,6 +1,6 @@
 globalThis.process ??= {}; globalThis.process.env ??= {};
 import { o as objectType, s as stringType, a as arrayType, c as createComponent, b as createAstro, r as renderComponent, d as renderTemplate } from '../../chunks/astro/server_DbPTNgPy.mjs';
-import { c as createLucideIcon, j as jsxRuntimeExports, a as cn, b as cva, C as Card, d as CardHeader, e as CardTitle, B as BookOpenText, f as CardContent, g as createContextScope, u as useControllableState, h as useId, P as Primitive, i as composeEventHandlers, k as Presence, l as useComposedRefs, m as useLayoutEffect2, n as createCollection, o as useDirection, p as ChevronDown, L as Lightbulb, r as runAi, R as RadioGroup, q as RadioGroupItem, s as Label, t as CircleCheckBig, v as CircleX, w as CardFooter, x as Button, y as LoaderCircle, A as Alert, z as AlertTitle, D as AlertDescription, E as Award, F as Dialog, G as DialogContent, H as DialogHeader, I as DialogTitle, J as DialogDescription, T as Textarea, K as DialogFooter, S as Send, M as Link, N as isBuildTime, O as translateText, $ as $$Layout, Q as lessons } from '../../chunks/translate-flow_COyTiWVQ.mjs';
+import { c as createLucideIcon, j as jsxRuntimeExports, a as cn, b as cva, C as Card, d as CardHeader, e as CardTitle, B as BookOpenText, f as CardContent, g as createContextScope, u as useControllableState, h as useId, P as Primitive, i as composeEventHandlers, k as Presence, l as useComposedRefs, m as useLayoutEffect2, n as createCollection, o as useDirection, p as ChevronDown, L as Lightbulb, r as runAi, R as RadioGroup, q as RadioGroupItem, s as Label, t as CircleCheckBig, v as CircleX, w as CardFooter, x as Button, y as LoaderCircle, A as Alert, z as AlertTitle, D as AlertDescription, E as Award, F as Dialog, G as DialogContent, H as DialogHeader, I as DialogTitle, J as DialogDescription, T as Textarea, K as DialogFooter, S as Send, M as Link, N as translateText, $ as $$Layout, O as lessons } from '../../chunks/translate-flow_kN_oiuBh.mjs';
 import { a as reactExports, R as React } from '../../chunks/_@astro-renderers_gQnhom5Z.mjs';
 export { r as renderers } from '../../chunks/_@astro-renderers_gQnhom5Z.mjs';
 
@@ -1076,9 +1076,9 @@ objectType({
 });
 async function generateArabicExplanation(input) {
   const { grammarTopic, level } = input;
-  if (isBuildTime() && (!process.env.CLOUDFLARE_ACCOUNT_ID || !process.env.CLOUDFLARE_API_TOKEN)) {
+  if (typeof window !== "undefined") {
     return {
-      arabicExplanation: `شرح مؤقت لموضوع "${grammarTopic}" للمستوى ${level}. سيتم تحديث هذا المحتوى عند تشغيل التطبيق.`
+      arabicExplanation: `شرح مؤقت لموضوع "${grammarTopic}" للمستوى ${level}. سيتم تحديث هذا المحتوى عند التشغيل.`
     };
   }
   const prompt = `Please provide a detailed explanation in Arabic for the following English grammar topic: "${grammarTopic}".

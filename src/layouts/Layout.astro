@@ -25,4 +25,86 @@ const { title } = Astro.props;
   @import 'tailwindcss/base';
   @import 'tailwindcss/components';
   @import 'tailwindcss/utilities';
+
+  @layer base {
+    :root {
+      --background: 240 10% 98%;
+      --foreground: 224 71% 4%;
+      --card: 0 0% 100%;
+      --card-foreground: 224 71% 4%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 224 71% 4%;
+      --primary: 120 61% 50%;
+      --primary-foreground: 210 20% 98%;
+      --secondary: 220 13% 91%;
+      --secondary-foreground: 224 71% 4%;
+      --muted: 220 13% 91%;
+      --muted-foreground: 220 9% 46%;
+      --accent: 120 82% 75%;
+      --accent-foreground: 224 71% 4%;
+      --destructive: 0 84% 60%;
+      --destructive-foreground: 355 100% 97%;
+      --border: 220 13% 86%;
+      --input: 220 13% 89%;
+      --ring: 120 61% 50%;
+      --radius: 0.5rem;
+      --bg-color-1: 120 61% 60%;
+      --bg-color-2: 150 70% 65%;
+      --bg-color-3: 120 82% 80%;
+      --bg-color-4: 180 50% 70%;
+    }
+   
+    .dark {
+      --background: 224 5% 16%;
+      --foreground: 210 20% 98%;
+      --card: 224 5% 20%;
+      --card-foreground: 210 20% 98%;
+      --popover: 224 5% 16%;
+      --popover-foreground: 210 20% 98%;
+      --primary: 120 61% 50%;
+      --primary-foreground: 224 71% 4%;
+      --secondary: 224 5% 22%;
+      --secondary-foreground: 210 20% 98%;
+      --muted: 224 5% 22%;
+      --muted-foreground: 215 20% 65%;
+      --accent: 120 82% 75%;
+      --accent-foreground: 224 71% 4%;
+      --destructive: 0 63% 31%;
+      --destructive-foreground: 210 20% 98%;
+      --border: 224 5% 22%;
+      --input: 224 5% 22%;
+      --ring: 120 61% 50%;
+      --bg-color-1: 120 61% 40%;
+      --bg-color-2: 260 60% 30%;
+      --bg-color-3: 120 82% 65%;
+      --bg-color-4: 330 60% 25%;
+    }
+  }
+   
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translate(0px, 0px) rotate(0deg);
+      }
+      100% {
+        transform: translate(var(--x-end), var(--y-end)) rotate(360deg);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fadeIn {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+  }
 </style>

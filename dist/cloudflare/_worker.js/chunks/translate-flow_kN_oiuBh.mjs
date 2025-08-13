@@ -10977,26 +10977,19 @@ const DialogDescription = reactExports.forwardRef(({ className, ...props }, ref)
 ));
 DialogDescription.displayName = Description.displayName;
 
-function isBuildTime() {
-  return typeof window === "undefined";
-}
-
-const CLOUDFLARE_ACCOUNT_ID = process.env.NEXT_PUBLIC_CLOUDFLARE_ACCOUNT_ID;
-const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
+const CLOUDFLARE_ACCOUNT_ID = "62af59a7ac82b29543577ee6800735ee";
+const CLOUDFLARE_API_TOKEN = "VDFyQyM2GDJ9L4cTQf8kXMjSp4VoiueUonsObued";
 objectType({
   text: unionType([stringType(), arrayType(stringType())]).describe("The text or array of texts to be translated."),
   sourceLanguage: stringType().default("en").describe('The source language code (e.g., "en" for English).'),
   targetLanguage: stringType().describe('The target language for translation (e.g., "ar" for Arabic).')
 });
 async function translateText({ text, sourceLanguage = "en", targetLanguage }) {
-  if (isBuildTime() && (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN)) {
+  if (typeof window !== "undefined") {
     if (Array.isArray(text)) {
       return { translation: text.map(() => "محتوى مؤقت - سيتم تحديثه عند التشغيل") };
     }
     return { translation: "محتوى مؤقت - سيتم تحديثه عند التشغيل" };
-  }
-  if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
-    throw new Error("Cloudflare AI credentials are not set in the environment variables.");
   }
   const isBatch = Array.isArray(text);
   const url = `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/meta/m2m100-1.2b`;
@@ -11045,4 +11038,4 @@ async function translateText({ text, sourceLanguage = "en", targetLanguage }) {
   throw new Error("Failed to parse translation from AI response.");
 }
 
-export { $$Layout as $, Alert as A, BookOpenText as B, Card as C, AlertDescription as D, Award as E, Dialog as F, DialogContent as G, DialogHeader as H, DialogTitle as I, DialogDescription as J, DialogFooter as K, Lightbulb as L, Link as M, isBuildTime as N, translateText as O, Primitive as P, lessons as Q, RadioGroup as R, Send as S, Textarea as T, useCallbackRef$1 as U, reactDomExports as V, useSize as W, composeRefs as X, Portal$1 as Y, hideOthers as Z, ReactRemoveScroll as _, cn as a, useFocusGuards as a0, FocusScope as a1, DismissableLayer as a2, require_interop_require_default as a3, requireJsxRuntime as a4, require_interop_require_wildcard as a5, requireReactDom as a6, requireRouterContext_sharedRuntime as a7, requireUseMergedRef as a8, X as a9, usePrevious as aa, CardDescription as ab, createRovingFocusGroupScope as ac, Root$2 as ad, Item as ae, DialogTrigger as af, DialogClose as ag, cva as b, createLucideIcon as c, CardHeader as d, CardTitle as e, CardContent as f, createContextScope as g, useId as h, composeEventHandlers as i, jsxRuntimeExports as j, Presence as k, useComposedRefs as l, useLayoutEffect2 as m, createCollection as n, useDirection as o, ChevronDown as p, RadioGroupItem as q, runAi as r, Label as s, CircleCheckBig as t, useControllableState as u, CircleX as v, CardFooter as w, Button as x, LoaderCircle as y, AlertTitle as z };
+export { $$Layout as $, Alert as A, BookOpenText as B, Card as C, AlertDescription as D, Award as E, Dialog as F, DialogContent as G, DialogHeader as H, DialogTitle as I, DialogDescription as J, DialogFooter as K, Lightbulb as L, Link as M, translateText as N, lessons as O, Primitive as P, useCallbackRef$1 as Q, RadioGroup as R, Send as S, Textarea as T, reactDomExports as U, useSize as V, composeRefs as W, Portal$1 as X, hideOthers as Y, ReactRemoveScroll as Z, useFocusGuards as _, cn as a, FocusScope as a0, DismissableLayer as a1, require_interop_require_default as a2, requireJsxRuntime as a3, require_interop_require_wildcard as a4, requireReactDom as a5, requireRouterContext_sharedRuntime as a6, requireUseMergedRef as a7, X as a8, usePrevious as a9, CardDescription as aa, createRovingFocusGroupScope as ab, Root$2 as ac, Item as ad, DialogTrigger as ae, DialogClose as af, cva as b, createLucideIcon as c, CardHeader as d, CardTitle as e, CardContent as f, createContextScope as g, useId as h, composeEventHandlers as i, jsxRuntimeExports as j, Presence as k, useComposedRefs as l, useLayoutEffect2 as m, createCollection as n, useDirection as o, ChevronDown as p, RadioGroupItem as q, runAi as r, Label as s, CircleCheckBig as t, useControllableState as u, CircleX as v, CardFooter as w, Button as x, LoaderCircle as y, AlertTitle as z };
