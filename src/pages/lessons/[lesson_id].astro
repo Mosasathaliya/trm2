@@ -31,6 +31,6 @@ const { lesson } = Astro.props;
         All Lessons
       </a>
     </div>
-    <LessonClientComponent lesson={lesson} client:load />
+    <LessonClientComponent lesson={lesson} client:only="react" />
   </div>
 </Layout>

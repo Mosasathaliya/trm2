@@ -1,10 +1,10 @@
 
 "use client";
 
-import type { Lesson } from '@/types/lesson';
-import { Button } from '@/components/ui/button';
+import type { Lesson } from '../../types/lesson';
+import { Button } from '../ui/button';
 import { ArrowLeft } from 'lucide-react';
-import LessonDisplay from '@/components/lesson/LessonDisplay';
+import LessonDisplay from './LessonDisplay';
 
 interface LessonClientComponentProps {
   lesson: Lesson;
