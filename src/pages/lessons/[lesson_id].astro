@@ -1,0 +1,86 @@
+---
+import { lessons } from '../../data/lingo-lessons-data';
+import type { Lesson } from '../../types/lesson';
+import LessonClientComponent from '../../components/lesson/LessonClientComponent';
+import { translateText } from '../../ai/flows/translate-flow';
+import { generateArabicExplanation } from '../../ai/flows/generate-lesson-content';
+
+export async function getStaticPaths() {
+  return lessons.map((lesson) => ({
+    params: { lesson_id: lesson.lesson_id },
+    props: { lesson }
+  }));
+}
+
+const { lesson } = Astro.props;
+let enhancedLesson: Lesson = JSON.parse(JSON.stringify(lesson));
+
+// Use the generative model to create a rich Arabic explanation
+try {
+  const [
+    explanationResponse,
+    translatedExamples,
+    translatedNotes,
+    translatedMistakes
+  ] = await Promise.all([
+    generateArabicExplanation({ 
+      grammarTopic: lesson.meta?.englishGrammarTopic || lesson.title, 
+      level: lesson.level 
+    }),
+    Promise.all(lesson.examples.map(async (ex) => {
+      const [translatedEnglish, translatedArabic] = await Promise.all([
+        translateText({ text: ex.english, targetLanguage: 'ar', sourceLanguage: 'en' }),
+        translateText({ text: ex.arabic, targetLanguage: 'ar', sourceLanguage: 'en' })
+      ]);
+      return {
+        english: ex.english,
+        arabic: translatedArabic.translation,
+        imagePrompt: ex.imagePrompt
+      };
+    })),
+    lesson.additional_notes ? translateText({ text: lesson.additional_notes, targetLanguage: 'ar', sourceLanguage: 'en' }) : Promise.resolve(null),
+    lesson.common_mistakes ? translateText({ text: lesson.common_mistakes, targetLanguage: 'ar', sourceLanguage: 'en' }) : Promise.resolve(null)
+  ]);
+  
+  enhancedLesson.arabic_explanation = explanationResponse.arabicExplanation;
+  enhancedLesson.examples = translatedExamples;
+  enhancedLesson.additional_notes_arabic = translatedNotes?.translation;
+  enhancedLesson.common_mistakes_arabic = translatedMistakes?.translation;
+
+} catch (error) {
+  console.error("Failed to generate or translate lesson content:", lesson.lesson_id, error);
+  const topic = lesson.meta?.englishGrammarTopic || lesson.title;
+  
+  enhancedLesson.arabic_explanation = `شرح مؤقت لموضوع "${topic}" للمستوى ${lesson.level}. سيتم تحديث هذا المحتوى عند تشغيل التطبيق.`;
+  enhancedLesson.examples = lesson.examples.map(ex => ({
+    ...ex,
+    arabic: "مثال مؤقت - سيتم تحديثه عند التشغيل"
+  }));
+  enhancedLesson.additional_notes_arabic = "ملاحظات مؤقتة - ستتم تحديثها عند التشغيل";
+  enhancedLesson.common_mistakes_arabic = "أخطاء شائعة مؤقتة - ستتم تحديثها عند التشغيل";
+}
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{enhancedLesson.title} - Learn English</title>
+  </head>
+  <body>
+    <div id="lesson-root"></div>
+  </body>
+</html>
+
+<script>
+  import LessonClientComponent from '../../components/lesson/LessonClientComponent';
+  import { createRoot } from 'react-dom/client';
+  
+  const lessonData = JSON.parse(document.querySelector('script[type="application/json"]')?.textContent || '{}');
+  
+  const container = document.getElementById('lesson-root');
+  const root = createRoot(container);
+  root.render(LessonClientComponent({ lesson: lessonData }));
+</script>
+
+<script type="application/json" set:html={JSON.stringify(enhancedLesson)} />

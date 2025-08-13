@@ -1,0 +1,24 @@
+---
+// Astro frontmatter
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn English - Trinav</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+
+<script>
+  import { MainApp } from '../components/main-app';
+  import { createRoot } from 'react-dom/client';
+  
+  const container = document.getElementById('root');
+  const root = createRoot(container);
+  root.render(MainApp());
+</script>

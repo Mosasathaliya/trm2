@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit",
-    "pages:build": "npx @cloudflare/next-on-pages@1",
-    "pages:deploy": "npx wrangler pages deploy .vercel/output/static --project-name=trm2"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.3",
+    "@astrojs/react": "^4.3.0",
     "@hookform/resolvers": "^4.1.3",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-alert-dialog": "^1.1.6",
@@ -36,6 +37,7 @@
     "@radix-ui/react-tooltip": "^1.1.8",
     "@supabase/supabase-js": "^2.45.1",
     "@tanstack/react-query": "^5.66.0",
+    "astro": "^5.12.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
