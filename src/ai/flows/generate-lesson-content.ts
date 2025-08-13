@@ -19,6 +19,13 @@ export type GenerateExplanationOutput = {
 export async function generateArabicExplanation(input: GenerateExplanationInput): Promise<GenerateExplanationOutput> {
   const { grammarTopic, level } = input;
   
+  // During build time, return placeholder content
+  if (typeof window === 'undefined' && (!process.env.CLOUDFLARE_ACCOUNT_ID || !process.env.CLOUDFLARE_API_TOKEN)) {
+    return { 
+      arabicExplanation: `شرح مؤقت لموضوع "${grammarTopic}" للمستوى ${level}. سيتم تحديث هذا المحتوى عند تشغيل التطبيق.` 
+    };
+  }
+  
   const prompt = `Please provide a detailed explanation in Arabic for the following English grammar topic: "${grammarTopic}".
 The explanation should be clear, easy to understand, and suitable for a student at the "${level}" level.
 Use examples where appropriate to illustrate the concepts.
@@ -29,9 +36,16 @@ Your response should ONLY be the Arabic explanation text, without any introducto
     { role: 'user', content: prompt }
   ];
 
-  const response = await runAi({ model: '@cf/meta/llama-3-8b-instruct', inputs: { messages } });
-  const jsonResponse = await response.json();
-  const explanation = jsonResponse.result.response;
-  
-  return { arabicExplanation: explanation };
+  try {
+    const response = await runAi({ model: '@cf/meta/llama-3-8b-instruct', inputs: { messages } });
+    const jsonResponse = await response.json();
+    const explanation = jsonResponse.result.response;
+    
+    return { arabicExplanation: explanation };
+  } catch (error) {
+    console.error('Failed to generate AI explanation:', error);
+    return { 
+      arabicExplanation: `شرح مؤقت لموضوع "${grammarTopic}" للمستوى ${level}. حدث خطأ في توليد المحتوى.` 
+    };
+  }
 }

@@ -62,12 +62,25 @@ async function getLessonData(lessonId: string): Promise<Lesson | null> {
 
   } catch (error) {
     console.error("Failed to generate or translate lesson content:", lessonId, error);
-    const topic = lesson.meta?.englishGrammarTopic || "this topic";
-    // Provide a more robust fallback message
-    lesson.arabic_explanation = `عذرًا، لم نتمكن من تحميل الشرح التفصيلي لهذا الدرس (${topic}) في الوقت الحالي. يرجى المحاولة مرة أخرى لاحقًا.`;
-    lesson.examples = [{ english: "Error loading examples.", arabic: "خطأ في تحميل الأمثلة." }];
-    lesson.additional_notes_arabic = "عذرًا، لم نتمكن من تحميل الملاحظات الإضافية باللغة العربية حاليًا.";
-    lesson.common_mistakes_arabic = "عذرًا، لم نتمكن من تحميل الأخطاء الشائعة باللغة العربية حاليًا.";
+    const topic = lesson.meta?.englishGrammarTopic || lesson.title;
+    
+    // Check if this is a build-time error (missing credentials)
+    if (error instanceof Error && error.message.includes('Cloudflare AI credentials')) {
+      // During build, use placeholder content
+      lesson.arabic_explanation = `شرح مؤقت لموضوع "${topic}" للمستوى ${lesson.level}. سيتم تحديث هذا المحتوى عند تشغيل التطبيق.`;
+      lesson.examples = lesson.examples.map(ex => ({
+        ...ex,
+        arabic: "مثال مؤقت - سيتم تحديثه عند التشغيل"
+      }));
+      lesson.additional_notes_arabic = "ملاحظات مؤقتة - ستتم تحديثها عند التشغيل";
+      lesson.common_mistakes_arabic = "أخطاء شائعة مؤقتة - ستتم تحديثها عند التشغيل";
+    } else {
+      // Runtime error, use error message
+      lesson.arabic_explanation = `عذرًا، لم نتمكن من تحميل الشرح التفصيلي لهذا الدرس (${topic}) في الوقت الحالي. يرجى المحاولة مرة أخرى لاحقًا.`;
+      lesson.examples = [{ english: "Error loading examples.", arabic: "خطأ في تحميل الأمثلة." }];
+      lesson.additional_notes_arabic = "عذرًا، لم نتمكن من تحميل الملاحظات الإضافية باللغة العربية حاليًا.";
+      lesson.common_mistakes_arabic = "عذرًا، لم نتمكن من تحميل الأخطاء الشائعة باللغة العربية حاليًا.";
+    }
   }
   
   return lesson;

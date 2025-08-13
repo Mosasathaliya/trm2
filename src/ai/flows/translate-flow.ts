@@ -21,6 +21,14 @@ export type TranslateOutput = {
 };
 
 export async function translateText({ text, sourceLanguage = 'en', targetLanguage }: TranslateInput): Promise<TranslateOutput> {
+  // During build time, return placeholder content
+  if (typeof window === 'undefined' && (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN)) {
+    if (Array.isArray(text)) {
+      return { translation: text.map(() => "محتوى مؤقت - سيتم تحديثه عند التشغيل") };
+    }
+    return { translation: "محتوى مؤقت - سيتم تحديثه عند التشغيل" };
+  }
+  
   if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
     throw new Error("Cloudflare AI credentials are not set in the environment variables.");
   }
