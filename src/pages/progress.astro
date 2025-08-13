@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Progress Tracking - TRM2 Arabic Learning">
+  <div class="min-h-screen bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-sm border-b">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <a href="/" class="text-2xl font-bold text-primary">TRM2 - Arabic Learning</a>
+          <nav class="flex space-x-6">
+            <a href="/" class="text-gray-700 hover:text-primary">Home</a>
+            <a href="/lessons" class="text-gray-700 hover:text-primary">Lessons</a>
+            <a href="/ai" class="text-gray-700 hover:text-primary">AI Tools</a>
+            <a href="/progress" class="text-gray-700 hover:text-primary font-semibold">Progress</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+      <!-- Back Button -->
+      <div class="mb-6">
+        <a href="/" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to Home
+        </a>
+      </div>
+
+      <!-- Page Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Your Learning Progress</h1>
+        <p class="text-xl text-gray-600">Track your Arabic learning journey and celebrate your achievements</p>
+      </div>
+
+      <!-- Progress Overview Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow-lg border p-6">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900">Completed Lessons</h3>
+            <p class="text-3xl font-bold text-green-600">12</p>
+            <p class="text-sm text-gray-500">out of 47</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg border p-6">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900">Total Points</h3>
+            <p class="text-3xl font-bold text-blue-600">1,250</p>
+            <p class="text-sm text-gray-500">earned</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg border p-6">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="h-8 w-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900">Study Time</h3>
+            <p class="text-3xl font-bold text-purple-600">8.5h</p>
+            <p class="text-sm text-gray-500">this week</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg border p-6">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="h-8 w-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900">Current Streak</h3>
+            <p class="text-3xl font-bold text-orange-600">7</p>
+            <p class="text-sm text-gray-500">days</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Chart -->
+      <div class="bg-white rounded-lg shadow-lg border p-6 mb-8">
+        <h2 class="text-2xl font-bold mb-6">Learning Progress Over Time</h2>
+        <div class="h-64 bg-gray-100 rounded flex items-center justify-center">
+          <p class="text-gray-500">Progress chart will be displayed here</p>
+        </div>
+      </div>
+
+      <!-- Recent Achievements -->
+      <div class="bg-white rounded-lg shadow-lg border p-6 mb-8">
+        <h2 class="text-2xl font-bold mb-6">Recent Achievements</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="border rounded-lg p-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold">First Lesson Complete</h3>
+                <p class="text-sm text-gray-500">Completed your first Arabic lesson</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border rounded-lg p-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold">Perfect Score</h3>
+                <p class="text-sm text-gray-500">Got 100% on a quiz</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border rounded-lg p-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold">Study Streak</h3>
+                <p class="text-sm text-gray-500">7 days of consistent study</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learning Goals -->
+      <div class="bg-white rounded-lg shadow-lg border p-6">
+        <h2 class="text-2xl font-bold mb-6">Your Learning Goals</h2>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between p-4 border rounded-lg">
+            <div>
+              <h3 class="font-semibold">Complete Beginner Level</h3>
+              <p class="text-sm text-gray-500">Finish all beginner lessons</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <div class="w-24 bg-gray-200 rounded-full h-2">
+                <div class="bg-green-600 h-2 rounded-full" style="width: 75%"></div>
+              </div>
+              <span class="text-sm font-medium">75%</span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between p-4 border rounded-lg">
+            <div>
+              <h3 class="font-semibold">Master Basic Grammar</h3>
+              <p class="text-sm text-gray-500">Learn fundamental grammar rules</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <div class="w-24 bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 h-2 rounded-full" style="width: 60%"></div>
+              </div>
+              <span class="text-sm font-medium">60%</span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between p-4 border rounded-lg">
+            <div>
+              <h3 class="font-semibold">Build Vocabulary</h3>
+              <p class="text-sm text-gray-500">Learn 500+ Arabic words</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <div class="w-24 bg-gray-200 rounded-full h-2">
+                <div class="bg-purple-600 h-2 rounded-full" style="width: 40%"></div>
+              </div>
+              <span class="text-sm font-medium">40%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

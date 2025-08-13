@@ -1,0 +1,315 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="AI Tools - TRM2 Arabic Learning">
+  <div class="min-h-screen bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-sm border-b">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <a href="/" class="text-2xl font-bold text-primary">TRM2 - Arabic Learning</a>
+          <nav class="flex space-x-6">
+            <a href="/" class="text-gray-700 hover:text-primary">Home</a>
+            <a href="/lessons" class="text-gray-700 hover:text-primary">Lessons</a>
+            <a href="/ai" class="text-gray-700 hover:text-primary font-semibold">AI Tools</a>
+            <a href="/progress" class="text-gray-700 hover:text-primary">Progress</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+      <!-- Back Button -->
+      <div class="mb-6">
+        <a href="/" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to Home
+        </a>
+      </div>
+
+      <!-- Page Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">AI Learning Tools</h1>
+        <p class="text-xl text-gray-600">Powerful artificial intelligence tools to enhance your Arabic learning experience</p>
+      </div>
+
+      <!-- AI Tools Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow-lg border p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="openAITool('chat')">
+          <div class="text-center space-y-3">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+              <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">Smart Chat</h3>
+            <p class="text-gray-600">Chat with AI about Arabic learning</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg border p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="openAITool('translation')">
+          <div class="text-center space-y-3">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+              <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="m5 8 6 6"></path>
+                <path d="m4 14 6-6 2-3"></path>
+                <path d="M2 5h12"></path>
+                <path d="M7 2h1"></path>
+                <path d="m22 22-5-10-5 10"></path>
+                <path d="M14 18h6"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">Smart Translation</h3>
+            <p class="text-gray-600">Translate between Arabic and English</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg border p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="openAITool('tts')">
+          <div class="text-center space-y-3">
+            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto">
+              <svg class="h-8 w-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">Text to Speech</h3>
+            <p class="text-gray-600">Listen to Arabic text pronunciation</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg border p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="openAITool('image')">
+          <div class="text-center space-y-3">
+            <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto">
+              <svg class="h-8 w-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">Image Generation</h3>
+            <p class="text-gray-600">Create images using AI</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg border p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="openAITool('quiz')">
+          <div class="text-center space-y-3">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto">
+              <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">Quiz Generation</h3>
+            <p class="text-gray-600">Create custom quizzes</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg border p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="openAITool('story')">
+          <div class="text-center space-y-3">
+            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto">
+              <svg class="h-8 w-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">Story Creation</h3>
+            <p class="text-gray-600">Generate educational stories</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Chat Interface -->
+      <div class="bg-white rounded-lg shadow-lg border p-6">
+        <h2 class="text-2xl font-bold mb-4">AI Learning Assistant</h2>
+        <div class="space-y-4">
+          <textarea id="ai-input" placeholder="Ask me anything about Arabic learning..." rows="4" class="w-full p-3 border rounded-lg resize-none"></textarea>
+          <div class="flex space-x-3">
+            <button onclick="sendMessage()" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+              Send Message
+            </button>
+            <button onclick="clearChat()" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+              Clear Chat
+            </button>
+          </div>
+        </div>
+        
+        <!-- Chat History -->
+        <div id="chat-history" class="mt-6 space-y-4 max-h-96 overflow-y-auto">
+          <!-- Chat messages will appear here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Tool Modals -->
+  <div id="ai-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+        <div class="flex items-center justify-between p-6 border-b">
+          <h2 id="modal-title" class="text-xl font-semibold">AI Tool</h2>
+          <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div id="modal-content" class="p-6">
+          <!-- Modal content will be populated here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentTool = '';
+    let chatHistory = [];
+
+    function openAITool(tool) {
+      currentTool = tool;
+      const modal = document.getElementById('ai-modal');
+      const modalTitle = document.getElementById('modal-title');
+      const modalContent = document.getElementById('modal-content');
+      
+      modalTitle.textContent = getToolTitle(tool);
+      modalContent.innerHTML = getToolContent(tool);
+      
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('ai-modal').classList.add('hidden');
+    }
+
+    function getToolTitle(tool) {
+      const titles = {
+        'chat': 'AI Chat Assistant',
+        'translation': 'Smart Translation',
+        'tts': 'Text to Speech',
+        'image': 'AI Image Generation',
+        'quiz': 'Quiz Generator',
+        'story': 'Story Creator'
+      };
+      return titles[tool] || 'AI Tool';
+    }
+
+    function getToolContent(tool) {
+      switch(tool) {
+        case 'chat':
+          return `
+            <div class="space-y-4">
+              <p class="text-gray-600">Chat with our AI assistant about Arabic learning!</p>
+              <textarea id="chat-input" placeholder="Type your message..." rows="3" class="w-full p-3 border rounded"></textarea>
+              <button onclick="sendChatMessage()" class="w-full px-4 py-2 bg-primary text-white rounded hover:bg-primary/90">Send Message</button>
+            </div>
+          `;
+        case 'translation':
+          return `
+            <div class="space-y-4">
+              <p class="text-gray-600">Translate text between Arabic and English</p>
+              <textarea id="translation-input" placeholder="Enter text to translate..." rows="3" class="w-full p-3 border rounded"></textarea>
+              <div class="flex space-x-2">
+                <button onclick="translate('ar-en')" class="flex-1 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90">Arabic → English</button>
+                <button onclick="translate('en-ar')" class="flex-1 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90">English → Arabic</button>
+              </div>
+              <div id="translation-result" class="p-3 bg-gray-100 rounded hidden"></div>
+            </div>
+          `;
+        case 'tts':
+          return `
+            <div class="space-y-4">
+              <p class="text-gray-600">Convert text to speech</p>
+              <textarea id="tts-input" placeholder="Enter text to speak..." rows="3" class="w-full p-3 border rounded"></textarea>
+              <div class="flex space-x-2">
+                <button onclick="speakText('en')" class="flex-1 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90">English</button>
+                <button onclick="speakText('ar')" class="flex-1 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90">Arabic</button>
+              </div>
+            </div>
+          `;
+        default:
+          return `
+            <div class="text-center py-8">
+              <p class="text-gray-600">This AI tool is coming soon!</p>
+            </div>
+          `;
+      }
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('ai-input');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      // Add user message to chat
+      addChatMessage('user', message);
+      input.value = '';
+      
+      // Simulate AI response
+      setTimeout(() => {
+        const response = `This is a simulated AI response to: "${message}". In a real implementation, this would call your RAG backend with Cloudflare AI models.`;
+        addChatMessage('ai', response);
+      }, 1000);
+    }
+
+    function addChatMessage(sender, message) {
+      const chatHistory = document.getElementById('chat-history');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `p-3 rounded-lg ${sender === 'user' ? 'bg-blue-100 ml-12' : 'bg-gray-100 mr-12'}`;
+      messageDiv.innerHTML = `
+        <div class="font-semibold">${sender === 'user' ? 'You' : 'AI Assistant'}</div>
+        <div>${message}</div>
+      `;
+      chatHistory.appendChild(messageDiv);
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
+    function clearChat() {
+      document.getElementById('chat-history').innerHTML = '';
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chat-input');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      alert(`Chat message: ${message}\nThis would be sent to your RAG backend with Cloudflare AI models.`);
+      input.value = '';
+    }
+
+    function translate(direction) {
+      const input = document.getElementById('translation-input');
+      const text = input.value.trim();
+      
+      if (!text) return;
+      
+      const result = document.getElementById('translation-result');
+      result.textContent = `Translation (${direction}): ${text}`;
+      result.classList.remove('hidden');
+    }
+
+    function speakText(language) {
+      const input = document.getElementById('tts-input');
+      const text = input.value.trim();
+      
+      if (!text) return;
+      
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = language === 'en' ? 'en-US' : 'ar-SA';
+        utterance.rate = 0.8;
+        speechSynthesis.speak(utterance);
+      } else {
+        alert('Speech synthesis not supported in this browser');
+      }
+    }
+
+    // Close modal when clicking outside
+    document.addEventListener('click', function(event) {
+      if (event.target.classList.contains('fixed')) {
+        event.target.classList.add('hidden');
+      }
+    });
+  </script>
+</Layout>

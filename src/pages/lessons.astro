@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { lessons } from '../data/lingo-lessons-data';
+---
+
+<Layout title="All Lessons - TRM2 Arabic Learning">
+  <div class="min-h-screen bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-sm border-b">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <a href="/" class="text-2xl font-bold text-primary">TRM2 - Arabic Learning</a>
+          <nav class="flex space-x-6">
+            <a href="/" class="text-gray-700 hover:text-primary">Home</a>
+            <a href="/lessons" class="text-gray-700 hover:text-primary font-semibold">Lessons</a>
+            <a href="/ai" class="text-gray-700 hover:text-primary">AI Tools</a>
+            <a href="/progress" class="text-gray-700 hover:text-primary">Progress</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+      <!-- Back Button -->
+      <div class="mb-6">
+        <a href="/" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to Home
+        </a>
+      </div>
+
+      <!-- Page Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">All Arabic Lessons</h1>
+        <p class="text-xl text-gray-600">Choose from our comprehensive collection of Arabic learning lessons</p>
+      </div>
+
+      <!-- Lesson Categories -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-green-800 mb-2">Beginner Level</h3>
+          <p class="text-green-600 mb-4">Perfect for those starting their Arabic journey</p>
+          <div class="text-2xl font-bold text-green-800">
+            {lessons.filter(l => l.level === 'Beginner').length} Lessons
+          </div>
+        </div>
+
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-blue-800 mb-2">Intermediate Level</h3>
+          <p class="text-blue-600 mb-4">For learners with basic Arabic knowledge</p>
+          <div class="text-2xl font-bold text-blue-800">
+            {lessons.filter(l => l.level === 'Intermediate').length} Lessons
+          </div>
+        </div>
+
+        <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-purple-800 mb-2">Advanced Level</h3>
+          <p class="text-purple-600 mb-4">Challenging content for advanced learners</p>
+          <div class="text-2xl font-bold text-purple-800">
+            {lessons.filter(l => l.level === 'Advanced').length} Lessons
+          </div>
+        </div>
+      </div>
+
+      <!-- Lessons Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {lessons.map((lesson) => (
+          <div class="bg-white rounded-lg shadow-lg border hover:shadow-xl transition-shadow">
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-4">
+                <span class={`px-3 py-1 rounded-full text-sm font-medium ${
+                  lesson.level === 'Beginner' ? 'bg-green-100 text-green-800' :
+                  lesson.level === 'Intermediate' ? 'bg-blue-100 text-blue-800' :
+                  'bg-purple-100 text-purple-800'
+                }`}>
+                  {lesson.level}
+                </span>
+                <span class="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                  {lesson.topic}
+                </span>
+              </div>
+              
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">{lesson.title}</h3>
+              <p class="text-gray-600 mb-4 line-clamp-3">{lesson.arabic_explanation}</p>
+              
+              <div class="flex items-center justify-between">
+                <div class="text-sm text-gray-500">
+                  {lesson.interactive_exercises?.length || 0} exercises
+                </div>
+                <a href={`/lessons/${lesson.lesson_id}`} class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                  Start Lesson
+                  <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>
