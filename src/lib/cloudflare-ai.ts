@@ -5,7 +5,11 @@ const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
 const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
 
 if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
-  throw new Error("Cloudflare Account ID or API Token are not set in the environment variables.");
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error("Cloudflare Account ID or API Token are not set in the environment variables.");
+  } else {
+    console.warn("Cloudflare Account ID or API Token not set - AI features may not work in dev/build. Set them in Cloudflare for production.");
+  }
 }
 
 type AiModel = 
