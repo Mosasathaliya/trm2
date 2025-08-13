@@ -1,4 +1,3 @@
-
 /**
  * @fileoverview Defines the content for each screen/tab of the application.
  */
@@ -61,6 +60,18 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip"
 import { learningItems } from '../lib/lessons';
+import { ragService } from '../lib/rag-service';
+import { 
+  generateText, 
+  translateText, 
+  generateSpeech, 
+  generateImage, 
+  generateStory, 
+  generateLessonContent, 
+  generateQuiz,
+  processVoiceChat,
+  enhancedAIFlow
+} from '../lib/client-ai';
 
 // Helper function to extract YouTube embed URL and video ID
 const getYouTubeInfo = (url: string): { embedUrl: string | null; videoId: string | null; title: string | null } => {
@@ -582,33 +593,16 @@ function AiChat() {
     setInput("");
 
     try {
-      const stream = await chatStream(currentInput);
-      if (!stream) {
-        throw new Error("Server action did not return a stream.");
-      }
-
-      const reader = stream.getReader();
-      const decoder = new TextDecoder();
+      // Use the REAL working AI function
+      const result = await generateText(currentInput, {
+        maxTokens: 800,
+        temperature: 0.7
+      });
       
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        
-        const decodedChunk = decoder.decode(value, { stream: true });
-        // Handle the data: {} format
-        const lines = decodedChunk.split('\n\n');
-        for (const line of lines) {
-            if (line.startsWith('data: ')) {
-                try {
-                    const json = JSON.parse(line.substring(6));
-                    if (json.response) {
-                        setResponse(prev => prev + json.response);
-                    }
-                } catch (e) {
-                    console.error("Failed to parse stream chunk JSON:", line);
-                }
-            }
-        }
+      if (result.success && result.content) {
+        setResponse(result.content);
+      } else {
+        setResponse(`Error: ${result.error || 'Failed to generate response'}`);
       }
     } catch (err) {
       console.error("AI chat error:", err);
@@ -626,7 +620,7 @@ function AiChat() {
       <div className="flex flex-col h-full">
           <DialogHeader className="p-4 border-b">
               <DialogTitle>اسأل الذكاء الاصطناعي</DialogTitle>
-              <DialogDescription>Your general-purpose English learning assistant.</DialogDescription>
+              <DialogDescription>Your general-purpose English learning assistant powered by REAL Cloudflare AI.</DialogDescription>
           </DialogHeader>
           <CardContent className="flex-grow flex flex-col gap-4 pt-4 min-h-0">
               <ScrollArea className="flex-grow rounded-lg border bg-muted/50 p-4 space-y-2">
@@ -679,45 +673,36 @@ function AiStoryMaker() {
 
     const generateStory = async () => {
         if (!prompt.trim() || loading || !canGenerate) return;
-
+        
         setLoading(true);
         setStoryContent("");
-        setImageUrl(null);
+        setImageUrl("");
 
         try {
-            const storyStream = await chatStream(`Write a short, creative story in English about: ${prompt}`);
-            if (!storyStream) throw new Error("Could not get story stream.");
-
-            const reader = storyStream.getReader();
-            const decoder = new TextDecoder();
-            let fullStory = "";
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                const decodedChunk = decoder.decode(value, { stream: true });
-                // Handle the data: {} format
-                const lines = decodedChunk.split('\n\n');
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        try {
-                            const json = JSON.parse(line.substring(6));
-                            if (json.response) {
-                                fullStory += json.response;
-                                setStoryContent(prev => prev + json.response);
-                            }
-                        } catch (e) {
-                            console.error("Failed to parse story stream chunk JSON:", line);
-                        }
-                    }
-                }
+            // Use the REAL working story generation function
+            const storyResult = await generateStory(prompt);
+            
+            if (!storyResult.success) {
+                throw new Error(storyResult.error || 'Failed to generate story');
             }
-
-            const imageResult = await generateStoryImage({ story: fullStory });
-            setImageUrl(imageResult.imageUrl);
             
-            addStory({ id: Date.now().toString(), prompt, content: fullStory, imageUrl: imageResult.imageUrl });
+            const fullStory = storyResult.content || '';
+            setStoryContent(fullStory);
             
-            toast({ title: "Story Generated!", description: "Your new story has been saved to your dashboard." });
+            // Generate image for the story
+            const imageResult = await generateImage({
+                prompt: `Illustration for story: ${prompt}`,
+                width: 1024,
+                height: 768
+            });
+            
+            if (imageResult.success && imageResult.imageUrl) {
+                setImageUrl(imageResult.imageUrl);
+            }
+            
+            addStory({ id: Date.now().toString(), prompt, content: fullStory, imageUrl: imageResult.imageUrl || '' });
+            
+            toast({ title: "Story Generated!", description: "Your new story has been saved to your dashboard using REAL AI!" });
 
         } catch (err) {
             console.error("AI story generation error:", err);
