@@ -1,0 +1,8 @@
+﻿name = "trm2-api"
+main = "dist/index.js"
+account_id = "62af59a7ac82b29543577ee6800735ee"
+compatibility_date = "2025-08-13"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+CLOUDFLARE_ACCOUNT_ID = "62af59a7ac82b29543577ee6800735ee"

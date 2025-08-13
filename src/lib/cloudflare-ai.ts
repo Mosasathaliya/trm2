@@ -3,12 +3,9 @@
 const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
 const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
 
-if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
-  if (typeof window === 'undefined' && process.env.VERCEL_ENV !== 'production') {
-    console.warn("Cloudflare Account ID or API Token not set - AI features may not work in dev/build. Set them in Cloudflare for production.");
-  } else if (process.env.NODE_ENV === 'production' && typeof window !== 'undefined') {
-    throw new Error("Cloudflare Account ID or API Token are not set in the environment variables.");
-  }
+// Only check environment variables at runtime, not during build
+if (typeof window !== 'undefined' && (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN)) {
+  console.warn("Cloudflare Account ID or API Token not set - AI features may not work. Set them in Cloudflare Pages environment variables.");
 }
 
 type AiModel = 
@@ -33,6 +30,11 @@ interface RunAiOptions {
  * @returns The model's response.
  */
 export async function runAi({ model, inputs, stream = false }: RunAiOptions) {
+  // Check if credentials are available
+  if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
+    throw new Error("Cloudflare AI credentials are not set in the environment variables.");
+  }
+
   const isImageOrAudio = model.includes('stable-diffusion') || model.includes('melotts') || model.includes('whisper');
   const isTextGeneration = model.includes('llama');
 
