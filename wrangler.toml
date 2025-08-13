@@ -1,0 +1,54 @@
+name = "trm2-autrag-backend"
+main = "src/functions/api/autrag/[[path]].ts"
+compatibility_date = "2025-08-13"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "trm2-autrag-backend-prod"
+
+[env.staging]
+name = "trm2-autrag-backend-staging"
+
+# AI binding for Cloudflare AI models
+[[ai]]
+binding = "AI"
+
+# Environment variables
+[vars]
+CLOUDFLARE_ACCOUNT_ID = "62af59a7ac82b29543577ee6800735ee"
+AUTORAG_ENDPOINT = "https://api.cloudflare.com/client/v4/accounts"
+
+# R2 binding for persistent storage (optional)
+# [[r2_buckets]]
+# binding = "RAG_STORAGE"
+# bucket_name = "trm2-rag-storage"
+# preview_bucket_name = "trm2-rag-storage-preview"
+
+# D1 database binding for metadata storage (optional)
+# [[d1_databases]]
+# binding = "RAG_DB"
+# database_name = "trm2-rag-db"
+# database_id = "your-d1-database-id"
+
+# KV binding for caching (optional)
+# [[kv_namespaces]]
+# binding = "RAG_CACHE"
+# id = "your-kv-namespace-id"
+# preview_id = "your-preview-kv-namespace-id"
+
+# Cron triggers for maintenance
+[triggers]
+crons = [
+  "0 2 * * *", # Daily at 2 AM - cleanup old documents
+  "0 6 * * *"  # Daily at 6 AM - rebuild embeddings index
+]
+
+# Build configuration
+[build]
+command = "npm run build"
+watch_dir = "src"
+
+# Development configuration
+[dev]
+port = 8787
+local = true

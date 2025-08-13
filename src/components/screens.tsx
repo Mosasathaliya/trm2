@@ -53,7 +53,7 @@ import { cn } from '@/lib/utils';
 import { translateText } from '@/ai/flows/translate-flow';
 import { useStoryStore, type SavedStory, useQuizStore, type StoryQuizResult } from '@/hooks/use-story-store';
 import { useProgressStore } from '@/hooks/use-progress-store';
-import { RAGEnhancedAIPanel } from './rag-enhanced-ai-panel';
+import { CloudflareAutoRAGPanel } from './cloudflare-autrag-panel';
 import {
   Tooltip,
   TooltipContent,
@@ -1434,7 +1434,7 @@ export function AiScreen({ setActiveTab }: { setActiveTab: (tab: ActiveTab) => v
                     <CardHeader>
                         <CardTitle as="h3" className="flex items-center gap-3">
                             <Brain className="h-8 w-8 text-blue-600" />
-                            <span>نظام RAG المتقدم</span>
+                            <span>نظام AutoRAG المتقدم</span>
                         </CardTitle>
                         <CardDescription>
                             نظام ذكي لاسترجاع وإعادة استخدام المحتوى المُنشأ بالذكاء الاصطناعي.
@@ -1475,14 +1475,14 @@ export function AiScreen({ setActiveTab }: { setActiveTab: (tab: ActiveTab) => v
                     <DialogHeader className="p-6 border-b">
                         <DialogTitle className="flex items-center gap-2">
                             <Brain className="h-6 w-6 text-blue-600" />
-                            نظام RAG المتقدم للذكاء الاصطناعي
+                            نظام AutoRAG المتقدم للذكاء الاصطناعي
                         </DialogTitle>
                         <DialogDescription>
                             نظام استرجاع وإعادة استخدام المحتوى المُنشأ بالذكاء الاصطناعي لتحسين الكفاءة وتقليل التكاليف
                         </DialogDescription>
                     </DialogHeader>
                     <div className="flex-1 overflow-hidden">
-                        <RAGEnhancedAIPanel />
+                        <CloudflareAutoRAGPanel />
                     </div>
                 </DialogContent>
             </Dialog>
