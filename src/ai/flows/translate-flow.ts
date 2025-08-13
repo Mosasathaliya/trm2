@@ -20,9 +20,11 @@ export type TranslateOutput = {
     translation: any;
 };
 
+import { isBuildTime } from '@/lib/env-check';
+
 export async function translateText({ text, sourceLanguage = 'en', targetLanguage }: TranslateInput): Promise<TranslateOutput> {
   // During build time, return placeholder content
-  if (typeof window === 'undefined' && (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN)) {
+  if (isBuildTime() && (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN)) {
     if (Array.isArray(text)) {
       return { translation: text.map(() => "محتوى مؤقت - سيتم تحديثه عند التشغيل") };
     }

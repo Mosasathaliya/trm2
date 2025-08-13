@@ -16,11 +16,13 @@ export type GenerateExplanationOutput = {
   arabicExplanation: string;
 };
 
+import { isBuildTime } from '@/lib/env-check';
+
 export async function generateArabicExplanation(input: GenerateExplanationInput): Promise<GenerateExplanationOutput> {
   const { grammarTopic, level } = input;
   
   // During build time, return placeholder content
-  if (typeof window === 'undefined' && (!process.env.CLOUDFLARE_ACCOUNT_ID || !process.env.CLOUDFLARE_API_TOKEN)) {
+  if (isBuildTime() && (!process.env.CLOUDFLARE_ACCOUNT_ID || !process.env.CLOUDFLARE_API_TOKEN)) {
     return { 
       arabicExplanation: `شرح مؤقت لموضوع "${grammarTopic}" للمستوى ${level}. سيتم تحديث هذا المحتوى عند تشغيل التطبيق.` 
     };
