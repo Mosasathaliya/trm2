@@ -36,10 +36,10 @@ export async function runAi({ model, inputs, stream = false }: RunAiOptions) {
   const isImageOrAudio = model.includes('stable-diffusion') || model.includes('melotts') || model.includes('whisper');
   const isTextGeneration = model.includes('llama');
 
-  const directUrl = https://api.cloudflare.com/client/v4/accounts//ai/run/;
+  const directUrl = `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/run/${model}`;
 
   let body: any;
-  const headers: HeadersInit = { 'Authorization': Bearer  };
+  const headers: HeadersInit = { 'Authorization': `Bearer ${CLOUDFLARE_API_TOKEN}` };
 
   if (model.includes('whisper') && 'audio' in inputs && (inputs.audio instanceof Buffer || inputs.audio instanceof Uint8Array)) {
     headers['Content-Type'] = 'application/octet-stream';
@@ -60,8 +60,8 @@ export async function runAi({ model, inputs, stream = false }: RunAiOptions) {
 
   if (!response.ok) {
     const errorText = await response.text();
-    console.error(Cloudflare AI API error for model :, errorText);
-    throw new Error(Cloudflare AI request failed: );
+    console.error(`Cloudflare AI API error for model ${model}:`, errorText);
+    throw new Error(`Cloudflare AI request failed: ${response.statusText}`);
   }
 
   if (stream) {
