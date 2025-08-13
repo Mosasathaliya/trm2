@@ -31,6 +31,21 @@ const { lesson } = Astro.props;
         All Lessons
       </a>
     </div>
+    
+    <!-- Test content to see if page loads -->
+    <div class="mb-6 p-4 bg-blue-100 border border-blue-300 rounded">
+      <h1 class="text-2xl font-bold text-blue-800">Lesson: {lesson.title}</h1>
+      <p class="text-blue-700">Level: {lesson.level}</p>
+      <p class="text-blue-700">Topic: {lesson.topic}</p>
+    </div>
+    
+    <!-- React component -->
     <LessonClientComponent lesson={lesson} client:only="react" />
+    
+    <!-- Fallback content if React fails -->
+    <div class="mt-8 p-4 bg-yellow-100 border border-yellow-300 rounded">
+      <h2 class="text-lg font-semibold text-yellow-800">Lesson Content (Fallback)</h2>
+      <p class="text-yellow-700 mt-2">{lesson.arabic_explanation}</p>
+    </div>
   </div>
 </Layout>
