@@ -25,6 +25,17 @@ export default defineConfig({
       alias: {
         '@': '/src'
       }
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom'],
+            'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-tabs', '@radix-ui/react-select'],
+            'ai-vendor': ['@cloudflare/ai', 'zod', 'zustand']
+          }
+        }
+      }
     }
   }
 });

@@ -9,3 +9,11 @@ name = "trm2-pages-prod"
 
 [env.preview]
 name = "trm2-pages-preview"
+
+# Environment variables for Cloudflare Pages
+[vars]
+NODE_VERSION = "18.20.8"
+
+# These will be set in Cloudflare Pages dashboard
+# CLOUDFLARE_ACCOUNT_ID = "your_account_id"
+# CLOUDFLARE_API_TOKEN = "your_api_token"

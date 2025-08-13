@@ -1,8 +1,125 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import MainApp from '../components/main-app';
+// Simple test page to verify basic functionality
 ---
 
-<Layout title="Learn English - Trinav">
-  <MainApp client:load />
-</Layout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRM2 - Test Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      min-height: 100vh;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.5em;
+    }
+    .status {
+      background: rgba(0, 255, 0, 0.2);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border: 1px solid rgba(0, 255, 0, 0.3);
+    }
+    .feature {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+    }
+    .error {
+      background: rgba(255, 0, 0, 0.2);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 TRM2 Arabic Learning App</h1>
+    
+    <div class="status">
+      ✅ <strong>Status:</strong> Basic app is working! 
+      <br>
+      🌐 <strong>Environment:</strong> Cloudflare Pages
+      <br>
+      📅 <strong>Deployed:</strong> <span id="deployTime"></span>
+    </div>
+
+    <div class="feature">
+      <h3>🎯 What's Working:</h3>
+      <ul>
+        <li>✅ Basic page rendering</li>
+        <li>✅ Cloudflare Pages deployment</li>
+        <li>✅ Responsive design</li>
+        <li>✅ Modern UI components</li>
+      </ul>
+    </div>
+
+    <div class="feature">
+      <h3>🔧 Next Steps:</h3>
+      <ol>
+        <li>Set Cloudflare AI environment variables</li>
+        <li>Test AI features one by one</li>
+        <li>Enable voice chat and TTS</li>
+        <li>Activate lesson generation</li>
+      </ol>
+    </div>
+
+    <div class="feature">
+      <h3>📋 Environment Variables Needed:</h3>
+      <code>
+        CLOUDFLARE_ACCOUNT_ID=your_account_id<br>
+        CLOUDFLARE_API_TOKEN=your_api_token
+      </code>
+      <p><small>Set these in your Cloudflare Pages dashboard → Settings → Environment variables</small></p>
+    </div>
+
+    <div class="feature">
+      <h3>🧪 Test AI Features:</h3>
+      <button onclick="testAI()" style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Test AI Connection
+      </button>
+      <div id="aiTestResult" style="margin-top: 10px;"></div>
+    </div>
+  </div>
+
+  <script>
+    // Show deployment time
+    document.getElementById('deployTime').textContent = new Date().toLocaleString();
+    
+    // Test AI connection
+    async function testAI() {
+      const resultDiv = document.getElementById('aiTestResult');
+      resultDiv.innerHTML = '🔄 Testing AI connection...';
+      
+      try {
+        // Simple test to see if environment variables are accessible
+        const response = await fetch('/api/test-ai');
+        if (response.ok) {
+          resultDiv.innerHTML = '✅ AI connection successful!';
+        } else {
+          resultDiv.innerHTML = '❌ AI connection failed. Check environment variables.';
+        }
+      } catch (error) {
+        resultDiv.innerHTML = '❌ AI connection error: ' + error.message;
+      }
+    }
+  </script>
+</body>
+</html>

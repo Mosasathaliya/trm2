@@ -1,7 +1,17 @@
-﻿'use server';
+﻿// Cloudflare Pages compatible AI library
+// Environment variables will be injected by Cloudflare Pages
 
-const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
-const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
+// Access environment variables safely
+function getEnvVar(name: string): string | undefined {
+  // For Cloudflare Pages, these are injected at runtime
+  if (typeof globalThis !== 'undefined' && (globalThis as any)[name]) {
+    return (globalThis as any)[name];
+  }
+  return undefined;
+}
+
+const CLOUDFLARE_API_TOKEN = getEnvVar('CLOUDFLARE_API_TOKEN');
+const CLOUDFLARE_ACCOUNT_ID = getEnvVar('CLOUDFLARE_ACCOUNT_ID');
 
 // Only check environment variables at runtime, not during build
 if (typeof window !== 'undefined' && (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN)) {
