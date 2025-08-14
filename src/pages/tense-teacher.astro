@@ -1,0 +1,452 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Tense Teacher - TRM2 Arabic Learning">
+  <div class="min-h-screen bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-sm border-b">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <a href="/" class="text-2xl font-bold text-primary">TRM2 - Arabic Learning</a>
+          <nav class="flex space-x-6">
+            <a href="/" class="text-gray-700 hover:text-primary">Home</a>
+            <a href="/lessons" class="text-gray-700 hover:text-primary">Lessons</a>
+            <a href="/ai" class="text-gray-700 hover:text-primary">AI Tools</a>
+            <a href="/progress" class="text-gray-700 hover:text-primary">Progress</a>
+            <a href="/tense-teacher" class="text-gray-700 hover:text-primary font-semibold">Tense Teacher</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+      <!-- Back Button -->
+      <div class="mb-6">
+        <a href="/" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to Home
+        </a>
+      </div>
+
+      <!-- Page Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Arabic Tense Teacher</h1>
+        <p class="text-xl text-gray-600">Master Arabic verb tenses and conjugations</p>
+      </div>
+
+      <!-- Tense Selection -->
+      <div class="bg-white rounded-lg shadow-lg border p-6 mb-8">
+        <h2 class="text-2xl font-bold mb-6">Choose a Tense</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <button onclick="selectTense('present')" class="tense-btn p-4 border rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors text-left">
+            <div class="font-semibold text-lg text-blue-800">Present Tense</div>
+            <div class="text-sm text-blue-600">المضارع</div>
+            <div class="text-xs text-blue-500 mt-1">Learn present tense conjugations</div>
+          </button>
+          
+          <button onclick="selectTense('past')" class="tense-btn p-4 border rounded-lg hover:bg-green-50 hover:border-green-300 transition-colors text-left">
+            <div class="font-semibold text-lg text-green-800">Past Tense</div>
+            <div class="text-sm text-green-600">الماضي</div>
+            <div class="text-xs text-green-500 mt-1">Master past tense forms</div>
+          </button>
+          
+          <button onclick="selectTense('future')" class="tense-btn p-4 border rounded-lg hover:bg-purple-50 hover:border-purple-300 transition-colors text-left">
+            <div class="font-semibold text-lg text-purple-800">Future Tense</div>
+            <div class="text-sm text-purple-600">المستقبل</div>
+            <div class="text-xs text-purple-500 mt-1">Understand future expressions</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Verb Selection -->
+      <div id="verb-selection" class="bg-white rounded-lg shadow-lg border p-6 mb-8 hidden">
+        <h2 class="text-2xl font-bold mb-6">Choose a Verb</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <button onclick="selectVerb('كتب')" class="verb-btn p-4 border rounded-lg hover:bg-gray-50 transition-colors text-center">
+            <div class="text-2xl font-bold text-primary mb-2">كتب</div>
+            <div class="text-sm text-gray-600">to write</div>
+          </button>
+          
+          <button onclick="selectVerb('قرأ')" class="verb-btn p-4 border rounded-lg hover:bg-gray-50 transition-colors text-center">
+            <div class="text-2xl font-bold text-primary mb-2">قرأ</div>
+            <div class="text-sm text-gray-600">to read</div>
+          </button>
+          
+          <button onclick="selectVerb('درس')" class="verb-btn p-4 border rounded-lg hover:bg-gray-50 transition-colors text-center">
+            <div class="text-2xl font-bold text-primary mb-2">درس</div>
+            <div class="text-sm text-gray-600">to study</div>
+          </button>
+          
+          <button onclick="selectVerb('ذهب')" class="verb-btn p-4 border rounded-lg hover:bg-gray-50 transition-colors text-center">
+            <div class="text-2xl font-bold text-primary mb-2">ذهب</div>
+            <div class="text-sm text-gray-600">to go</div>
+          </button>
+          
+          <button onclick="selectVerb('أكل')" class="verb-btn p-4 border rounded-lg hover:bg-gray-50 transition-colors text-center">
+            <div class="text-2xl font-bold text-primary mb-2">أكل</div>
+            <div class="text-sm text-gray-600">to eat</div>
+          </button>
+          
+          <button onclick="selectVerb('شرب')" class="verb-btn p-4 border rounded-lg hover:bg-gray-50 transition-colors text-center">
+            <div class="text-2xl font-bold text-primary mb-2">شرب</div>
+            <div class="text-sm text-gray-600">to drink</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Conjugation Display -->
+      <div id="conjugation-display" class="bg-white rounded-lg shadow-lg border p-6 mb-8 hidden">
+        <h2 class="text-2xl font-bold mb-6">Conjugations</h2>
+        
+        <div class="mb-6">
+          <div class="text-center mb-4">
+            <div class="text-3xl font-bold text-primary mb-2" id="selected-verb">كتب</div>
+            <div class="text-lg text-gray-600" id="verb-meaning">to write</div>
+            <div class="text-sm text-gray-500" id="tense-name">Present Tense</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Singular -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4 text-blue-800">Singular</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                <span class="font-medium">I</span>
+                <span class="text-right font-bold" dir="rtl" id="conj-i">أكتب</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                <span class="font-medium">You (m)</span>
+                <span class="text-right font-bold" dir="rtl" id="conj-you-m">تكتب</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                <span class="font-medium">You (f)</span>
+                <span class="text-right font-bold" dir="rtl" id="conj-you-f">تكتبين</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                <span class="font-medium">He</span>
+                <span class="text-right font-bold" dir="rtl" id="conj-he">يكتب</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                <span class="font-medium">She</span>
+                <span class="text-right font-bold" dir="rtl" id="conj-she">تكتب</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Plural -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4 text-green-800">Plural</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                <span class="font-medium">We</span>
+                <span class="text-right font-bold" dir="rtl" id="conj-we">نكتب</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                <span class="font-medium">You (m pl)</span>
+                <span class="text-right font-bold" dir="rtl" id="conj-you-m-pl">تكتبون</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                <span class="font-medium">You (f pl)</span>
+                <span class="text-right font-bold" dir="rtl" id="conj-you-f-pl">تكتبن</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                <span class="font-medium">They (m)</span>
+                <span class="text-right font-bold" dir="rtl" id="conj-they-m">يكتبون</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                <span class="font-medium">They (f)</span>
+                <span class="text-right font-bold" dir="rtl" id="conj-they-f">يكتبن</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Practice Section -->
+        <div class="mt-8 p-6 bg-gray-50 rounded-lg">
+          <h3 class="text-lg font-semibold mb-4">Practice</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <button onclick="practiceConjugation()" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+              Practice Conjugations
+            </button>
+            <button onclick="listenPronunciation()" class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+              Listen to Pronunciation
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Practice Mode -->
+      <div id="practice-mode" class="bg-white rounded-lg shadow-lg border p-6 hidden">
+        <h2 class="text-2xl font-bold mb-6">Practice Mode</h2>
+        
+        <div id="practice-question" class="mb-6">
+          <p class="text-lg mb-4">Complete the conjugation:</p>
+          <div class="text-xl font-semibold mb-4">
+            <span id="practice-person">I</span> 
+            <span class="text-primary">(to write)</span> = 
+            <span class="text-gray-400">_____</span>
+          </div>
+          
+          <input type="text" id="practice-answer" placeholder="Type your answer in Arabic" class="w-full p-3 border rounded-lg text-right" dir="rtl">
+          
+          <div class="mt-4 space-x-3">
+            <button onclick="checkAnswer()" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+              Check Answer
+            </button>
+            <button onclick="showHint()" class="px-6 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors">
+              Show Hint
+            </button>
+          </div>
+        </div>
+
+        <div id="practice-result" class="hidden">
+          <!-- Practice results will appear here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentTense = '';
+    let currentVerb = '';
+    let currentConjugations = {};
+
+    // Conjugation data
+    const conjugations = {
+      present: {
+        'كتب': {
+          meaning: 'to write',
+          conjugations: {
+            'I': 'أكتب',
+            'You (m)': 'تكتب',
+            'You (f)': 'تكتبين',
+            'He': 'يكتب',
+            'She': 'تكتب',
+            'We': 'نكتب',
+            'You (m pl)': 'تكتبون',
+            'You (f pl)': 'تكتبن',
+            'They (m)': 'يكتبون',
+            'They (f)': 'يكتبن'
+          }
+        },
+        'قرأ': {
+          meaning: 'to read',
+          conjugations: {
+            'I': 'أقرأ',
+            'You (m)': 'تقرأ',
+            'You (f)': 'تقرئين',
+            'He': 'يقرأ',
+            'She': 'تقرأ',
+            'We': 'نقرأ',
+            'You (m pl)': 'تقرؤون',
+            'You (f pl)': 'تقرأن',
+            'They (m)': 'يقرؤون',
+            'They (f)': 'يقرأن'
+          }
+        },
+        'درس': {
+          meaning: 'to study',
+          conjugations: {
+            'I': 'أدرس',
+            'You (m)': 'تدرس',
+            'You (f)': 'تدرسين',
+            'He': 'يدرس',
+            'She': 'تدرس',
+            'We': 'ندرس',
+            'You (m pl)': 'تدرسون',
+            'You (f pl)': 'تدرسن',
+            'They (m)': 'يدرسون',
+            'They (f)': 'يدرسن'
+          }
+        }
+      },
+      past: {
+        'كتب': {
+          meaning: 'to write',
+          conjugations: {
+            'I': 'كتبت',
+            'You (m)': 'كتبت',
+            'You (f)': 'كتبت',
+            'He': 'كتب',
+            'She': 'كتبت',
+            'We': 'كتبنا',
+            'You (m pl)': 'كتبتم',
+            'You (f pl)': 'كتبتن',
+            'They (m)': 'كتبوا',
+            'They (f)': 'كتبن'
+          }
+        }
+      },
+      future: {
+        'كتب': {
+          meaning: 'to write',
+          conjugations: {
+            'I': 'سأكتب',
+            'You (m)': 'ستكتب',
+            'You (f)': 'ستكتبين',
+            'He': 'سيكتب',
+            'She': 'ستكتب',
+            'We': 'سنكتب',
+            'You (m pl)': 'ستكتبون',
+            'You (f pl)': 'ستكتبن',
+            'They (m)': 'سيكتبون',
+            'They (f)': 'سيكتبن'
+          }
+        }
+      }
+    };
+
+    function selectTense(tense) {
+      currentTense = tense;
+      
+      // Update tense button styles
+      document.querySelectorAll('.tense-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-primary', 'border-primary');
+      });
+      event.target.classList.add('ring-2', 'ring-primary', 'border-primary');
+      
+      // Show verb selection
+      document.getElementById('verb-selection').classList.remove('hidden');
+      document.getElementById('conjugation-display').classList.add('hidden');
+      document.getElementById('practice-mode').classList.add('hidden');
+    }
+
+    function selectVerb(verb) {
+      currentVerb = verb;
+      
+      // Update verb button styles
+      document.querySelectorAll('.verb-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-primary', 'border-primary');
+      });
+      event.target.classList.add('ring-2', 'ring-primary', 'border-primary');
+      
+      // Show conjugations
+      displayConjugations();
+    }
+
+    function displayConjugations() {
+      const tenseData = conjugations[currentTense];
+      const verbData = tenseData[currentVerb];
+      
+      if (!verbData) {
+        alert('Conjugations for this verb and tense are not available yet.');
+        return;
+      }
+
+      currentConjugations = verbData.conjugations;
+      
+      // Update display
+      document.getElementById('selected-verb').textContent = currentVerb;
+      document.getElementById('verb-meaning').textContent = verbData.meaning;
+      document.getElementById('tense-name').textContent = getTenseName(currentTense);
+      
+      // Update all conjugation cells
+      Object.keys(verbData.conjugations).forEach(person => {
+        const elementId = getElementId(person);
+        if (elementId) {
+          document.getElementById(elementId).textContent = verbData.conjugations[person];
+        }
+      });
+      
+      // Show conjugation display
+      document.getElementById('conjugation-display').classList.remove('hidden');
+    }
+
+    function getTenseName(tense) {
+      const names = {
+        'present': 'Present Tense - المضارع',
+        'past': 'Past Tense - الماضي',
+        'future': 'Future Tense - المستقبل'
+      };
+      return names[tense] || tense;
+    }
+
+    function getElementId(person) {
+      const mapping = {
+        'I': 'conj-i',
+        'You (m)': 'conj-you-m',
+        'You (f)': 'conj-you-f',
+        'He': 'conj-he',
+        'She': 'conj-she',
+        'We': 'conj-we',
+        'You (m pl)': 'conj-you-m-pl',
+        'You (f pl)': 'conj-you-f-pl',
+        'They (m)': 'conj-they-m',
+        'They (f)': 'conj-they-f'
+      };
+      return mapping[person];
+    }
+
+    function practiceConjugation() {
+      document.getElementById('practice-mode').classList.remove('hidden');
+      generatePracticeQuestion();
+    }
+
+    function generatePracticeQuestion() {
+      const persons = Object.keys(currentConjugations);
+      const randomPerson = persons[Math.floor(Math.random() * persons.length)];
+      const correctAnswer = currentConjugations[randomPerson];
+      
+      document.getElementById('practice-person').textContent = randomPerson;
+      document.getElementById('practice-answer').value = '';
+      document.getElementById('practice-result').classList.add('hidden');
+      
+      // Store correct answer for checking
+      window.currentPracticeAnswer = correctAnswer;
+    }
+
+    function checkAnswer() {
+      const userAnswer = document.getElementById('practice-answer').value.trim();
+      const correctAnswer = window.currentPracticeAnswer;
+      
+      const resultDiv = document.getElementById('practice-result');
+      resultDiv.classList.remove('hidden');
+      
+      if (userAnswer === correctAnswer) {
+        resultDiv.innerHTML = `
+          <div class="p-4 bg-green-100 border border-green-300 rounded-lg">
+            <div class="text-green-800 font-semibold">Correct! ✓</div>
+            <div class="text-green-700">Great job! You got it right.</div>
+          </div>
+        `;
+      } else {
+        resultDiv.innerHTML = `
+          <div class="p-4 bg-red-100 border border-red-300 rounded-lg">
+            <div class="text-red-800 font-semibold">Incorrect ✗</div>
+            <div class="text-red-700">The correct answer is: <span class="font-bold" dir="rtl">${correctAnswer}</span></div>
+          </div>
+        `;
+      }
+      
+      // Generate new question after a delay
+      setTimeout(() => {
+        generatePracticeQuestion();
+      }, 2000);
+    }
+
+    function showHint() {
+      const correctAnswer = window.currentPracticeAnswer;
+      alert(`Hint: The answer starts with "${correctAnswer.charAt(0)}"`);
+    }
+
+    function listenPronunciation() {
+      const verb = document.getElementById('selected-verb').textContent;
+      
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(verb);
+        utterance.lang = 'ar-SA';
+        utterance.rate = 0.8;
+        speechSynthesis.speak(utterance);
+      } else {
+        alert('Speech synthesis not supported in this browser');
+      }
+    }
+  </script>
+</Layout>

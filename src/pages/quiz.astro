@@ -1,0 +1,370 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Arabic Quiz - TRM2 Arabic Learning">
+  <div class="min-h-screen bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-sm border-b">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <a href="/" class="text-2xl font-bold text-primary">TRM2 - Arabic Learning</a>
+          <nav class="flex space-x-6">
+            <a href="/" class="text-gray-700 hover:text-primary">Home</a>
+            <a href="/lessons" class="text-gray-700 hover:text-primary">Lessons</a>
+            <a href="/ai" class="text-gray-700 hover:text-primary">AI Tools</a>
+            <a href="/progress" class="text-gray-700 hover:text-primary">Progress</a>
+            <a href="/quiz" class="text-gray-700 hover:text-primary font-semibold">Quiz</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+      <!-- Back Button -->
+      <div class="mb-6">
+        <a href="/" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to Home
+        </a>
+      </div>
+
+      <!-- Page Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Arabic Learning Quiz</h1>
+        <p class="text-xl text-gray-600">Test your knowledge and track your progress</p>
+      </div>
+
+      <!-- Quiz Setup -->
+      <div id="quiz-setup" class="bg-white rounded-lg shadow-lg border p-6 mb-8">
+        <h2 class="text-2xl font-bold mb-6">Quiz Configuration</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <!-- Topic Selection -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Topic</label>
+            <select id="topic-select" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+              <option value="grammar">Grammar</option>
+              <option value="vocabulary">Vocabulary</option>
+              <option value="pronunciation">Pronunciation</option>
+              <option value="culture">Culture</option>
+              <option value="mixed">Mixed Topics</option>
+            </select>
+          </div>
+
+          <!-- Difficulty Level -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Difficulty</label>
+            <select id="difficulty-select" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+
+          <!-- Number of Questions -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Questions</label>
+            <select id="questions-select" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+              <option value="5">5 Questions</option>
+              <option value="10">10 Questions</option>
+              <option value="15">15 Questions</option>
+              <option value="20">20 Questions</option>
+            </select>
+          </div>
+        </div>
+
+        <button onclick="startQuiz()" class="w-full px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-lg font-semibold">
+          Start Quiz
+        </button>
+      </div>
+
+      <!-- Quiz Interface -->
+      <div id="quiz-interface" class="hidden">
+        <div class="bg-white rounded-lg shadow-lg border p-6 mb-6">
+          <!-- Progress Bar -->
+          <div class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-sm font-medium text-gray-700">Question <span id="current-question">1</span> of <span id="total-questions">10</span></span>
+              <span class="text-sm font-medium text-gray-700"><span id="score">0</span> / <span id="max-score">10</span></span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+              <div id="progress-bar" class="bg-primary h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Question -->
+          <div id="question-container" class="mb-6">
+            <h3 id="question-text" class="text-xl font-semibold mb-4">Question text will appear here</h3>
+            
+            <!-- Question Image (if any) -->
+            <div id="question-image" class="mb-4 hidden">
+              <img id="question-img" src="" alt="Question" class="max-w-full h-auto rounded-lg">
+            </div>
+
+            <!-- Answer Options -->
+            <div id="answer-options" class="space-y-3">
+              <!-- Answer options will be populated here -->
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="flex justify-between items-center">
+            <button id="prev-btn" onclick="previousQuestion()" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+              Previous
+            </button>
+            
+            <button id="next-btn" onclick="nextQuestion()" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz Results -->
+      <div id="quiz-results" class="hidden">
+        <div class="bg-white rounded-lg shadow-lg border p-6 text-center">
+          <h2 class="text-3xl font-bold mb-4">Quiz Complete!</h2>
+          
+          <div class="mb-6">
+            <div class="text-6xl font-bold text-primary mb-2" id="final-score">0</div>
+            <div class="text-xl text-gray-600" id="score-percentage">0%</div>
+          </div>
+
+          <div class="mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="p-4 bg-green-50 rounded-lg">
+                <div class="text-2xl font-bold text-green-600" id="correct-answers">0</div>
+                <div class="text-sm text-green-600">Correct</div>
+              </div>
+              <div class="p-4 bg-red-50 rounded-lg">
+                <div class="text-2xl font-bold text-red-600" id="incorrect-answers">0</div>
+                <div class="text-sm text-red-600">Incorrect</div>
+              </div>
+              <div class="p-4 bg-blue-50 rounded-lg">
+                <div class="text-2xl font-bold text-blue-600" id="time-taken">0s</div>
+                <div class="text-sm text-blue-600">Time</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <button onclick="reviewQuiz()" class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+              Review Answers
+            </button>
+            <button onclick="retakeQuiz()" class="w-full px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+              Take Another Quiz
+            </button>
+            <button onclick="goHome()" class="w-full px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+              Back to Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentQuiz = null;
+    let currentQuestionIndex = 0;
+    let userAnswers = [];
+    let startTime = null;
+
+    // Sample quiz questions
+    const quizQuestions = {
+      grammar: [
+        {
+          question: "What is the Arabic word for 'book'?",
+          options: ["كتاب", "قلم", "مدرسة", "بيت"],
+          correct: 0,
+          explanation: "كتاب (kitaab) means 'book' in Arabic."
+        },
+        {
+          question: "Which of these is a plural form?",
+          options: ["طالب", "طالبون", "طالبة", "طالبان"],
+          correct: 1,
+          explanation: "طالبون (tullaabun) is the plural form of طالب (student)."
+        }
+      ],
+      vocabulary: [
+        {
+          question: "What does 'مرحبا' mean?",
+          options: ["Goodbye", "Hello", "Thank you", "Please"],
+          correct: 1,
+          explanation: "مرحبا (marhaba) means 'Hello' in Arabic."
+        },
+        {
+          question: "Which word means 'house'?",
+          options: ["سيارة", "بيت", "شجرة", "بحر"],
+          correct: 1,
+          explanation: "بيت (bayt) means 'house' in Arabic."
+        }
+      ],
+      pronunciation: [
+        {
+          question: "How do you pronounce 'خ'?",
+          options: ["Like 'h' in 'hat'", "Like 'k' in 'kite'", "Like 'ch' in 'Bach'", "Like 'g' in 'go'"],
+          correct: 2,
+          explanation: "خ is pronounced like the 'ch' in the German 'Bach'."
+        }
+      ]
+    };
+
+    function startQuiz() {
+      const topic = document.getElementById('topic-select').value;
+      const difficulty = document.getElementById('difficulty-select').value;
+      const questionCount = parseInt(document.getElementById('questions-select').value);
+
+      // Generate quiz questions
+      currentQuiz = generateQuiz(topic, difficulty, questionCount);
+      currentQuestionIndex = 0;
+      userAnswers = new Array(currentQuiz.length).fill(null);
+      startTime = Date.now();
+
+      // Show quiz interface
+      document.getElementById('quiz-setup').classList.add('hidden');
+      document.getElementById('quiz-interface').classList.remove('hidden');
+      document.getElementById('quiz-results').classList.add('hidden');
+
+      // Display first question
+      displayQuestion();
+    }
+
+    function generateQuiz(topic, difficulty, count) {
+      let questions = [];
+      
+      if (topic === 'mixed') {
+        // Mix questions from all topics
+        Object.values(quizQuestions).forEach(topicQuestions => {
+          questions = questions.concat(topicQuestions);
+        });
+      } else {
+        questions = quizQuestions[topic] || quizQuestions.grammar;
+      }
+
+      // Shuffle and limit questions
+      questions = questions.sort(() => Math.random() - 0.5).slice(0, count);
+      return questions;
+    }
+
+    function displayQuestion() {
+      if (!currentQuiz || currentQuestionIndex >= currentQuiz.length) {
+        showResults();
+        return;
+      }
+
+      const question = currentQuiz[currentQuestionIndex];
+      
+      // Update progress
+      document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+      document.getElementById('total-questions').textContent = currentQuiz.length;
+      document.getElementById('progress-bar').style.width = `${((currentQuestionIndex + 1) / currentQuiz.length) * 100}%`;
+
+      // Display question
+      document.getElementById('question-text').textContent = question.question;
+
+      // Display answer options
+      const optionsContainer = document.getElementById('answer-options');
+      optionsContainer.innerHTML = '';
+      
+      question.options.forEach((option, index) => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors';
+        optionDiv.onclick = () => selectAnswer(index);
+        
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'answer';
+        radio.value = index;
+        radio.checked = userAnswers[currentQuestionIndex] === index;
+        
+        const label = document.createElement('label');
+        label.className = 'flex-1 cursor-pointer';
+        label.textContent = option;
+        
+        optionDiv.appendChild(radio);
+        optionDiv.appendChild(label);
+        optionsContainer.appendChild(optionDiv);
+      });
+
+      // Update navigation buttons
+      document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
+      document.getElementById('next-btn').textContent = currentQuestionIndex === currentQuiz.length - 1 ? 'Finish' : 'Next';
+    }
+
+    function selectAnswer(answerIndex) {
+      userAnswers[currentQuestionIndex] = answerIndex;
+      
+      // Update radio button selection
+      const options = document.querySelectorAll('input[name="answer"]');
+      options.forEach((option, index) => {
+        option.checked = index === answerIndex;
+      });
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIndex < currentQuiz.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function previousQuestion() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        displayQuestion();
+      }
+    }
+
+    function showResults() {
+      const endTime = Date.now();
+      const timeTaken = Math.round((endTime - startTime) / 1000);
+      
+      let correctCount = 0;
+      userAnswers.forEach((answer, index) => {
+        if (answer === currentQuiz[index].correct) {
+          correctCount++;
+        }
+      });
+
+      const score = Math.round((correctCount / currentQuiz.length) * 100);
+
+      // Update results display
+      document.getElementById('final-score').textContent = score;
+      document.getElementById('score-percentage').textContent = `${score}%`;
+      document.getElementById('correct-answers').textContent = correctCount;
+      document.getElementById('incorrect-answers').textContent = currentQuiz.length - correctCount;
+      document.getElementById('time-taken').textContent = `${timeTaken}s`;
+
+      // Hide quiz interface and show results
+      document.getElementById('quiz-interface').classList.add('hidden');
+      document.getElementById('quiz-results').classList.remove('hidden');
+    }
+
+    function reviewQuiz() {
+      // This would show a detailed review of all questions and answers
+      alert('Quiz review feature coming soon!');
+    }
+
+    function retakeQuiz() {
+      // Reset and show quiz setup
+      currentQuiz = null;
+      currentQuestionIndex = 0;
+      userAnswers = [];
+      startTime = null;
+      
+      document.getElementById('quiz-setup').classList.remove('hidden');
+      document.getElementById('quiz-interface').classList.add('hidden');
+      document.getElementById('quiz-results').classList.add('hidden');
+    }
+
+    function goHome() {
+      window.location.href = '/';
+    }
+  </script>
+</Layout>
